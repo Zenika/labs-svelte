@@ -15,7 +15,7 @@ watch: watch-serve
 	fswatch -o codelab.md | xargs -n1 -L1 -I{} make build-ci
 
 build:
-	docker container run -it -v $(pwd):/app bpetetot/claat export codelab.md -f template.html
+	docker container run -it -v $(pwd):/app bpetetot/claat export codelab.md
 
 build-ci: install
 	docker container run -v $(pwd):/app bpetetot/claat export codelab.md
