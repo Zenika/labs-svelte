@@ -1,0 +1,1 @@
+<div>Votre IMC est de 10</div>
