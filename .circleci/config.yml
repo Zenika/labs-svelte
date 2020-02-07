@@ -12,8 +12,8 @@ jobs:
       - run: cd codelab && claat export codelab.md
       - run: cd become-svelte && npm install
       - run: cd become-svelte && npm build
-      - run: npm install -g firebase-tools
-      - run: firebase deploy --token $FIREBASE_TOKEN
+      - run: npm install firebase-tools
+      - run: npx firebase deploy --token $FIREBASE_TOKEN
 
 workflows:
   build:
