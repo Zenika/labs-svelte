@@ -7,9 +7,20 @@
 
 <div>Votre IMC est de {imc}</div>
 {#if imc < 18}
-  <div>Vous êtes en sous poids</div>
+  <div class="souspoid">Vous êtes en sous poids</div>
 {:else if imc > 35}
-  <div>Vous êtes en sur poids</div>
+  <div class="surpoid">Vous êtes en sur poids</div>
 {:else}
-  <div>Quel corps svelte !</div>
+  <div class="normal">Quel corps svelte !</div>
 {/if}
+
+<style>
+  .normal {
+    color: green
+  }
+
+  .surpoid, .souspoid {
+    color: orange;
+  }
+
+</style>
