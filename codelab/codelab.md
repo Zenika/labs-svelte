@@ -21,13 +21,75 @@ Duration: 10
 - Animations
 
 <!-- ------------------------ -->
-## Setting Duration
+## Créer votre première application
 Duration: 10
 
 To indicate how long each slide will take to go through, set the `Duration` under each Heading 2 (i.e. `##`) to an integer.
 The integers refer to minutes. If you set `Duration: 4` then a particular slide will take 4 minutes to complete.
 
 The total time will automatically be calculated for you and will be displayed on the codelab once you create it.
+
+<!-- ------------------------ -->
+## Créer un composant
+Duration: 5
+
+
+<!-- ------------------------ -->
+## Mettre des variables et afficher dans un template
+Duration: 10
+
+<!-- ------------------------ -->
+## Parametre d'un composant
+Duration: 10
+
+<!-- ------------------------ -->
+## Conditions d'affichages
+Duration: 10
+
+<!-- ------------------------ -->
+## Ajouter du styles
+Duration: 10
+
+
+<!-- ------------------------ -->
+## Créer un formulaire
+Duration: 10
+
+
+<!-- ------------------------ -->
+## Double binding
+Duration: 10
+
+
+<!-- ------------------------ -->
+## Réactive statement
+Duration: 5
+
+
+<!-- ------------------------ -->
+## Mise en place de store
+Duration: 10
+
+
+<!-- ------------------------ -->
+## Store dérivée
+Duration: 10
+
+
+<!-- ------------------------ -->
+## Ajouter du styles
+Duration: 10
+
+
+<!-- ------------------------ -->
+## Animation
+Duration: 10
+
+
+<!-- ------------------------ -->
+## Modifier le titre de la page
+Duration: 10
+
 
 <!-- ------------------------ -->
 ## Code Snippets
