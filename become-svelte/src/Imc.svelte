@@ -4,6 +4,10 @@
  import { fly, fade } from 'svelte/transition';
 </script>
 
+<svelte:head>
+  <title>Votre IMC : {$imc}</title>
+</svelte:head>
+
 <div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
 {#if $imc < 18}
   <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sous poids</div>
