@@ -8,6 +8,7 @@ jobs:
       - image: circleci/node:12
     steps:
       - checkout
+      - setup_remote_docker
       - run: cd codelab && make build-ci
       - run: cd become-svelte && npm install
       - run: cd become-svelte && npm build
