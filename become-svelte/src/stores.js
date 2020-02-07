@@ -1,4 +1,4 @@
-import { derived, writable } from 'svelte'
+import { derived, writable } from 'svelte/store'
 
 export const poid = writable(80)
 export const taille = writable(1.8)
