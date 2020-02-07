@@ -4,7 +4,9 @@ version: 2.1
 jobs:
   codelab:
     working_directory: ~/codelab
-    machine: true
+    machine:
+      node:
+        version: 12.15.0
     steps:
       - checkout
       - run: cd codelab && make build-ci
