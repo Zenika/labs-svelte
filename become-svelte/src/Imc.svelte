@@ -1,13 +1,11 @@
 <script>
- import { poid, taille } from './stores'
-
-  $: imc = ($poid / $taille ** 2).toFixed(2)
+ import { poid, taille, imc } from './stores'
 </script>
 
-<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {imc}</div>
-{#if imc < 18}
+<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
+{#if $imc < 18}
   <div class="souspoid">Vous êtes en sous poids</div>
-{:else if imc > 35}
+{:else if $imc > 35}
   <div class="surpoid">Vous êtes en sur poids</div>
 {:else}
   <div class="normal">Quel corps svelte !</div>
