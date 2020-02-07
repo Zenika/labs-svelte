@@ -5,7 +5,7 @@
 
 <main>
 	<h1>Hello {name}!</h1>
-	<Imc />
+	<Imc poid=100 taille=1.9 />
 </main>
 
 <style>
