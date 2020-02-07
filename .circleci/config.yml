@@ -10,10 +10,11 @@ jobs:
     steps:
       - checkout
       - run: cd codelab && make build-ci
-      - gh-pages/deploy:
-        ssh-fingerprints: 'c1:d1:20:94:20:67:f4:88:75:e2:c6:8d:cf:07:3b:ae'
-orbs:
-  gh-pages: sugarshin/gh-pages@0.0.6
+      - run: cd become-svelte && npm install
+      - run: cd become-svelte && npm build
+      - run: npm install -g firebase-tools
+      - run: firebase deploy --token $FIREBASE_TOKEN
+
 workflows:
   build:
     jobs:
