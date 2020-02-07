@@ -5,11 +5,11 @@ jobs:
   codelab:
     working_directory: ~/labs
     docker:
-      - image: circleci/node:12
+      - image: circleci/golang:1.11.6-node
     steps:
       - checkout
-      - setup_remote_docker
-      - run: cd codelab && make build-ci
+      - run: CGO_ENABLED=0 go get github.com/googlecodelabs/tools/claat
+      - run: cd codelab && claat export codelab.md
       - run: cd become-svelte && npm install
       - run: cd become-svelte && npm build
       - run: npm install -g firebase-tools
