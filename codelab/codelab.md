@@ -73,6 +73,8 @@ Checkout the official documentation here: [Codelab Formatting Guide](https://git
 
 
 ## Todo :
+- Avoir des couleurs differentes pour souspoid et surpoid
+- Modifier la taille du texte en fonction du poids (thin, normal, bold)
 - Ajouter l'affichage du poid et de la taille dans le composant IMC
 - Ajouter un bouton calculer dans le formulaire
 - Ajouter entre l'étape 6 et l'étape 7, un bouton de validation pour mettre à jour l'IMC, création d'un Event custom lorsque l'on clique sur le bouton, propagation de l'event de click.
