@@ -5,7 +5,7 @@
   let imc = (poid / taille ** 2).toFixed(2)
 </script>
 
-<div>Votre IMC est de {imc}</div>
+<div>Votre IMC ({poid}/{taille}<sup>2</sup>) est de {imc}</div>
 {#if imc < 18}
   <div class="souspoid">Vous êtes en sous poids</div>
 {:else if imc > 35}

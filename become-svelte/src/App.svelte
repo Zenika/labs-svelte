@@ -2,12 +2,15 @@
  import Imc from './Imc.svelte'
  import Form from './Form.svelte'
  let name = "World";
+
+ let poid = 80;
+ let taille = 1.8;
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
-	<Form />
-	<Imc poid=100 taille=1.9 />
+	<Form bind:poid bind:taille/>
+	<Imc {poid} {taille} />
 </main>
 
 <style>
