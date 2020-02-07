@@ -1,10 +1,12 @@
 <script>
  import Imc from './Imc.svelte'
+ import Form from './Form.svelte'
  let name = "World";
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
+	<Form />
 	<Imc poid=100 taille=1.9 />
 </main>
 
