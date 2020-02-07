@@ -4,8 +4,9 @@ version: 2.1
 jobs:
   codelab:
     working_directory: ~/codelab
-    machine:
-      image: ubuntu-1604:201903-01
+    machine: true
+    branches:
+      ignore: gh-pages
     steps:
       - checkout
       - run: cd codelab && make build-ci
