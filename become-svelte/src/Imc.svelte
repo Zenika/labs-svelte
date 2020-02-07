@@ -2,7 +2,7 @@
   export let poid = 80;
   export let taille = 1.80;
 
-  let imc = (poid / taille ** 2).toFixed(2)
+  $: imc = (poid / taille ** 2).toFixed(2)
 </script>
 
 <div>Votre IMC ({poid}/{taille}<sup>2</sup>) est de {imc}</div>
