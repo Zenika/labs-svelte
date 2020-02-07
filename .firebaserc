@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "labs-svelte"
+  },
+  "targets": {
+    "labs-svelte": {
+      "hosting": {
+        "codelab": [
+          "codelab-svelte"
+        ],
+        "app": [
+          "labs-svelte"
+        ]
+      }
+    }
+  }
+}
