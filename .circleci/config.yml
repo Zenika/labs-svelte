@@ -5,8 +5,6 @@ jobs:
   codelab:
     working_directory: ~/codelab
     machine: true
-    branches:
-      ignore: gh-pages
     steps:
       - checkout
       - run: cd codelab && make build-ci
