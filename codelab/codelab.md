@@ -9,7 +9,7 @@ analytics account:
 ## Overview
 Duration: 10
 
-### What You’ll Learn
+### Ce que vous allez apprendre ?
 - Installation du framework
 - Création d'un premier composant
 - Passer des paramètres
@@ -20,14 +20,44 @@ Duration: 10
 - Stores et contexte
 - Animations
 
+### Présentation de Svelte
+
+Svelte est un compilateur plus qu'un framework, il ajoute du sucre syntaxique a du code javascript pour développer des applications.
+Il va ainsi pouvoir instrumentaliser le code pour ajouter des instructions pour mettre à jour le template lors de changement des données.
+
+Sur le site de [svelte](https://svelte.dev/), un REPL (Read Eval Print Loop) permet de tester en direct du code svelte et voir le code généré.
+De même un [tutoriel](https://svelte.dev/tutorial/basics) permet d'apprendre les base du framework pas à pas.
+
+Un fichier svelte (fichier avec une extension .svelte) ressemble à un fichier html qui va contenir les balises html de notre template, une balise `<script>` contenant le code javascript, ainsi qu'une balise `<style>` contenant le style CSS.
+
+Par exemple :
+```html
+<script>
+	let name = 'world';
+</script>
+
+<style>
+	h1 {
+		color: red;
+	}
+</style>
+
+<h1>Hello {name}!</h1>
+```
+
+
+### Créer un projet svelte
+
+Comme Svelte est un compilateur, il est nécessaire de le lancer pour pouvoir transformer les fichiers .svelte en fichier javascript et css.
+
+Svelte est capable de s'intégrer avec tous les package buddler existant comme webpack ou rollup.
+
+
 <!-- ------------------------ -->
 ## Créer votre première application
 Duration: 10
 
-To indicate how long each slide will take to go through, set the `Duration` under each Heading 2 (i.e. `##`) to an integer.
-The integers refer to minutes. If you set `Duration: 4` then a particular slide will take 4 minutes to complete.
-
-The total time will automatically be calculated for you and will be displayed on the codelab once you create it.
+Sv
 
 <!-- ------------------------ -->
 ## Créer un composant
