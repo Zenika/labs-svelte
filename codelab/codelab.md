@@ -52,12 +52,73 @@ Comme Svelte est un compilateur, il est nécessaire de le lancer pour pouvoir tr
 
 Svelte est capable de s'intégrer avec tous les package buddler existant comme webpack ou rollup.
 
+Ils fournissent des templaces pour créer le squelette d'une application, et propose d'utiliser `degit` un utilitaire qui télécharge les fichiers d'un repos git sans l'historique.
+
+Pour créer un projet avec rollup il suffit alors de saisir les lignes de commandes suivantes :
+```bash
+npx degit sveltejs/template my-svelte-project
+cd my-svelte-project
+npm install
+npm run dev
+```
+
+Vous aurez alors un projet de base avec les outils pour lancer l'application en développement ou construire l'application à deployer.
+
+
+### Le projet pour ce codelab
+
+Après ce rapide introduction à Svelte, nous allons créer pour ce codelab un projet pour calculer son IMC (Indice de Masse Corporelle)
+
+Positive
+: L'indice de masse corporelle ou IMC (en anglais, body mass index ou BMI) est une grandeur qui permet d'estimer la corpulence d’une personne. Inventé au milieu du xixe siècle par Adolphe Quetelet, mathématicien belge et l'un des fondateurs de la statistique moderne, cet indice est appelé aussi l'indice de Quetelet.
+
+La formule pour calculer l'IMC est le poid divisé par la taille au carré.
 
 <!-- ------------------------ -->
 ## Créer votre première application
 Duration: 10
 
-Sv
+### Initialiser le projet
+Comme on l'a vu lors de la première étape, nous allons initialisé notre application en partant d'un template. Nous avons créer un template pour le codelab qui va contenir des éléments qui seront utilisé directement par votre application.
+
+```bash
+npx degit zenika/labs-svelte/template labs-svelte
+cd labs-svelte
+npm install
+```
+
+### Découvrir ce qui a été généré
+Vous vous retrouvez avec une application simple, voici les différents fichiers que l'on peut retrouver :
+
+- **package.json** : Contient les dépendances, ainsi que les script `dev` (pour lancer le projet en développement) ou `build` (pour construire l'application final)
+- **rollup.config.js** : Configuration pour le packageur d'application configurer pour utiliser svelte
+- **public** : Les resources statiques du projet, cela contiendra alors le fichier bundle.js et bundle.css avec votre application compilé
+- **src**: Les fichiers sources de l'application où l'on ajoutera les différents composants
+  - **main.js** : Fichier javascript qui initialise l'application
+  - **App.svelete** : Premier composant svelte qui s'affiche sur notre application, c'est dans ce fichier que nous allons modifier le long de notre application.
+
+### Lancer le projet
+
+Maintenant lançons le projet :
+```bash
+npm run dev
+```
+
+En ouvrant le navigateur à l'url http://localhost:9090/ vous verrez la page de notre application  :
+
+//TODO mettre une capture de l'application
+
+### Modifier et voir le résultat
+
+Maintenant entrons dans le vif du sujet et ouvrez le fichier **App.svelte**, et modifier la variable `name` pour y mettre votre nom :
+
+```javascript
+  let name = "Votre nom"
+```
+
+L'application sera automatiquement rafraichis avec les changements que vous avez fait et vous devriez avoir le texte "Bonjour Votre nom" qui s'affiche à l'écran.
+
+Passons maintenant à l'étape suivante, pour créer notre premier composant.
 
 <!-- ------------------------ -->
 ## Créer un composant
