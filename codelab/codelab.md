@@ -104,7 +104,7 @@ Maintenant lançons le projet :
 npm run dev
 ```
 
-En ouvrant le navigateur à l'url http://localhost:9090/ vous verrez la page de notre application  :
+En ouvrant le navigateur à l'url http://localhost:5000/ vous verrez la page de notre application  :
 
 //TODO mettre une capture de l'application
 
