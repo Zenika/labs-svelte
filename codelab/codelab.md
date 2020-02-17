@@ -124,14 +124,99 @@ Passons maintenant à l'étape suivante, pour créer notre premier composant.
 ## Créer un composant
 Duration: 5
 
+Nous allons maintenant créer notre premier composant, pour cela créer un nouveau fichier **Imc.svelte** dans le répertoire `src`.
+
+Dans ce fichier, mettre du code html pour afficher un simple texte :
+
+```html
+<div>Votre IMC est de 20</div>
+```
+
+Dans le fichier **App.svelte**, ajouter simplement l'import de notre composant Imc :
+
+```javascript
+import Imc from './Imc.svelte'
+```
+
+Positive
+: Mettre ce code javascript entre les balise html `<script></script>`
+
+On peut maintenant utiliser notre composant Imc directement dans notre contenu html :
+
+```html
+	<Imc />
+```
+
+On se retrouve maintenant avec une page qui contient affiche maintenant notre texte "Votre IMC est de 20".
+
+Maintenant, il faudrait que ce texte soit plus dynamique et qu'il puisse être configurer en fonction du poid et de la taille.
 
 <!-- ------------------------ -->
 ## Mettre des variables et afficher dans un template
 Duration: 10
 
+Dans notre fichier **Imc.svelte**, nous allons ajouter deux variables pour définir le poid et la taille, et afficher ensuite le calcul de l'IMC à la place de notre texte html statique.
+
+Pour cela, ajoutons une balise script, contenant deux déclarations de variable :
+
+```html
+<script>
+  let poid = 80;
+  let taille = 1.80;
+</script>
+```
+
+Nous pouvons maintenant afficher ces variables dans le html en utilisant la syntaxe `{variable ou expression}`
+
+```html
+<div>Votre IMC ({poid}/{taille}<sup>2</sup>) est de {(poid / taille ** 2).toFixed(2)}</div>
+```
+
+Positive
+: La formule de l'IMC est le poid en kilo divisé par la taille en métre au carré.
+
+Analysons le code ci-dessus :
+`{poid}` ou `{taille}` sera remplacé par le contenu de la variable poid ou taille
+`{(poid / taille ** 2).toFixed(2)}` Fait plusieurs actions :
+ - `(poid / taille ** 2)` : Calcule de l'IMC (l'opérateur ** permet de faire une puissance en javascript)
+ - `.toFixed(2)` : Convertis le nombre en chaine de caractère en ne gardant que deux chiffres après la virgule
+ - `{}`: Affiche le résultat dans le html
+
+Vous pouvez maintenant faire évoluer la valleur des variables poid ou taille et voir le résultat du calcul de l'IMC en rafraichissant la page.
+
+Ce composant même si il permet de faire le calcule n'est pas utilisable dans une application, car il utilise des variables locales à celui-ci.
+Voyont maintenant comment paramètrer ces variables pour permettre de recevoir ces valeurs en entrée du composant.
+
 <!-- ------------------------ -->
-## Parametre d'un composant
+## Attributs d'un composant
 Duration: 10
+
+Pour qu'un composant svelte reçoivent des entrée via des attributs html, il sufit simplement que ce composant possède des variables préfixé par le mot clé `export`.
+
+Positive
+: En javascript, le mot clé `export` permet d'indiquer que la variable ou la fonction est accéssible à l'exterrieur du fichier (du module). Svelte l'utilise pour définir les entrées des composants.
+
+Une fois ajouté ce mot clé :
+```html
+<script>
+  export let poid = 80;
+  export let taille = 1.80;
+</script>
+```
+
+On peut maintenant faire passer les valeurs par des attributs html à notre composant :
+```html
+<Imc poid=100 taille=1.9 />
+```
+
+Il est bien sûr possible que cet attribut devienne dynamique :
+```html
+<Imc poid={monPoid} {taille} />
+```
+Ici :
+- `poid={monPoid}` : on passe le contenu de la variable `monPoid` dans l'attribut `poid`
+- `{taille}' : écriture symplifié de `taille={taille}`
+
 
 <!-- ------------------------ -->
 ## Conditions d'affichages
