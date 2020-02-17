@@ -215,7 +215,7 @@ Il est bien sûr possible que cet attribut devienne dynamique :
 ```
 Ici :
 - `poid={monPoid}` : on passe le contenu de la variable `monPoid` dans l'attribut `poid`
-- `{taille}' : écriture symplifié de `taille={taille}`
+- `{taille}` : écriture symplifié de `taille={taille}`
 
 
 <!-- ------------------------ -->
