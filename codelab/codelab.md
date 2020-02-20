@@ -252,6 +252,53 @@ On peut ensuite ajouter dans le code html, un ensemble de conditions pour affich
 ## Ajouter du styles
 Duration: 10
 
+Maintenant que l'on affiche un petit message explicatif en fonction de l'IMC, on aimerais différencier ces messages via un système de couleur :
+- *orange*: Si l'IMC est inférieur à 18
+- *rouge*: Si l'IMC est suppérieur à 35
+- *vert*: Si on est dans fourchette d'un IMC normal
+
+Pour cela, on va se créer 3 classes CSS. On peut soit mettre ces classes dans le fichier `global.css` qui se trouve dans le répertoire public. Les classes seront alors disponible pour toute l'application. Mais si je veux ajouter du css directement dans notre composant, il suffit d'ajouter la balise `<style></style>` dans votre fichier `Imc.svelte` et d'y ajouter votre code CSS :
+
+```css
+  .normal {
+    color: green
+  }
+
+  .surpoid {
+    color: red;
+  }
+
+  .souspoid {
+    color: orange;
+  }
+```
+
+Il faut maintenant ajouter les classes CSS dans le code html ajouté précédement :
+
+```html
+<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
+{#if $imc < 18}
+  <div class="souspoid">Vous êtes en sous poids</div>
+{:else if $imc > 35}
+  <div class="surpoid">Vous êtes en sur poids</div>
+{:else}
+  <div class="normal">Quel corps svelte !</div>
+{/if}
+<style>
+  .normal {
+    color: green
+  }
+  .surpoid {
+    color: red;
+  }
+  .souspoid {
+    color: orange;
+  }
+</style>
+```
+
+Svelte va automatiquement ajouter une classe généré sur chaque composant, et le css sera automatiquement scopé avec cette classe.
+Si un autre composant déclare aussi une classe CSS `.normal` chaque composant n'auront pas le même style css et il n'y aura pas de collisition.
 
 <!-- ------------------------ -->
 ## Créer un formulaire

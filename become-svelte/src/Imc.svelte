@@ -22,7 +22,11 @@
     color: green
   }
 
-  .surpoid, .souspoid {
+  .surpoid {
+    color: red;
+  }
+
+  .souspoid {
     color: orange;
   }
 
