@@ -222,6 +222,32 @@ Ici :
 ## Conditions d'affichages
 Duration: 10
 
+Ajoutons maintenant un message qui précise notre état de corpulence en fonction de l'IMC.
+
+Positive
+: Le rapport taille sur le poid au carré qui est considéré comme une corpulence est compris entre 18 et 35. Au delà, on est en surpoid et inversement en sous-poid si l'on est en dessous.
+
+On veut donc ajouter un message en fonction de notre IMC. Svelte permet d'ajouter des conditions dans un template avec la syntaxe `{#if condition}{:else if condition}{:else}{/if}`
+
+Commençons par créer une variable pour calculer l'IMC et pouvoir réutiliser cette valeur dans notre condition :
+
+```javascript
+let imc = (poid / taille ** 2).toFixed(2)
+```
+
+On peut ensuite ajouter dans le code html, un ensemble de conditions pour afficher un message :
+
+```html
+<div>Votre IMC est de {imc}</div>
+{#if imc < 18}
+  <div>Vous êtes en sous poids</div>
+{:else if imc > 35}
+  <div>Vous êtes en sur poids</div>
+{:else}
+  <div>Quel corps svelte !</div>
+{/if}
+```
+
 <!-- ------------------------ -->
 ## Ajouter du styles
 Duration: 10
