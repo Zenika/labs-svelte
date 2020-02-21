@@ -417,6 +417,60 @@ On peut donc remplacer les `on:input={onPoidChange}` par `bind:value={poid}` dan
 ## Réactive statement
 Duration: 5
 
+Pour l'instant, lorsque vous modifiez le poid ou la taille, seulement l'affichage du poid et de la taille se met à jour, vous remarquez que l'IMC n'est pas mis à jours.
+Pourtant il existe bien la ligne qui fait le calcule de l'IMC, mais ce calcul n'est fait que lors de la création du composant mais pas lors de la mise à jour des variables.
+
+Svelte propose donc une syntaxe pour rendre reactive une ligne (ou plusieurs) de code, pour cela il faut ajouter $: au début de la ligne (si on veut plusieurs lignes, on peut utiliser les {} : `$:{ }`).
+Dès qu'une variable contenu dans cette ligne est modifié, alors la ligne est réexecuté.
+
+```javascript
+$: imc = (poid / taille ** 2).toFixed(2)
+```
+
+Maintenant de manière magique, l'IMC est bien recalculé lors de la modification du formulaire.
+
+Cette syntaxe permet également de logger les valeurs des variables :
+
+```javascript
+$: {
+  console.log(poid);
+  console.log(taille);
+}
+```
+
+Positive
+: Cette syntaxe n'est pas une invention de svelte, mais réutilise une syntaxe peut utilisé de javascript, il est possible d'ajouter en javascript un label suivit de deux points, en particulier devant une boucle. lors d'un break dans une boucle on peut indiquer alors le label de la boucle que l'on veut arrêter, cela permet de sortir de multiple boucles intégrer :
+: ```
+boucle1:
+for (i = 0; i < 3; i++) {
+   boucle2:
+   for (j = 0; j < 3; j++) {
+      if (i === 1 && j === 1) {
+         continue boucle1;
+      } else {
+         console.log("i = " + i + ", j = " + j);
+      }
+   }
+}
+```
+
+Une autre méthode permet de s'abonner aux changements des parametres d'un composant en utilisant les fonctions du cycle de vie d'un composant :
+- `beforeUpdate` : la fonction passé à cette fonction est appelé avant que les parametres sont modifiés
+- `afterUpdate` : la fonction est appelé après que les parametres sont modifiés
+
+```javascript
+  import { beforeUpdate, afterUpdate } from 'svelte';
+
+	beforeUpdate(() => {
+		console.log('the component is about to update');
+	});
+
+  afterUpdate(() => {
+		console.log('the component just updated');
+    imc = (poid / taille ** 2).toFixed(2)
+	});
+```
+
 
 <!-- ------------------------ -->
 ## Mise en place de store
