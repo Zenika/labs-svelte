@@ -304,11 +304,114 @@ Si un autre composant déclare aussi une classe CSS `.normal` chaque composant n
 ## Créer un formulaire
 Duration: 10
 
+Pour l'instant, le poid et la taille sont définit comme des attributs du composant `Imc` mais ne sont pas éditable, ce qui n'est pas très pratique pour proposer à nos utilisateurs de calculer notre IMC.
+Il est donc nécessaire de créer un formulaire pour pouvoir saisir notre poid et notre taille et ainsi pouvoir calculer notre IMC.
+
+## Nouveau composant
+Commençons par créer un nouveau composant que nous nomerons `Form.svelte`.
+
+Ce composant contiendra un formulaire simple avec deux sliders pour définir notre poid et notre taille :
+
+```html
+<form>
+  <label> Poid ({poid} kg) :
+    <input type="range" min="10" max="200" step="5" />
+  </label>
+
+  <label> Taille ({taille.toFixed(2)} m) :
+    <input type="range" min="0.5" max="2.5" step="0.01" />
+  </label>
+
+  <input type="submit" value="Calculer" />
+</form>
+```
+
+Ajoutons maintenant ce formulaire dans notre composant principale `App.svelte`, en important notre composant :
+```javascript
+ import Form from './Form.svelte'
+```
+
+Puis au dessus du composant `<Imc />` notre composant `<Form />`
+
+## Récupérer les valeurs
+
+Mais pour l'instant, on ne récupère pas les valeurs du formulaire.
+Svelte vous propose une syntaxe pour s'abonner aux évènements d'un composant, en utilisant le préfix `on:` sur le nom de l'évènement, ainsi que la fonction à appeler entre accollade `{submit}` ou une fonction lambda `{event => changeEvent(event.target.value)}`
+
+```html
+<input on:input={saveChange} />
+<button on:click={submit}"/>
+<div on:mousemove={event => handleMousemove(event.clientX, event.clientY)}></div>
+```
+
+Ajoutons donc des évènements pour récupérer les valeurs saisis pour la taille et le poid :
+
+```javascript
+ let poid = 0;
+ let taille = 0;
+ function onPoidChange(event) {
+  poid = event.target.value
+ }
+ function onTailleChange(event) {
+  taille = parseFloat(event.target.value)
+ }
+```
+
+```html
+    <input type="range" min="10" max="200" step="5" on:input={onPoidChange} />
+    <input type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange}/>
+```
 
 <!-- ------------------------ -->
 ## Double binding
 Duration: 10
 
+Maintenant que l'on peut récupérer la valeur de nos champs, il est nécessaire de faire passer la valeur de ntore composant `Form` vers le composant `Imc`.
+
+### Déscendre une valeur d'un composant parent
+Pour cela, il faut passer par le composant `App` pour faire passer les valeurs.
+
+Ajoutons deux variables dans le fichier `App.svelte` à l'intérieur de la balise `<script></script>`
+
+```
+ let poid = 80;
+ let taille = 1.8;
+```
+
+Pour faire passer les valeurs au composant `Imc`, rien de plus simple, il suffit d'utiliser la syntaxe permettant de passer des paramèetres à un composant `taille={taille}` ou la syntaxe simplifié `{taille}` :
+
+```html
+<Imc {taille} {poid} />
+```
+
+### Remonter une valeur au composant parent
+Mais comment faire sortir les données du composant `Form` ? Svelte permet de le faire avec les paramètres d'un composant et en utilisant le préfixe `bind:` qui permet de mettre en place un double binding entre deux composants.
+
+Ajoutons donc le mot clé `export` devant les deux variables dans le fichier `Form.svelte` :
+
+```javascript
+ export let poid;
+ export let taille;
+```
+
+et dans le fichier `App.svelte`, relions les variables via la syntaxe `bind:poid={poid}` ou la syntaxe simplifié `{bind:poid}` :
+
+```html
+  <Form bind:poid bind:taille />
+```
+
+De cette façon si la variable poid est modifié dans le composant `Form`, la variable est mise à jour dans le composant `App` et inversement si on modifie la valeur d'une variable dans le composant `App`.
+
+### Double binding sur un élèment du DOM
+
+Mais la syntaxe `bind:` permet également de faire un double binding entre une variable et une propriété d'un élément du DOM pour par exemple les élèments du formulaire.
+
+On peut donc remplacer les `on:input={onPoidChange}` par `bind:value={poid}` dans le fichier `Form.svelte`
+
+```html
+ <input type="range" min="10" max="200" step="5" bind:value={poid} />
+ <input type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
+ ```
 
 <!-- ------------------------ -->
 ## Réactive statement
