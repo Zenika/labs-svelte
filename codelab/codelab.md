@@ -439,7 +439,9 @@ $: {
 ```
 
 Positive
-: Cette syntaxe n'est pas une invention de svelte, mais réutilise une syntaxe peut utilisé de javascript, il est possible d'ajouter en javascript un label suivit de deux points, en particulier devant une boucle. lors d'un break dans une boucle on peut indiquer alors le label de la boucle que l'on veut arrêter, cela permet de sortir de multiple boucles intégrer : ```
+: Cette syntaxe n'est pas une invention de *svelte*, mais réutilise une syntaxe peut utilisé de javascript, il est possible d'ajouter en javascript un label suivit de deux points, en particulier devant une boucle. lors d'un **break** ou **continue** dans une boucle on peut indiquer alors le label de la boucle que l'on veut arrêter, cela permet de sortir de multiple boucles intégrées :
+
+```javascript
 boucle1:
 for (i = 0; i < 3; i++) {
    boucle2:
@@ -453,6 +455,7 @@ for (i = 0; i < 3; i++) {
 }
 ```
 
+
 Une autre méthode permet de s'abonner aux changements des parametres d'un composant en utilisant les fonctions du cycle de vie d'un composant :
 - `beforeUpdate` : la fonction passé à cette fonction est appelé avant que les parametres sont modifiés
 - `afterUpdate` : la fonction est appelé après que les parametres sont modifiés
@@ -460,16 +463,111 @@ Une autre méthode permet de s'abonner aux changements des parametres d'un compo
 ```javascript
   import { beforeUpdate, afterUpdate } from 'svelte';
 
-	beforeUpdate(() => {
-		console.log('the component is about to update');
-	});
+  beforeUpdate(() => {
+    console.log('the component is about to update');
+  });
 
   afterUpdate(() => {
-		console.log('the component just updated');
+    console.log('the component just updated');
     imc = (poid / taille ** 2).toFixed(2)
-	});
+  });
 ```
 
+<!-- ------------------------ -->
+## Evenement lors du click sur le bouton
+Duration: 10
+
+Pour le moment, dès qu'un changement est fait sur le formulaire, l'IMC est recalculé, ce qui pour de gros formulaire peut être pas performant et ne permet pas d'avoir une étape de validation.
+
+Ajoutons un bouton "calculer" pour ne lancer le calcule de l'IMC seulement lorsque l'on clique sur le bouton, pour cela, il faut s'abonner au click sur le bouton et ensuite envoyer un événement personnalisé pour mettre à jour l'IMC :
+
+### Event dispatcher
+Pour envoyer un événement, on va utiliser le *dispatcher* de *svelte*. Après la création d'un evtnDispatcher avec le code suivant :
+
+```javascript
+ import { createEventDispatcher } from 'svelte';
+ const dispatch = createEventDispatcher();
+```
+
+On peut maintenant dispatcher des évènements personnalisés :
+```javascript
+  dispatch('calculer', {
+    poid,
+    taille
+  });
+```
+
+Le composant parent peut alors s'abonner à l'évènement avec la syntaxe `on:calculer={fonction_a_appeler}`.
+
+### Evènement personnalisé
+
+Ce qui nous donne le code suivant pour notre composant :
+
+```html
+<script>
+ import { createEventDispatcher } from 'svelte';
+
+ const dispatch = createEventDispatcher();
+ export let taille = 1.8;
+ export let poid = 80;
+
+ function submitCalculer(event) {
+  dispatch('calculer', {
+    poid,
+    taille
+  });
+ }
+</script>
+
+<form>
+  <label> Poid ({poid} kg) :
+    <input type="range" min="10" max="200" step="5" bind:value={poid} />
+  </label>
+
+  <label> Taille ({taille.toFixed(2)} m) :
+    <input type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
+  </label>
+
+  <input type="submit" value="Calculer" on:click={submitCalculer}/>
+</form>
+```
+
+Et dans le fichier `App.svelte`, on réagit à l'évènement :
+
+```html
+<script>
+  let taille = 1.8;
+  let poid = 80;
+
+  function calculerEvent(event) {
+    console.log(event)
+    poid = event.detail.poid;
+    taille = event.detail.taille;
+  }
+</script>
+  <Form on:calculer={calculerEvent}/>
+  <Imc {taille} {poid} />
+```
+
+### Event modifier
+
+Une fois ce code implémenté, vous devrier remarquer que le calcule de l'IMC se modifie mais rapidement la page est rafraichis, car le bouton envoie le formulaire.
+
+Pour cela, il est nécessaire en javascript d'appeler la fonction `preventDefault` sur l'objet `event` passé en paramètre de la fonction `submitCalculer`. Mais *svelte* apporte une syntaxe pour ajouter des modificateurs à un évènement.
+
+En ajoutant `|preventDefault` après le `on:click`, *svelte* va automatiquement executer le code `event.preventDefault()` avant d'appeler votre fonction :
+
+```html
+  <input type="submit" value="Calculer" on:click|preventDefault={submitCalculer}/>
+```
+
+D'[autres modificateurs](https://svelte.dev/docs#on_element_event) sont disponibles :
+- `stopPropagation` : Exécute le code `event.stopPropagation()` qui permet de ne pas propager l'événement sur les noeuds html parents.
+- `once`: Se désabonne après avoir reçu un évènement
+- `self`: L'évènement n'est actif seulement si envoyé par l'élément dom où l'on ajoute l'événement.
+
+Positive
+: On aurait aussi pu propager l'évènement click du bouton à notre composant `App` en ajoutant la ligne `on:click` sur notre bouton, et dans le composant `on:click={calculerImc}`, mais on expose de notre composant une implémentation interne, comment faire pour ajouter un autre moyen pour valider le formulaire, par exemple un racourcis clavier ?
 
 <!-- ------------------------ -->
 ## Mise en place de store
