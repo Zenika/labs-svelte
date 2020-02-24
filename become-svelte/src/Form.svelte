@@ -1,5 +1,15 @@
 <script>
  import { poid, taille } from './stores'
+ import { createEventDispatcher } from 'svelte';
+
+ const dispatch = createEventDispatcher();
+
+ function calculerImc() {
+  dispatch('calculer', {
+    poid: $poid,
+    taille: $taille
+	});
+ }
 </script>
 
 <form>
@@ -10,4 +20,6 @@
   <label> Taille ({$taille.toFixed(2)} m) :
     <input type="range" min="0.5" max="2.5" step="0.01" bind:value={$taille} />
   </label>
+
+  <input type="submit" value="Calculer" on:click|preventDefault={calculerImc}/>
 </form>

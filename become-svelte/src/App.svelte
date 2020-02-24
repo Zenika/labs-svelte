@@ -1,12 +1,17 @@
 <script>
  import Imc from './Imc.svelte'
  import Form from './Form.svelte'
+
+	function calculerEvent(event) {
+		console.log(event.detail)
+	}
+
  let name = "World";
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
-	<Form />
+	<Form on:calculer={calculerEvent}/>
 	<Imc />
 </main>
 
