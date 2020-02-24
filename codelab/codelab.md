@@ -307,7 +307,7 @@ Duration: 10
 Pour l'instant, le poid et la taille sont définit comme des attributs du composant `Imc` mais ne sont pas éditable, ce qui n'est pas très pratique pour proposer à nos utilisateurs de calculer notre IMC.
 Il est donc nécessaire de créer un formulaire pour pouvoir saisir notre poid et notre taille et ainsi pouvoir calculer notre IMC.
 
-## Nouveau composant
+### Nouveau composant
 Commençons par créer un nouveau composant que nous nomerons `Form.svelte`.
 
 Ce composant contiendra un formulaire simple avec deux sliders pour définir notre poid et notre taille :
@@ -333,7 +333,7 @@ Ajoutons maintenant ce formulaire dans notre composant principale `App.svelte`, 
 
 Puis au dessus du composant `<Imc />` notre composant `<Form />`
 
-## Récupérer les valeurs
+### Récupérer les valeurs
 
 Mais pour l'instant, on ne récupère pas les valeurs du formulaire.
 Svelte vous propose une syntaxe pour s'abonner aux évènements d'un composant, en utilisant le préfix `on:` sur le nom de l'évènement, ainsi que la fonction à appeler entre accollade `{submit}` ou une fonction lambda `{event => changeEvent(event.target.value)}`
@@ -439,8 +439,7 @@ $: {
 ```
 
 Positive
-: Cette syntaxe n'est pas une invention de svelte, mais réutilise une syntaxe peut utilisé de javascript, il est possible d'ajouter en javascript un label suivit de deux points, en particulier devant une boucle. lors d'un break dans une boucle on peut indiquer alors le label de la boucle que l'on veut arrêter, cela permet de sortir de multiple boucles intégrer :
-: ```
+: Cette syntaxe n'est pas une invention de svelte, mais réutilise une syntaxe peut utilisé de javascript, il est possible d'ajouter en javascript un label suivit de deux points, en particulier devant une boucle. lors d'un break dans une boucle on peut indiquer alors le label de la boucle que l'on veut arrêter, cela permet de sortir de multiple boucles intégrer : ```
 boucle1:
 for (i = 0; i < 3; i++) {
    boucle2:
