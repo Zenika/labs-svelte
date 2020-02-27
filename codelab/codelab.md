@@ -738,14 +738,47 @@ On peut maintenant supprimer dans le fichier `Imc.svelte` la ligne qui calcule l
 ```
 
 <!-- ------------------------ -->
-## Ajouter du styles
-Duration: 10
-
-
-<!-- ------------------------ -->
 ## Animation
 Duration: 10
 
+### Présentation
+Maintenant que nous avons une application finalisé, ajoutons un peu d'intérations en mettant des annimations.
+
+*Svelte* permet d'ajouter facilement des animations, en mettant simplement des attributs à une balise html ou un composant pour ajouter une transition qui pourra s'exécuter à l'apparition ou la disparition d'un élément.
+La syntaxe est simple, on indique la transition que l'on veut utiliser, que l'on préfixe par `in:` ou `out:` en fonction de si l'on veut afficher l'animation à l'apparition ou à la disparition de l'élément. Si l'on peut la même transition à l'apparition ou la disparition, il suffit d'utiliser le préfixe `transition:`
+Il y a 6 transitions proposés par défaut, mais il est posible de créer sa propre transition personnalisé.
+- **fade** : change l'opacité de l'élément
+- **blur** : Applique un filtre de floue et change l'opacité
+- **fly** : Déplace l'élément et change l'opacité
+- **slide** : Masque ou affiche l'élément par un effet de volet.
+- **scale** : Affiche ou masque l'élément en changeant sa taille
+- **draw** : Intéressant pour un SVG pour avoir un effet de dessin par un crayon.
+
+Il est bien sûr possible de passer des parametres pour personnaliser l'animations avec par exemple la durée de l'animation, ou la position initiale :
+```html
+<div in:fly="{{ y: 200, duration: 2000 }}" out:fade>
+```
+
+### Le mettre en place
+
+Ajoutons maintenant des animations sur les textes qui s'affichent en fonction de la valeur de l'IMC.
+Dans le fichier `Imc.svelte` :
+
+```html
+<script>
+ import { poid, taille, imc } from './stores'
+ import { fly, fade } from 'svelte/transition';
+</script>
+
+<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
+{#if $imc < 18}
+  <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sous poids</div>
+{:else if $imc > 35}
+  <div class="surpoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sur poids</div>
+{:else}
+  <div class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Quel corps svelte !</div>
+{/if}
+```
 
 <!-- ------------------------ -->
 ## Modifier le titre de la page
