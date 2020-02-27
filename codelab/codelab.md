@@ -570,14 +570,172 @@ Positive
 : On aurait aussi pu propager l'évènement click du bouton à notre composant `App` en ajoutant la ligne `on:click` sur notre bouton, et dans le composant `on:click={calculerImc}`, mais on expose de notre composant une implémentation interne, comment faire pour ajouter un autre moyen pour valider le formulaire, par exemple un racourcis clavier ?
 
 <!-- ------------------------ -->
-## Mise en place de store
+## Mise en place du store
 Duration: 10
 
+
+### Présentation
+La communication entre plusieurs composant via les attributs et les évènements peut vite devenir complexe avec de grosse application. Il est donc nécessaire d'avoir un mécanisme pour partager des données entre les différents composant.
+Un patterne est maintenant de plus en plus en train de s'imposer dans les applications front, c'est le concepte de store application. L'idée est d'avoir un endroit où garder en mémoire à tous moment de l'état globale de l'application.
+
+*Svelte* propose une implémentation de ce patterne en permettant d'écrire des stores. Il propose trois types de store :
+- **writable** : Cas le plus courant, un store qui est modifiable.
+- **readable** : L'application ne peut que lire des données du store, mais pas écrire (sert pour accèder à des données venant d'une autre source et non modifié par l'application : api du navigateur, push serveur, temps ...)
+- **derived** : Ce store se met à jour en fonction de mises à jour venant d'autres store (on le mettra en place dans le chapitre suivant).
+
+Les composants qui vont communiquer par le store seront découplé.
+
+### Un store writable
+
+Un store **writable** est donc un object qui contient une valeur initiale, que l'on peut ensuite mettre à jour, et s'abonner sur ces mises à jours :
+
+```javascript
+import { writable } from 'svelte/store';
+
+const count = writable(0);
+
+count.subscribe(value => {
+	console.log(value);
+}); // logs '0'
+
+count.set(1); // logs '1'
+
+count.update(n => n + 1); // logs '2'
+```
+
+### Créer un store pour stocker le poid et la taille
+
+Pour cela, créons un fichier javascript (il ne contient que du code, et pas template, donc pas nécessaire d'avoir un fichier svelte) `stores.js` qui va contenir la création de nos deux stores pour stocker le poid et la taille :
+
+```javascript
+import { writable } from 'svelte/store'
+
+export const poid = writable(80)
+export const taille = writable(1.8)
+```
+
+Maintenant, on peut modifier notre fichier `Form.svelte` pour utiliser notre store :
+
+```javascript
+ import { poid, taille } from './stores'
+
+ function onPoidChange(event) {
+  poid.set(event.target.value)
+ }
+ function onTailleChange(event) {
+  taille.set(parseFloat(event.target.value))
+ }
+```
+
+et à l'inverse dans le fichier `Imc.svelte`
+
+```javascript
+import { poid as storePoid, taille as storeTaille } from './stores'
+
+let poid;
+let taille;
+
+storePoid.subscribe(value => poid = value)
+storeTaille.subscribe(value => taille = value)
+```
+
+Negative
+: Attention, le subscribe retourne une fonction qui permet de se désaboner. Il faut donc gardr cette fonction dans une variable et utiliser le livecycle `onDetroy()` pour nettoyer les souscriptions et éviter les fuites mémoires. La syntaxe simplifié s'en occupe automatiquement.
+
+### Syntaxe simplifié
+
+La syntaxe avec les méthodes set et subscribe n'est pas très pratique et lisible pour les développeurs. *Svelte* propose donc un mécanisme pour rendre ce code plus simple et lisite.
+Pour cela, on va encore utiliser la syntaxe `$`, toute variable d'un store en ajoutant un `$` devant sera alors utilisable comme une variable de base :
+```javascript
+import { writable } from 'svelte/store';
+
+const count = writable(0);
+
+$: console.log($count);
+
+$count = 1; // logs '1'
+```
+
+Cette syntaxe est également disponible dans le template :
+
+```html
+<input type="number" bind:value={$count} />
+<p>Count : {$count}</p>
+```
+
+Positive
+: *Svelte* propose des fonctions pour créer facilement des stores, mais tout object `Observable` (qui possède un subscribe, unsubscribe) est considéré par *svelte* comme un store et peut utiliser la syntaxe réactive de *svelte*.
+
+### Utiliser la syntaxe simplifié dans notre application
+
+Grâce à la syntaxe simplifié, on peut avoir un template simple en utilisant $poid et $taille comme si c'était de simple variables.
+
+Dans le fichier `Form.svelte` :
+```html
+<script>
+ import { poid, taille } from './stores'
+</script>
+
+<form>
+  <label> Poid ({$poid} kg) :
+    <input type="range" min="10" max="200" step="5" bind:value={$poid} />
+  </label>
+
+  <label> Taille ({$taille.toFixed(2)} m) :
+    <input type="range" min="0.5" max="2.5" step="0.01" bind:value={$taille} />
+  </label>
+</form>
+```
+
+Dans le fichier `Imc.svelte` :
+
+```html
+<script>
+ import { poid, taille } from './stores'
+  $: imc = ($poid / $taille ** 2).toFixed(2)
+</script>
+
+<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {imc}</div>
+```
+
+Maintenant, il n'est plus nécessaire de faire passer les informations par le composant `App.svelte`, et on pourrait avoir d'autres composants qui utilisent aussi ce store;
 
 <!-- ------------------------ -->
 ## Store dérivée
-Duration: 10
+Duration: 5
 
+En plus des stores simples **writable**, *svelte* propose les stores **derived**, ce store se met à jours par la modification d'un ou plusieurs autres stores.
+Ce qui est notre cas, ici, le calcule de l'IMC est un dérivée des valeurs du poid et de la taille.
+
+Ajoutons dans le fichier `store.js`, ce nouveau store dérivée :
+
+```javascript
+import { derived, writable } from 'svelte'
+
+export const poid = writable(80)
+export const taille = writable(1.8)
+
+export const imc = derived([poid, taille], ([$poid, $taille]) => {
+  return ($poid / $taille ** 2).toFixed(2)
+})
+```
+
+On peut maintenant supprimer dans le fichier `Imc.svelte` la ligne qui calcule l'IMC est utiliser à la place la syntaxe simplifié du store dérivée `$imc` :
+
+```html
+<script>
+ import { poid, taille, imc } from './stores'
+</script>
+
+<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
+{#if $imc < 18}
+  <div class="souspoid">Vous êtes en sous poids</div>
+{:else if $imc > 35}
+  <div class="surpoid">Vous êtes en sur poids</div>
+{:else}
+  <div class="normal">Quel corps svelte !</div>
+{/if}
+```
 
 <!-- ------------------------ -->
 ## Ajouter du styles
