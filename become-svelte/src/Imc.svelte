@@ -8,7 +8,9 @@
   <title>Votre IMC : {$imc}</title>
 </svelte:head>
 
-<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
+<div class:thin={$imc < 18} class:bold={$imc > 35}>
+  Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}
+</div>
 {#if $imc < 18}
   <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sous poids</div>
 {:else if $imc > 35}
@@ -29,5 +31,12 @@
   .souspoid {
     color: orange;
   }
-
+  .thin {
+    font-weight: 200;
+    font-size: .875rem;
+  }
+  .bold {
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
 </style>

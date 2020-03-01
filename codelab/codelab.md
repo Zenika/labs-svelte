@@ -276,10 +276,10 @@ Pour cela, on va se créer 3 classes CSS. On peut soit mettre ces classes dans l
 Il faut maintenant ajouter les classes CSS dans le code html ajouté précédement :
 
 ```html
-<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
-{#if $imc < 18}
+<div>Votre IMC ({poid}/{taille}<sup>2</sup>) est de {imc}</div>
+{#if imc < 18}
   <div class="souspoid">Vous êtes en sous poids</div>
-{:else if $imc > 35}
+{:else if imc > 35}
   <div class="surpoid">Vous êtes en sur poids</div>
 {:else}
   <div class="normal">Quel corps svelte !</div>
@@ -299,6 +299,105 @@ Il faut maintenant ajouter les classes CSS dans le code html ajouté précédeme
 
 Svelte va automatiquement ajouter une classe généré sur chaque composant, et le css sera automatiquement scopé avec cette classe.
 Si un autre composant déclare aussi une classe CSS `.normal` chaque composant n'auront pas le même style css et il n'y aura pas de collisition.
+
+On peut aller plus loin dans l'ajout de style, en ajoutant des classes de facon conditionnelle. Pour tester cela on va faire varier le poids et la taille du texte en fonction de la valeur de l'IMC.
+
+Pour cela on ajoute la declaration des classes avec les conditions associees sur la balise `div` autours de l'affichage de l'IMC ;
+
+```sveltehtml
+<div class:thin={imc < 18} class:bold={imc > 35}>
+    Votre IMC ({poid}/{taille}<sup>2</sup>) est de {imc}
+</div>
+```
+
+puis on ajoute les classes dans la balise style de notre composant
+
+```html
+<style>
+  .normal {
+    color: green
+  }
+  .surpoid {
+    color: red;
+  }
+  .souspoid {
+    color: orange;
+  }
+  .thin {
+    font-weight: 200;
+  }
+  .bold {
+    font-weight: 600;
+  }
+</style>
+```
+
+C'est plutot pratique, mais ca pose un petit soucis dans notre cas, on utilise 2 fois les meme conditions a 2 endroits differents. Ce n'est pas ideal pour maintenir le code.
+Heureusement, il existe un sucre synthaxique pour l'ecriture de classes qui peut parfaitement resoudre notre probleme. Si la classe et la variable qui conditionne son affichage sont identiques, alors on peut simplement ecrire `class:condition`.
+
+On va donc commencer par ajouter stocker nos conditions dans 2 variables :
+
+```sveltehtml
+<script>
+  const imc = (poid / taille ** 2).toFixed(2)
+  const thin = imc < 18
+  const bold = imc > 35
+</script>
+```
+
+Puis on modifie notre code html en accord avec ces nouvelles variables :
+
+```sveltehtml
+<div class:thin class:bold>
+    Votre IMC ({poid}/{taille}<sup>2</sup>) est de {imc}
+</div>
+{#if thin}
+  <div class="souspoid">Vous êtes en sous poids</div>
+{:else if bold}
+  <div class="surpoid">Vous êtes en sur poids</div>
+{:else}
+  <div class="normal">Quel corps svelte !</div>
+{/if}
+```
+
+Ce qui nous donne le resultat suivant pour l'ensemble du composant :
+
+```sveltehtml
+<script>
+  const imc = (poid / taille ** 2).toFixed(2)
+  const thin = imc < 18
+  const bold = imc > 35
+</script>
+
+<div class:thin class:bold>
+    Votre IMC ({poid}/{taille}<sup>2</sup>) est de {imc}
+</div>
+{#if thin}
+  <div class="souspoid">Vous êtes en sous poids</div>
+{:else if bold}
+  <div class="surpoid">Vous êtes en sur poids</div>
+{:else}
+  <div class="normal">Quel corps svelte !</div>
+{/if}
+
+<style>
+  .normal {
+    color: green
+  }
+  .surpoid {
+    color: red;
+  }
+  .souspoid {
+    color: orange;
+  }
+  .thin {
+    font-weight: 200;
+  }
+  .bold {
+    font-weight: 600;
+  }
+</style>
+```
 
 <!-- ------------------------ -->
 ## Créer un formulaire
