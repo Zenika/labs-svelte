@@ -272,7 +272,7 @@ Maintenant que l'on affiche un petit message explicatif en fonction de l'IMC, on
 
 Pour cela, on va se créer 3 classes CSS. On peut soit mettre ces classes dans le fichier `global.css` qui se trouve dans le répertoire public.
 Les classes seront alors disponible pour toute l'application. Mais si je veux ajouter du css directement dans notre composant, 
-il suffit d'ajouter la balise `<style></style>` dans votre fichier `Imc.svelte` et d'y ajouter votre code CSS :
+il suffit d'ajouter la balise `<style></style>` dans votre fichier **Imc.svelte** et d'y ajouter votre code CSS :
 
 ```css
   .normal {
@@ -427,7 +427,7 @@ Pour l'instant, le poid et la taille sont définit comme des attributs du compos
 Il est donc nécessaire de créer un formulaire pour pouvoir saisir notre poid et notre taille et ainsi pouvoir calculer notre IMC.
 
 ### Nouveau composant
-Commençons par créer un nouveau composant que nous nomerons `Form.svelte`.
+Commençons par créer un nouveau composant que nous nomerons **Form.svelte**.
 
 Ce composant contiendra un formulaire simple avec deux sliders pour définir notre poid et notre taille :
 
@@ -454,7 +454,7 @@ Petites notes sur ce code:
 - *input type="range" min="10" max="200" step="5"*: On ajoute 2 inputs de type `range` que l'on a configure avec des min, max et step
 - *value={poids}*: On initialise les inputs avec les valeurs de nos variables
 
-Ajoutons maintenant ce formulaire dans notre composant principale `App.svelte`, en important notre composant :
+Ajoutons maintenant ce formulaire dans notre composant principale **App.svelte**, en important notre composant :
 ```javascript
  import Form from './Form.svelte'
 ```
@@ -509,7 +509,7 @@ Maintenant que l'on peut récupérer la valeur de nos champs, il est nécessaire
 ### Déscendre une valeur d'un composant parent
 Pour cela, il faut passer par le composant `App` pour faire passer les valeurs.
 
-Ajoutons deux variables dans le fichier `App.svelte` à l'intérieur de la balise `<script></script>`
+Ajoutons deux variables dans le fichier **App.svelte** à l'intérieur de la balise `<script></script>`
 
 ```
  let poid = 80;
@@ -526,14 +526,14 @@ Pour faire passer les valeurs au composant `Imc`, rien de plus simple, il suffit
 Mais comment faire sortir les données du composant `Form` ? 
 *Svelte* permet de le faire avec les paramètres d'un composant et en utilisant le préfixe `bind:` qui permet de mettre en place un double binding entre deux composants.
 
-Ajoutons donc le mot clé `export` devant les deux variables dans le fichier `Form.svelte` :
+Ajoutons donc le mot clé `export` devant les deux variables dans le fichier **Form.svelte** :
 
 ```javascript
 export let poid = 0;
 export let taille = 0;
 ```
 
-et dans le fichier `App.svelte`
+et dans le fichier **App.svelte**
 
 ```sveltehtml
 <Form {taille} {poid} />
@@ -567,7 +567,7 @@ Les valeurs de l'IMC et les styles ne sont pas modifies lorsque l'on change les 
 
 La syntaxe `bind:` permet également de faire un double binding entre une variable et une propriété d'un élément du DOM pour par exemple les élèments du formulaire.
 
-On peut donc remplacer la combinaison de `value:poid` et `on:input={onPoidChange}` par `bind:value={poid}` dans le fichier `Form.svelte`
+On peut donc remplacer la combinaison de `value:poid` et `on:input={onPoidChange}` par `bind:value={poid}` dans le fichier **Form.svelte**
 
 ```sveltehtml
 <input name="poid" type="range" min="10" max="200" step="5" bind:value={poid} />
@@ -740,7 +740,7 @@ Ce qui nous donne le code suivant pour notre composant :
 </form>
 ```
 
-Et dans le fichier `App.svelte`, on réagit à l'évènement :
+Et dans le fichier **App.svelte**, on réagit à l'évènement :
 
 ```sveltehtml
 <script>
@@ -787,7 +787,7 @@ C'est tout. Le simple fait de ne pas associer de fonction a un evenement permet 
 </form>
 ```
 
-On doit donc egalement mettre a jour `App.svelte`, d'abord l'event que l'on observe :
+On doit donc egalement mettre a jour **App.svelte**, d'abord l'event que l'on observe :
 
 ```sveltehtml
 <Form {poid} {taille} on:submit={calculerEvent} />
@@ -869,7 +869,7 @@ export const poid = writable(80)
 export const taille = writable(1.8)
 ```
 
-Maintenant, on peut modifier notre fichier `Form.svelte` pour utiliser notre store :
+Maintenant, on peut modifier notre fichier **Form.svelte** pour utiliser notre store :
 
 ```javascript
  import { poid, taille } from './stores'
@@ -882,7 +882,7 @@ Maintenant, on peut modifier notre fichier `Form.svelte` pour utiliser notre sto
  }
 ```
 
-et à l'inverse dans le fichier `Imc.svelte`
+et à l'inverse dans le fichier **Imc.svelte**
 
 ```javascript
 import { poid as storePoid, taille as storeTaille } from './stores'
@@ -928,7 +928,7 @@ mais tout object `Observable` (qui possède un subscribe, unsubscribe) est consi
 
 Grâce à la syntaxe simplifié, on peut avoir un template simple en utilisant $poid et $taille comme si c'était de simple variables.
 
-Dans le fichier `Form.svelte` :
+Dans le fichier **Form.svelte** :
 ```sveltehtml
 <script>
  import { poid, taille } from './stores'
@@ -945,7 +945,7 @@ Dans le fichier `Form.svelte` :
 </form>
 ```
 
-Dans le fichier `Imc.svelte` :
+Dans le fichier **Imc.svelte** :
 
 ```sveltehtml
 <script>
@@ -960,7 +960,7 @@ Dans le fichier `Imc.svelte` :
 </div>
 ```
 
-Maintenant, il n'est plus nécessaire de faire passer les informations par le composant `App.svelte`, et on pourrait avoir d'autres composants qui utilisent aussi ce store;
+Maintenant, il n'est plus nécessaire de faire passer les informations par le composant **App.svelte**, et on pourrait avoir d'autres composants qui utilisent aussi ce store;
 
 <!-- ------------------------ -->
 ## Store dérivée
@@ -982,7 +982,7 @@ export const imc = derived([poid, taille], ([$poid, $taille]) => {
 })
 ```
 
-On peut maintenant supprimer dans le fichier `Imc.svelte` la ligne qui calcule l'IMC est utiliser à la place la syntaxe simplifié du store dérivée `$imc` :
+On peut maintenant supprimer dans le fichier **Imc.svelte** la ligne qui calcule l'IMC est utiliser à la place la syntaxe simplifié du store dérivée `$imc` :
 
 ```sveltehtml
 <script>
@@ -1025,7 +1025,7 @@ Il est bien sûr possible de passer des parametres pour personnaliser l'animatio
 ### Le mettre en place
 
 Ajoutons maintenant des animations sur les textes qui s'affichent en fonction de la valeur de l'IMC.
-Dans le fichier `Imc.svelte` :
+Dans le fichier **Imc.svelte** :
 
 ```sveltehtml
 <script>
@@ -1054,7 +1054,7 @@ Duration: 10
 
 *Svelte* donne acces a une collection d'elements speciaux qui nous donnent acces a des elements deja existant dans le DOM tel que la balise `head` ou `body`. Mais egalement a l'objet `window` pour l'ajout d'events.
 
-On va modifier le composant `Imc.svelte`, pour qu'il mette a jour le titre de la page avec la valeur caculee de l'IMC.
+On va modifier le composant **Imc.svelte**, pour qu'il mette a jour le titre de la page avec la valeur caculee de l'IMC.
 
 Pour cela on va utiliser l'element special `<svelte:head>` :
 
