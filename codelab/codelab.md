@@ -784,6 +784,35 @@ Dans le fichier `Imc.svelte` :
 ## Modifier le titre de la page
 Duration: 10
 
+### Présentation
+Svelte donne acces a une collection d'elements speciaux qui nous donnent acces a des elements deja existant dans le DOM tel que la balise `head` ou `body`. Mais egalement a l'objet `window` pour l'ajout d'events.
+
+On va modifier le composant `Imc.svelte`, pour qu'il mette a jour le titre de la page avec la valeur caculee de l'IMC.
+
+Pour cela on va utiliser l'element special `<svelte:head>` :
+
+```sveltehtml
+<script>
+ import { poid, taille, imc } from './stores'
+ import { fly, fade } from 'svelte/transition';
+</script>
+
+<svelte:head>
+  <title>Votre IMC : {$imc}</title>
+</svelte:head>
+
+<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
+{#if $imc < 18}
+  <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sous poids</div>
+{:else if $imc > 35}
+  <div class="surpoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sur poids</div>
+{:else}
+  <div class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Quel corps svelte !</div>
+{/if}
+```
+
+L'ajout de ce code permet a Svelte de venir modifier la balise `title` de notre page a chaque fois que le composant est inclus dans notre page.
+L'inclusion de `{$imc}` dans le titre permet egalement la mise a jour du titre quand la valeur du store `imc` change.
 
 <!-- ------------------------ -->
 ## Code Snippets
