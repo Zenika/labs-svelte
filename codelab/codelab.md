@@ -1040,11 +1040,17 @@ Dans le fichier **Imc.svelte** :
   <div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
 </div>
 {#if thin}
-  <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sous poids</div>
+  <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
+    Vous êtes en sous poids
+  </div>
 {:else if bold}
-  <div class="surpoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sur poids</div>
+  <div class="surpoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
+    Vous êtes en sur poids
+  </div>
 {:else}
-  <div class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Quel corps svelte !</div>
+  <div class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
+    Quel corps svelte !
+  </div>
 {/if}
 ```
 
@@ -1075,11 +1081,17 @@ Pour cela on va utiliser l'element special `<svelte:head>` :
   <div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
 </div>
 {#if thin}
-  <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sous poids</div>
+  <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
+    Vous êtes en sous poids
+  </div>
 {:else if bold}
-  <div class="surpoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sur poids</div>
+  <div class="surpoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
+    Vous êtes en sur poids
+  </div>
 {:else}
-  <div class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Quel corps svelte !</div>
+  <div class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
+    Quel corps svelte !
+  </div>
 {/if}
 ```
 
