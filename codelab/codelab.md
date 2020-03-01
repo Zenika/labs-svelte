@@ -787,7 +787,7 @@ C'est tout. Le simple fait de ne pas associer de fonction a un evenement permet 
 </form>
 ```
 
-On doit donc egalement mettre a jour **App.svelte**, d'abord l'event que l'on observe :
+On doit donc egalement mettre a jour `App`, d'abord l'event que l'on observe :
 
 ```sveltehtml
 <Form {poid} {taille} on:submit={calculerEvent} />
@@ -960,7 +960,7 @@ Dans le fichier **Imc.svelte** :
 </div>
 ```
 
-Maintenant, il n'est plus nécessaire de faire passer les informations par le composant **App.svelte**, et on pourrait avoir d'autres composants qui utilisent aussi ce store;
+Maintenant, il n'est plus nécessaire de faire passer les informations par le composant `App`, et on pourrait avoir d'autres composants qui utilisent aussi ce store;
 
 <!-- ------------------------ -->
 ## Store dérivée
@@ -1060,7 +1060,7 @@ Duration: 10
 
 *Svelte* donne acces a une collection d'elements speciaux qui nous donnent acces a des elements deja existant dans le DOM tel que la balise `head` ou `body`. Mais egalement a l'objet `window` pour l'ajout d'events.
 
-On va modifier le composant **Imc.svelte**, pour qu'il mette a jour le titre de la page avec la valeur caculee de l'IMC.
+On va modifier le composant `Imc`, pour qu'il mette a jour le titre de la page avec la valeur caculee de l'IMC.
 
 Pour cela on va utiliser l'element special `<svelte:head>` :
 
