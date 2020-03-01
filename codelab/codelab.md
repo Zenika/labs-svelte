@@ -25,7 +25,7 @@ Duration: 10
 *Svelte* est un compilateur plus qu'un framework, il ajoute du sucre syntaxique a du code javascript pour développer des applications.
 Il va ainsi pouvoir instrumentaliser le code pour ajouter des instructions pour mettre à jour l'affichage lors de changement des données.
 
-Sur le site de [*Svelte*](https://svelte.dev/), un REPL (Read Eval Print Loop) permet de tester en direct du code *Svelte* et voir le code généré.
+Sur le site de [Svelte](https://svelte.dev/), un REPL (Read Eval Print Loop) permet de tester en direct du code *Svelte* et voir le code généré.
 De même un [tutoriel](https://svelte.dev/tutorial/basics) permet d'apprendre les base du framework pas à pas.
 
 Un fichier *Svelte* (fichier avec une extension .svelte) ressemble à un fichier html qui va contenir les balises html de notre template,
@@ -47,7 +47,7 @@ Par exemple :
 ```
 
 
-### Créer un projet *Svelte*
+### Créer un projet Svelte
 
 Comme *Svelte* est un compilateur, il est nécessaire de le lancer pour pouvoir transformer les fichiers .svelte en fichier javascript et css.
 
@@ -456,14 +456,14 @@ Petites notes sur ce code:
 
 Ajoutons maintenant ce formulaire dans notre composant principale **App.svelte**, en important notre composant :
 ```javascript
- import Form from './Form.svelte'
+import Form from './Form.svelte'
 ```
 
 Puis au dessus du composant `<Imc />` notre composant `<Form />`
 
 ```sveltehtml
-  <Form />
-  <Imc poid=100 taille=1.9 />
+<Form />
+<Imc poid=100 taille=1.9 />
 ```
 
 ### Récupérer les valeurs
@@ -496,8 +496,8 @@ On ajoute donc les 2 fonctions pour mettre a jour notre variable dans la balise 
 Puis on branche ces nouvelles fonctions sur les events de nos inputs :
 
 ```sveltehtml
-    <input name="poid" type="range" min="10" max="200" step="5" on:input={onPoidChange} />
-    <input name="taille" type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange}/>
+<input name="poid" type="range" min="10" max="200" step="5" on:input={onPoidChange} />
+<input name="taille" type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange}/>
 ```
 
 <!-- ------------------------ -->
@@ -635,16 +635,16 @@ Une autre méthode permet de s'abonner aux changements des parametres d'un compo
 - `afterUpdate` : la fonction est appelé après que les parametres sont modifiés
 
 ```javascript
-  import { beforeUpdate, afterUpdate } from 'svelte';
+import { beforeUpdate, afterUpdate } from 'svelte';
 
-  beforeUpdate(() => {
-    console.log('the component is about to update');
-  });
+beforeUpdate(() => {
+  console.log('the component is about to update');
+});
 
-  afterUpdate(() => {
-    console.log('the component just updated');
-    imc = (poid / taille ** 2).toFixed(2)
-  });
+afterUpdate(() => {
+  console.log('the component just updated');
+  imc = (poid / taille ** 2).toFixed(2)
+});
 ```
 
 <!-- ------------------------ -->
@@ -680,16 +680,16 @@ il faut s'abonner au click sur le bouton et ensuite envoyer un événement perso
 Pour envoyer un événement, on va utiliser le *dispatcher* de *svelte*. Après la création d'un eventDispatcher avec le code suivant :
 
 ```javascript
- import { createEventDispatcher } from 'svelte';
- const dispatch = createEventDispatcher();
+import { createEventDispatcher } from 'svelte';
+const dispatch = createEventDispatcher();
 ```
 
 On peut maintenant dispatcher des évènements personnalisés :
 ```javascript
-  dispatch('calculer', {
-    poid,
-    taille
-  });
+dispatch('calculer', {
+  poid,
+  taille
+});
 ```
 
 La fonction dispatch prends 2 arguments:
@@ -813,7 +813,7 @@ Mais *Svelte* apporte une syntaxe pour ajouter des modificateurs à un évèneme
 En ajoutant `|preventDefault` après le `on:click`, *Svelte* va automatiquement executer le code `event.preventDefault()` avant d'appeler votre fonction :
 
 ```sveltehtml
-  <form on:submit|preventDefault>
+<form on:submit|preventDefault>
 ```
 
 D'[autres modificateurs](https://svelte.dev/docs#on_element_event) sont disponibles :
@@ -872,14 +872,14 @@ export const taille = writable(1.8)
 Maintenant, on peut modifier notre fichier **Form.svelte** pour utiliser notre store :
 
 ```javascript
- import { poid, taille } from './stores'
+import { poid, taille } from './stores'
 
- function onPoidChange(event) {
-  poid.set(event.target.value)
- }
- function onTailleChange(event) {
-  taille.set(parseFloat(event.target.value))
- }
+function onPoidChange(event) {
+ poid.set(event.target.value)
+}
+function onTailleChange(event) {
+ taille.set(parseFloat(event.target.value))
+}
 ```
 
 et à l'inverse dans le fichier **Imc.svelte**
