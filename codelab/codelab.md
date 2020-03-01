@@ -22,13 +22,14 @@ Duration: 10
 
 ### Présentation de Svelte
 
-Svelte est un compilateur plus qu'un framework, il ajoute du sucre syntaxique a du code javascript pour développer des applications.
+*Svelte* est un compilateur plus qu'un framework, il ajoute du sucre syntaxique a du code javascript pour développer des applications.
 Il va ainsi pouvoir instrumentaliser le code pour ajouter des instructions pour mettre à jour l'affichage lors de changement des données.
 
-Sur le site de [svelte](https://svelte.dev/), un REPL (Read Eval Print Loop) permet de tester en direct du code svelte et voir le code généré.
+Sur le site de [*Svelte*](https://svelte.dev/), un REPL (Read Eval Print Loop) permet de tester en direct du code *Svelte* et voir le code généré.
 De même un [tutoriel](https://svelte.dev/tutorial/basics) permet d'apprendre les base du framework pas à pas.
 
-Un fichier svelte (fichier avec une extension .svelte) ressemble à un fichier html qui va contenir les balises html de notre template, une balise `<script>` contenant le code javascript, ainsi qu'une balise `<style>` contenant le style CSS.
+Un fichier *Svelte* (fichier avec une extension .svelte) ressemble à un fichier html qui va contenir les balises html de notre template,
+ une balise `<script>` contenant le code javascript, ainsi qu'une balise `<style>` contenant le style CSS.
 
 Par exemple :
 ```sveltehtml
@@ -46,11 +47,11 @@ Par exemple :
 ```
 
 
-### Créer un projet svelte
+### Créer un projet *Svelte*
 
-Comme Svelte est un compilateur, il est nécessaire de le lancer pour pouvoir transformer les fichiers .svelte en fichier javascript et css.
+Comme *Svelte* est un compilateur, il est nécessaire de le lancer pour pouvoir transformer les fichiers .svelte en fichier javascript et css.
 
-Svelte est capable de s'intégrer avec tous les package buddler existant comme webpack ou rollup.
+*Svelte* est capable de s'intégrer avec tous les package buddler existant comme webpack ou rollup.
 
 Ils fournissent des templaces pour créer le squelette d'une application, et propose d'utiliser `degit` un utilitaire qui télécharge les fichiers d'un repos git sans l'historique.
 
@@ -67,10 +68,11 @@ Vous aurez alors un projet de base avec les outils pour lancer l'application en 
 
 ### Le projet pour ce codelab
 
-Après ce rapide introduction à Svelte, nous allons créer pour ce codelab un projet pour calculer son IMC (Indice de Masse Corporelle)
+Après ce rapide introduction à *Svelte*, nous allons créer pour ce codelab un projet pour calculer son IMC (Indice de Masse Corporelle)
 
 Positive
-: L'indice de masse corporelle ou IMC (en anglais, body mass index ou BMI) est une grandeur qui permet d'estimer la corpulence d’une personne. Inventé au milieu du xixe siècle par Adolphe Quetelet, mathématicien belge et l'un des fondateurs de la statistique moderne, cet indice est appelé aussi l'indice de Quetelet.
+: L'indice de masse corporelle ou IMC (en anglais, body mass index ou BMI) est une grandeur qui permet d'estimer la corpulence d’une personne.
+Inventé au milieu du xixe siècle par Adolphe Quetelet, mathématicien belge et l'un des fondateurs de la statistique moderne, cet indice est appelé aussi l'indice de Quetelet.
 
 La formule pour calculer l'IMC est le poid divisé par la taille au carré.
 
@@ -79,7 +81,8 @@ La formule pour calculer l'IMC est le poid divisé par la taille au carré.
 Duration: 10
 
 ### Initialiser le projet
-Comme on l'a vu lors de la première étape, nous allons initialisé notre application en partant d'un template. Nous avons créer un template pour le codelab qui va contenir des éléments qui seront utilisé directement par votre application.
+Comme on l'a vu lors de la première étape, nous allons initialisé notre application en partant d'un template. 
+Nous avons créer un template pour le codelab qui va contenir des éléments qui seront utilisé directement par votre application.
 
 ```bash
 npx degit zenika/labs-svelte/template labs-svelte
@@ -91,11 +94,11 @@ npm install
 Vous vous retrouvez avec une application simple, voici les différents fichiers que l'on peut retrouver :
 
 - **package.json** : Contient les dépendances, ainsi que les script `dev` (pour lancer le projet en développement) ou `build` (pour construire l'application final)
-- **rollup.config.js** : Configuration pour le packageur d'application configurer pour utiliser svelte
+- **rollup.config.js** : Configuration pour le packageur d'application configurer pour utiliser *Svelte*
 - **public** : Les resources statiques du projet, il contiendra egalement les fichiers bundle.js et bundle.css une fois votre application compilée
 - **src**: Les fichiers sources de l'application où l'on ajoutera les différents composants
   - **main.js** : Fichier javascript qui initialise l'application
-  - **App.svelte** : Premier composant svelte qui s'affiche sur notre application, c'est dans ce fichier que nous allons commencer notre application.
+  - **App.svelte** : Premier composant *Svelte* qui s'affiche sur notre application, c'est dans ce fichier que nous allons commencer notre application.
 
 ### Lancer le projet
 
@@ -180,7 +183,7 @@ Analysons le code ci-dessus :
 `{(poid / taille ** 2).toFixed(2)}` Fait plusieurs actions :
  - `(poid / taille ** 2)` : Calcule de l'IMC (l'opérateur ** permet de faire une puissance en javascript)
  - `.toFixed(2)` : Convertis le nombre en chaine de caractère en ne gardant que deux chiffres après la virgule
- - `{}`: Syntax pour indiquer a Svelte d'afficher le contenu dans le html
+ - `{}`: Syntax pour indiquer a *Svelte* d'afficher le contenu dans le html
 
 Vous pouvez maintenant faire évoluer la valleur des variables poid ou taille et voir le résultat du calcul de l'IMC en rafraichissant la page.
 
@@ -191,10 +194,11 @@ Voyont maintenant comment paramètrer ces variables pour permettre de recevoir c
 ## Attributs d'un composant
 Duration: 10
 
-Pour qu'un composant svelte reçoivent des entrée via des attributs html, il sufit simplement que ce composant possède des variables préfixé par le mot clé `export`.
+Pour qu'un composant *Svelte* reçoivent des entrée via des attributs html, il sufit simplement que ce composant possède des variables préfixé par le mot clé `export`.
 
 Positive
-: En javascript, le mot clé `export` permet d'indiquer que la variable ou la fonction est accéssible à l'exterrieur du fichier (du module). Svelte l'utilise pour définir les entrées des composants.
+: En javascript, le mot clé `export` permet d'indiquer que la variable ou la fonction est accéssible à l'exterrieur du fichier (du module).
+*Svelte* l'utilise pour définir les entrées des composants.
 
 Une fois ajouté ce mot clé :
 ```sveltehtml
@@ -227,7 +231,7 @@ Ajoutons maintenant un message qui précise notre état de corpulence en fonctio
 Positive
 : Le rapport taille sur le poid au carré qui est considéré comme une corpulence est compris entre 18 et 35. Au delà, on est en surpoid et inversement en sous-poid si l'on est en dessous.
 
-On veut donc ajouter un message en fonction de notre IMC. Svelte permet d'ajouter des conditions dans un template avec la syntaxe `{#if condition}{:else if condition}{:else}{/if}`
+On veut donc ajouter un message en fonction de notre IMC. *Svelte* permet d'ajouter des conditions dans un template avec la syntaxe `{#if condition}{:else if condition}{:else}{/if}`
 
 Commençons par créer une variable pour calculer l'IMC et pouvoir réutiliser cette valeur dans notre condition :
 
@@ -236,7 +240,7 @@ const imc = (poid / taille ** 2).toFixed(2)
 ```
 
 On peut ensuite ajouter dans le code html, un ensemble de conditions pour afficher un message.
-Pour cela on utilise un template propre a Svelte en utilisant les balises `{#if}`, `{:else if}` et `{/if}`.
+Pour cela on utilise un template propre a *Svelte* en utilisant les balises `{#if}`, `{:else if}` et `{/if}`.
 
 ```sveltehtml
 <div>Votre IMC ({poid}/{taille}<sup>2</sup>) est de {imc}</div>
@@ -249,9 +253,9 @@ Pour cela on utilise un template propre a Svelte en utilisant les balises `{#if}
 {/if}
 ```
 
-Svelte donne acces a d'autres balises similaire pour aider la creation de templates, tel que `{#each}{/each}`.
+*Svelte* donne acces a d'autres balises similaire pour aider la creation de templates, tel que `{#each}{/each}`.
 
-En regle generale, les balises de template Svelte sont encapsulees dans 2 accolades `{}`.
+En regle generale, les balises de template *Svelte* sont encapsulees dans 2 accolades `{}`.
 Afin de pouvoir imbrique les balises, on differencies les balises ouvrantes ou fermantes avec les characteres `#` et `/` respectivement.
 Les balises `else` sont elles precedees de `:`.
 Il est possibile de les utiliser en association avec une balise `if` mais aussi `each`.
@@ -266,7 +270,9 @@ Maintenant que l'on affiche un petit message explicatif en fonction de l'IMC, on
 - *rouge*: Si l'IMC est suppérieur à 35
 - *vert*: Si on est dans fourchette d'un IMC normal
 
-Pour cela, on va se créer 3 classes CSS. On peut soit mettre ces classes dans le fichier `global.css` qui se trouve dans le répertoire public. Les classes seront alors disponible pour toute l'application. Mais si je veux ajouter du css directement dans notre composant, il suffit d'ajouter la balise `<style></style>` dans votre fichier `Imc.svelte` et d'y ajouter votre code CSS :
+Pour cela, on va se créer 3 classes CSS. On peut soit mettre ces classes dans le fichier `global.css` qui se trouve dans le répertoire public.
+Les classes seront alors disponible pour toute l'application. Mais si je veux ajouter du css directement dans notre composant, 
+il suffit d'ajouter la balise `<style></style>` dans votre fichier `Imc.svelte` et d'y ajouter votre code CSS :
 
 ```css
   .normal {
@@ -306,7 +312,7 @@ Il faut maintenant ajouter les classes CSS dans le code html ajouté précédeme
 </style>
 ```
 
-Svelte va automatiquement ajouter une classe généré sur chaque composant, et le css sera automatiquement scopé avec cette classe.
+*Svelte* va automatiquement ajouter une classe généré sur chaque composant, et le css sera automatiquement scopé avec cette classe.
 Si un autre composant déclare aussi une classe CSS `.normal` chaque composant n'auront pas le même style css et il n'y aura pas de collisition.
 
 On peut aller plus loin dans l'ajout de style, en ajoutant des classes de facon conditionnelle. Pour tester cela on va faire varier le poids et la taille du texte en fonction de la valeur de l'IMC.
@@ -344,7 +350,8 @@ puis on ajoute les classes dans la balise style de notre composant
 ```
 
 C'est plutot pratique, mais ca pose un petit soucis dans notre cas, on utilise 2 fois les meme conditions a 2 endroits differents. Ce n'est pas ideal pour maintenir le code.
-Heureusement, il existe un sucre synthaxique pour l'ecriture de classes qui peut parfaitement resoudre notre probleme. Si la classe et la variable qui conditionne son affichage sont identiques, alors on peut simplement ecrire `class:condition`.
+Heureusement, il existe un sucre synthaxique pour l'ecriture de classes qui peut parfaitement resoudre notre probleme. 
+Si la classe et la variable qui conditionne son affichage sont identiques, alors on peut simplement ecrire `class:condition`.
 
 On va donc commencer par ajouter stocker nos conditions dans 2 variables :
 
@@ -462,7 +469,8 @@ Puis au dessus du composant `<Imc />` notre composant `<Form />`
 ### Récupérer les valeurs
 
 Mais pour l'instant, on ne récupère pas les valeurs du formulaire.
-Svelte vous propose une syntaxe pour s'abonner aux évènements d'un composant, en utilisant le préfix `on:` sur le nom de l'évènement, ainsi que la fonction à appeler entre accollade `{submit}` ou une fonction lambda `{event => changeEvent(event.target.value)}`
+*Svelte* vous propose une syntaxe pour s'abonner aux évènements d'un composant, en utilisant le préfix `on:` sur le nom de l'évènement, 
+ainsi que la fonction à appeler entre accollade `{submit}` ou une fonction lambda `{event => changeEvent(event.target.value)}`
 
 ```sveltehtml
 <input on:input={saveChange} />
@@ -515,7 +523,8 @@ Pour faire passer les valeurs au composant `Imc`, rien de plus simple, il suffit
 ```
 
 ### Remonter une valeur au composant parent
-Mais comment faire sortir les données du composant `Form` ? Svelte permet de le faire avec les paramètres d'un composant et en utilisant le préfixe `bind:` qui permet de mettre en place un double binding entre deux composants.
+Mais comment faire sortir les données du composant `Form` ? 
+*Svelte* permet de le faire avec les paramètres d'un composant et en utilisant le préfixe `bind:` qui permet de mettre en place un double binding entre deux composants.
 
 Ajoutons donc le mot clé `export` devant les deux variables dans le fichier `Form.svelte` :
 
@@ -538,7 +547,7 @@ Toutefois les mises a jour ne modifient pas les valeurs dans le composant `Imc` 
 
 Jusqu'a present on ne transmet les donnees que dans un seul sens. Du parent vers l'enfant. 
 Mais parfais on voudrait egalement que les modifications qui sont effetuees sur un props au sein de l'enfant soit transmise au parent.
-Pour cela Svelte met a notre disposition une syntax de double binding, ou un binding qui est a la fois desendant mais aussi ascendant.
+Pour cela *Svelte* met a notre disposition une syntax de double binding, ou un binding qui est a la fois desendant mais aussi ascendant.
 
 On realise ce binding avec le mot cle `bind`.
 
@@ -593,7 +602,7 @@ Duration: 5
 Comme on l'a vu precedemment, on peut maintenant modifier les valeurs de `poid` et `taille` dans `Imc` depuis `Form`, mais cela ne vient pas mettre a jour la valeur d'`imc`, ni les styles.
 C'est parce que les valeurs de `imc`, `thin` et `bold` sont calculees uniquement a la creation du composant. Et ne prennent pas en compte les evolutions de valeurs des props.
 
-Svelte propose donc une syntaxe pour rendre reactive une ligne (ou plusieurs) de code, c'est a dire que si une ou plusieurs variables contenues dans cette ligne sont modifiées, alors la ligne est réexecutée.
+*Svelte* propose donc une syntaxe pour rendre reactive une ligne (ou plusieurs) de code, c'est a dire que si une ou plusieurs variables contenues dans cette ligne sont modifiées, alors la ligne est réexecutée.
 
 Pour cela il faut ajouter `$:` au début de la ligne (si on veut plusieurs lignes, on peut utiliser les {} : `$:{ }`).
 
@@ -607,7 +616,7 @@ Maintenant l'IMC est bien recalculé lors de la modification du formulaire.
 
 Positive
 : Il n'est pas necessaire de declarer la variable avec `const` ou `let` lorsque l'on utilise cette syntaxe.
-Si la variable n'est pas deja declaree avant alors Svelte se charge de le faire pour nous
+Si la variable n'est pas deja declaree avant alors *Svelte* se charge de le faire pour nous
 
 Cette syntaxe permet également de logger les valeurs des variables :
 
@@ -644,7 +653,8 @@ Duration: 10
 
 Pour le moment, dès qu'un changement est fait sur le formulaire, l'IMC est recalculé, ce qui pour de gros formulaire peut causer des pertes de performances et ne permet pas d'avoir une étape de validation.
 
-Ajoutons un bouton "calculer" pour ne lancer le calcule de l'IMC seulement lorsque l'on clique sur le bouton, pour cela, il faut s'abonner au click sur le bouton et ensuite envoyer un événement personnalisé pour mettre à jour l'IMC :
+Ajoutons un bouton "calculer" pour ne lancer le calcule de l'IMC seulement lorsque l'on clique sur le bouton, pour cela, 
+il faut s'abonner au click sur le bouton et ensuite envoyer un événement personnalisé pour mettre à jour l'IMC :
 
 ```sveltehtml
 <script>
@@ -797,7 +807,8 @@ function calculerEvent(event) {
 
 Une fois ce code implémenté, vous devrier remarquer que le calcule de l'IMC se modifie mais rapidement la page est rafraichis, car le bouton envoie le formulaire.
 
-Pour cela, il est nécessaire en javascript d'appeler la fonction `preventDefault` sur l'objet `event` passé en paramètre de la fonction `submitCalculer`. Mais *Svelte* apporte une syntaxe pour ajouter des modificateurs à un évènement.
+Pour cela, il est nécessaire en javascript d'appeler la fonction `preventDefault` sur l'objet `event` passé en paramètre de la fonction `submitCalculer`. 
+Mais *Svelte* apporte une syntaxe pour ajouter des modificateurs à un évènement.
 
 En ajoutant `|preventDefault` après le `on:click`, *Svelte* va automatiquement executer le code `event.preventDefault()` avant d'appeler votre fonction :
 
@@ -848,7 +859,8 @@ count.update(n => n + 1); // logs '2'
 
 ### Créer un store pour stocker le poid et la taille
 
-Pour cela, créons un fichier javascript (il ne contient que du code, et pas template, donc pas nécessaire d'avoir un fichier svelte) `stores.js` qui va contenir la création de nos deux stores pour stocker le poid et la taille :
+Pour cela, créons un fichier javascript (il ne contient que du code, et pas template, 
+donc pas nécessaire d'avoir un fichier *Svelte*) `stores.js` qui va contenir la création de nos deux stores pour stocker le poid et la taille :
 
 ```javascript
 import { writable } from 'svelte/store'
@@ -909,7 +921,8 @@ Cette syntaxe est également disponible dans le template :
 ```
 
 Positive
-: *Svelte* propose des fonctions pour créer facilement des stores, mais tout object `Observable` (qui possède un subscribe, unsubscribe) est considéré par *svelte* comme un store et peut utiliser la syntaxe réactive de *svelte*.
+: *Svelte* propose des fonctions pour créer facilement des stores, 
+mais tout object `Observable` (qui possède un subscribe, unsubscribe) est considéré par *svelte* comme un store et peut utiliser la syntaxe réactive de *svelte*.
 
 ### Utiliser la syntaxe simplifié dans notre application
 
@@ -991,8 +1004,11 @@ Duration: 10
 ### Présentation
 Maintenant que nous avons une application finalisé, ajoutons un peu d'intérations en mettant des annimations.
 
-*Svelte* permet d'ajouter facilement des animations, en mettant simplement des attributs à une balise html ou un composant pour ajouter une transition qui pourra s'exécuter à l'apparition ou la disparition d'un élément.
-La syntaxe est simple, on indique la transition que l'on veut utiliser, que l'on préfixe par `in:` ou `out:` en fonction de si l'on veut afficher l'animation à l'apparition ou à la disparition de l'élément. Si l'on peut la même transition à l'apparition ou la disparition, il suffit d'utiliser le préfixe `transition:`
+*Svelte* permet d'ajouter facilement des animations, en mettant simplement des attributs à une balise html ou un composant 
+pour ajouter une transition qui pourra s'exécuter à l'apparition ou la disparition d'un élément.
+La syntaxe est simple, on indique la transition que l'on veut utiliser, que l'on préfixe par `in:` ou `out:` en fonction 
+de si l'on veut afficher l'animation à l'apparition ou à la disparition de l'élément. Si l'on peut la même transition à 
+l'apparition ou la disparition, il suffit d'utiliser le préfixe `transition:`
 Il y a 6 transitions proposés par défaut, mais il est posible de créer sa propre transition personnalisé.
 - **fade** : change l'opacité de l'élément
 - **blur** : Applique un filtre de floue et change l'opacité
@@ -1036,8 +1052,7 @@ Dans le fichier `Imc.svelte` :
 ## Modifier le titre de la page
 Duration: 10
 
-### Présentation
-Svelte donne acces a une collection d'elements speciaux qui nous donnent acces a des elements deja existant dans le DOM tel que la balise `head` ou `body`. Mais egalement a l'objet `window` pour l'ajout d'events.
+*Svelte* donne acces a une collection d'elements speciaux qui nous donnent acces a des elements deja existant dans le DOM tel que la balise `head` ou `body`. Mais egalement a l'objet `window` pour l'ajout d'events.
 
 On va modifier le composant `Imc.svelte`, pour qu'il mette a jour le titre de la page avec la valeur caculee de l'IMC.
 
@@ -1068,7 +1083,7 @@ Pour cela on va utiliser l'element special `<svelte:head>` :
 {/if}
 ```
 
-L'ajout de ce code permet a Svelte de venir modifier la balise `title` de notre page a chaque fois que le composant est inclus dans notre page.
+L'ajout de ce code permet a *Svelte* de venir modifier la balise `title` de notre page a chaque fois que le composant est inclus dans notre page.
 L'inclusion de `{$imc}` dans le titre permet egalement la mise a jour du titre quand la valeur du store `imc` change.
 
 <!-- ------------------------ -->
