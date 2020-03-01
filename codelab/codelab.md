@@ -1058,7 +1058,7 @@ Dans le fichier **Imc.svelte** :
 ## Modifier le titre de la page
 Duration: 10
 
-*Svelte* donne acces a une collection d'elements speciaux qui nous donnent acces a des elements deja existant dans le DOM tel que la balise `head` ou `body`. Mais egalement a l'objet `window` pour l'ajout d'events.
+*Svelte* donne acces a une collection d'[elements speciaux](https://svelte.dev/docs#svelte_self) qui nous donnent acces a des elements deja existant dans le DOM tel que la balise `head` ou `body`. Mais egalement a l'objet `window` pour l'ajout d'events.
 
 On va modifier le composant `Imc`, pour qu'il mette a jour le titre de la page avec la valeur caculee de l'IMC.
 
