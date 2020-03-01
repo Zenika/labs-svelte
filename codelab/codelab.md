@@ -23,7 +23,7 @@ Duration: 10
 ### Présentation de Svelte
 
 Svelte est un compilateur plus qu'un framework, il ajoute du sucre syntaxique a du code javascript pour développer des applications.
-Il va ainsi pouvoir instrumentaliser le code pour ajouter des instructions pour mettre à jour le template lors de changement des données.
+Il va ainsi pouvoir instrumentaliser le code pour ajouter des instructions pour mettre à jour l'affichage lors de changement des données.
 
 Sur le site de [svelte](https://svelte.dev/), un REPL (Read Eval Print Loop) permet de tester en direct du code svelte et voir le code généré.
 De même un [tutoriel](https://svelte.dev/tutorial/basics) permet d'apprendre les base du framework pas à pas.
@@ -31,7 +31,7 @@ De même un [tutoriel](https://svelte.dev/tutorial/basics) permet d'apprendre le
 Un fichier svelte (fichier avec une extension .svelte) ressemble à un fichier html qui va contenir les balises html de notre template, une balise `<script>` contenant le code javascript, ainsi qu'une balise `<style>` contenant le style CSS.
 
 Par exemple :
-```html
+```sveltehtml
 <script>
 	let name = 'world';
 </script>
@@ -92,10 +92,10 @@ Vous vous retrouvez avec une application simple, voici les différents fichiers 
 
 - **package.json** : Contient les dépendances, ainsi que les script `dev` (pour lancer le projet en développement) ou `build` (pour construire l'application final)
 - **rollup.config.js** : Configuration pour le packageur d'application configurer pour utiliser svelte
-- **public** : Les resources statiques du projet, cela contiendra alors le fichier bundle.js et bundle.css avec votre application compilé
+- **public** : Les resources statiques du projet, il contiendra egalement les fichiers bundle.js et bundle.css une fois votre application compilée
 - **src**: Les fichiers sources de l'application où l'on ajoutera les différents composants
   - **main.js** : Fichier javascript qui initialise l'application
-  - **App.svelete** : Premier composant svelte qui s'affiche sur notre application, c'est dans ce fichier que nous allons modifier le long de notre application.
+  - **App.svelte** : Premier composant svelte qui s'affiche sur notre application, c'est dans ce fichier que nous allons commencer notre application.
 
 ### Lancer le projet
 
@@ -116,7 +116,7 @@ Maintenant entrons dans le vif du sujet et ouvrez le fichier **App.svelte**, et 
   let name = "Votre nom"
 ```
 
-L'application sera automatiquement rafraichis avec les changements que vous avez fait et vous devriez avoir le texte "Bonjour Votre nom" qui s'affiche à l'écran.
+L'application sera automatiquement rafraichis avec les changements, une fois celle ci sauvegardees, et vous devriez avoir le texte "Bonjour Votre nom" qui s'affiche à l'écran.
 
 Passons maintenant à l'étape suivante, pour créer notre premier composant.
 
@@ -128,7 +128,7 @@ Nous allons maintenant créer notre premier composant, pour cela créer un nouve
 
 Dans ce fichier, mettre du code html pour afficher un simple texte :
 
-```html
+```sveltehtml
 <div>Votre IMC est de 20</div>
 ```
 
@@ -139,12 +139,12 @@ import Imc from './Imc.svelte'
 ```
 
 Positive
-: Mettre ce code javascript entre les balise html `<script></script>`
+: Placer ce code javascript entre les balise html `<script></script>`
 
 On peut maintenant utiliser notre composant Imc directement dans notre contenu html :
 
-```html
-	<Imc />
+```sveltehtml
+<Imc />
 ```
 
 On se retrouve maintenant avec une page qui contient affiche maintenant notre texte "Votre IMC est de 20".
@@ -159,7 +159,7 @@ Dans notre fichier **Imc.svelte**, nous allons ajouter deux variables pour défi
 
 Pour cela, ajoutons une balise script, contenant deux déclarations de variable :
 
-```html
+```sveltehtml
 <script>
   let poid = 80;
   let taille = 1.80;
@@ -168,7 +168,7 @@ Pour cela, ajoutons une balise script, contenant deux déclarations de variable 
 
 Nous pouvons maintenant afficher ces variables dans le html en utilisant la syntaxe `{variable ou expression}`
 
-```html
+```sveltehtml
 <div>Votre IMC ({poid}/{taille}<sup>2</sup>) est de {(poid / taille ** 2).toFixed(2)}</div>
 ```
 
@@ -180,7 +180,7 @@ Analysons le code ci-dessus :
 `{(poid / taille ** 2).toFixed(2)}` Fait plusieurs actions :
  - `(poid / taille ** 2)` : Calcule de l'IMC (l'opérateur ** permet de faire une puissance en javascript)
  - `.toFixed(2)` : Convertis le nombre en chaine de caractère en ne gardant que deux chiffres après la virgule
- - `{}`: Affiche le résultat dans le html
+ - `{}`: Syntax pour indiquer a Svelte d'afficher le contenu dans le html
 
 Vous pouvez maintenant faire évoluer la valleur des variables poid ou taille et voir le résultat du calcul de l'IMC en rafraichissant la page.
 
@@ -197,7 +197,7 @@ Positive
 : En javascript, le mot clé `export` permet d'indiquer que la variable ou la fonction est accéssible à l'exterrieur du fichier (du module). Svelte l'utilise pour définir les entrées des composants.
 
 Une fois ajouté ce mot clé :
-```html
+```sveltehtml
 <script>
   export let poid = 80;
   export let taille = 1.80;
@@ -205,17 +205,17 @@ Une fois ajouté ce mot clé :
 ```
 
 On peut maintenant faire passer les valeurs par des attributs html à notre composant :
-```html
+```sveltehtml
 <Imc poid=100 taille=1.9 />
 ```
 
-Il est bien sûr possible que cet attribut devienne dynamique :
-```html
+Il est bien sûr possible que cet attribut soit dynamique :
+```sveltehtml
 <Imc poid={monPoid} {taille} />
 ```
 Ici :
 - `poid={monPoid}` : on passe le contenu de la variable `monPoid` dans l'attribut `poid`
-- `{taille}` : écriture symplifié de `taille={taille}`
+- `{taille}` : écriture simplifié de `taille={taille}`
 
 
 <!-- ------------------------ -->
@@ -232,13 +232,14 @@ On veut donc ajouter un message en fonction de notre IMC. Svelte permet d'ajoute
 Commençons par créer une variable pour calculer l'IMC et pouvoir réutiliser cette valeur dans notre condition :
 
 ```javascript
-let imc = (poid / taille ** 2).toFixed(2)
+const imc = (poid / taille ** 2).toFixed(2)
 ```
 
-On peut ensuite ajouter dans le code html, un ensemble de conditions pour afficher un message :
+On peut ensuite ajouter dans le code html, un ensemble de conditions pour afficher un message.
+Pour cela on utilise un template propre a Svelte en utilisant les balises `{#if}`, `{:else if}` et `{/if}`.
 
-```html
-<div>Votre IMC est de {imc}</div>
+```sveltehtml
+<div>Votre IMC ({poid}/{taille}<sup>2</sup>) est de {imc}</div>
 {#if imc < 18}
   <div>Vous êtes en sous poids</div>
 {:else if imc > 35}
@@ -247,6 +248,14 @@ On peut ensuite ajouter dans le code html, un ensemble de conditions pour affich
   <div>Quel corps svelte !</div>
 {/if}
 ```
+
+Svelte donne acces a d'autres balises similaire pour aider la creation de templates, tel que `{#each}{/each}`.
+
+En regle generale, les balises de template Svelte sont encapsulees dans 2 accolades `{}`.
+Afin de pouvoir imbrique les balises, on differencies les balises ouvrantes ou fermantes avec les characteres `#` et `/` respectivement.
+Les balises `else` sont elles precedees de `:`.
+Il est possibile de les utiliser en association avec une balise `if` mais aussi `each`.
+Dans le second cas, cela permet d'afficher une alternative au cas ou le tableau est vide.
 
 <!-- ------------------------ -->
 ## Ajouter du styles
@@ -275,7 +284,7 @@ Pour cela, on va se créer 3 classes CSS. On peut soit mettre ces classes dans l
 
 Il faut maintenant ajouter les classes CSS dans le code html ajouté précédement :
 
-```html
+```sveltehtml
 <div>Votre IMC ({poid}/{taille}<sup>2</sup>) est de {imc}</div>
 {#if imc < 18}
   <div class="souspoid">Vous êtes en sous poids</div>
@@ -312,7 +321,7 @@ Pour cela on ajoute la declaration des classes avec les conditions associees sur
 
 puis on ajoute les classes dans la balise style de notre composant
 
-```html
+```sveltehtml
 <style>
   .normal {
     color: green
@@ -325,9 +334,11 @@ puis on ajoute les classes dans la balise style de notre composant
   }
   .thin {
     font-weight: 200;
+    font-size: .875rem;
   }
   .bold {
     font-weight: 600;
+    font-size: 1.125rem;
   }
 </style>
 ```
@@ -392,9 +403,11 @@ Ce qui nous donne le resultat suivant pour l'ensemble du composant :
   }
   .thin {
     font-weight: 200;
+    font-size: .875rem;
   }
   .bold {
     font-weight: 600;
+    font-size: 1.125rem;
   }
 </style>
 ```
@@ -411,19 +424,28 @@ Commençons par créer un nouveau composant que nous nomerons `Form.svelte`.
 
 Ce composant contiendra un formulaire simple avec deux sliders pour définir notre poid et notre taille :
 
-```html
+```sveltehtml
+<script>
+  let poid = 0;
+  let taille = 0;
+</script>
+
 <form>
   <label> Poid ({poid} kg) :
-    <input type="range" min="10" max="200" step="5" />
+    <input name="poid" type="range" min="10" max="200" step="5" value={poids} />
   </label>
 
   <label> Taille ({taille.toFixed(2)} m) :
-    <input type="range" min="0.5" max="2.5" step="0.01" />
+    <input name="taille" type="range" min="0.5" max="2.5" step="0.01" value={taille} />
   </label>
-
-  <input type="submit" value="Calculer" />
 </form>
 ```
+
+Petites notes sur ce code:
+- *let poid = 0;*: On creer des variables pour le poid et la taille que l'on initialise a 0
+- *Poid ({poid} kg)*: On affiche la valeur de chaque variable dans les labels, avec la syntax `{}` que l'on a vu precedemment
+- *input type="range" min="10" max="200" step="5"*: On ajoute 2 inputs de type `range` que l'on a configure avec des min, max et step
+- *value={poids}*: On initialise les inputs avec les valeurs de nos variables
 
 Ajoutons maintenant ce formulaire dans notre composant principale `App.svelte`, en important notre composant :
 ```javascript
@@ -432,33 +454,42 @@ Ajoutons maintenant ce formulaire dans notre composant principale `App.svelte`, 
 
 Puis au dessus du composant `<Imc />` notre composant `<Form />`
 
+```sveltehtml
+  <Form />
+  <Imc poid=100 taille=1.9 />
+```
+
 ### Récupérer les valeurs
 
 Mais pour l'instant, on ne récupère pas les valeurs du formulaire.
 Svelte vous propose une syntaxe pour s'abonner aux évènements d'un composant, en utilisant le préfix `on:` sur le nom de l'évènement, ainsi que la fonction à appeler entre accollade `{submit}` ou une fonction lambda `{event => changeEvent(event.target.value)}`
 
-```html
+```sveltehtml
 <input on:input={saveChange} />
-<button on:click={submit}"/>
+<button on:click={submit} />
 <div on:mousemove={event => handleMousemove(event.clientX, event.clientY)}></div>
 ```
 
-Ajoutons donc des évènements pour récupérer les valeurs saisis pour la taille et le poid :
+On ajoute donc les 2 fonctions pour mettre a jour notre variable dans la balise `script` de notre composant :
 
-```javascript
- let poid = 0;
- let taille = 0;
- function onPoidChange(event) {
-  poid = event.target.value
- }
- function onTailleChange(event) {
-  taille = parseFloat(event.target.value)
- }
+```sveltehtml
+<script>
+  let poid = 0;
+  let taille = 0;
+  function onPoidChange(event) {
+    poid = event.target.value
+  }
+  function onTailleChange(event) {
+    taille = parseFloat(event.target.value)
+  }
+</script>
 ```
 
-```html
-    <input type="range" min="10" max="200" step="5" on:input={onPoidChange} />
-    <input type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange}/>
+Puis on branche ces nouvelles fonctions sur les events de nos inputs :
+
+```sveltehtml
+    <input name="poid" type="range" min="10" max="200" step="5" on:input={onPoidChange} />
+    <input name="taille" type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange}/>
 ```
 
 <!-- ------------------------ -->
@@ -479,7 +510,7 @@ Ajoutons deux variables dans le fichier `App.svelte` à l'intérieur de la balis
 
 Pour faire passer les valeurs au composant `Imc`, rien de plus simple, il suffit d'utiliser la syntaxe permettant de passer des paramèetres à un composant `taille={taille}` ou la syntaxe simplifié `{taille}` :
 
-```html
+```sveltehtml
 <Imc {taille} {poid} />
 ```
 
@@ -489,44 +520,94 @@ Mais comment faire sortir les données du composant `Form` ? Svelte permet de le
 Ajoutons donc le mot clé `export` devant les deux variables dans le fichier `Form.svelte` :
 
 ```javascript
- export let poid;
- export let taille;
+export let poid = 0;
+export let taille = 0;
 ```
 
-et dans le fichier `App.svelte`, relions les variables via la syntaxe `bind:poid={poid}` ou la syntaxe simplifié `{bind:poid}` :
+et dans le fichier `App.svelte`
 
-```html
-  <Form bind:poid bind:taille />
+```sveltehtml
+<Form {taille} {poid} />
 ```
 
-De cette façon si la variable poid est modifié dans le composant `Form`, la variable est mise à jour dans le composant `App` et inversement si on modifie la valeur d'une variable dans le composant `App`.
+Maintenant on transmet les valeurs de `taille` et `poids` depuis le composant `App` dans les composants `Form` et `Imc`.
+On peut egalement modifier ces valeurs au sein du composant `Form` quand on modifie les inputs.
+Toutefois les mises a jour ne modifient pas les valeurs dans le composant `Imc` car les modifications ne sont jamais remontees jusque dans `App`.
+
+### Le Double Binding a la rescousse !
+
+Jusqu'a present on ne transmet les donnees que dans un seul sens. Du parent vers l'enfant. 
+Mais parfais on voudrait egalement que les modifications qui sont effetuees sur un props au sein de l'enfant soit transmise au parent.
+Pour cela Svelte met a notre disposition une syntax de double binding, ou un binding qui est a la fois desendant mais aussi ascendant.
+
+On realise ce binding avec le mot cle `bind`.
+
+En ajoutant `bind` devant un props, on s'assure que toutes les mises a jour de la valeurs de ce props dans l'enfant seront aussi transmise a la variable associe dans le parent.
+
+On peut donc modifier notre appel de `Form` dans le composant `App` en ecrivant :
+
+```sveltehtml
+<Form bind:poid bind:taille />
+```
+
+Maintenant les modifications dans `Form` mettent a jour les valeurs de poid et taille dans `Imc`.
+
+Les valeurs de l'IMC et les styles ne sont pas modifies lorsque l'on change les valeurs de poid et taille. C'est normal et le sujet du prochain chapitre.
 
 ### Double binding sur un élèment du DOM
 
-Mais la syntaxe `bind:` permet également de faire un double binding entre une variable et une propriété d'un élément du DOM pour par exemple les élèments du formulaire.
+La syntaxe `bind:` permet également de faire un double binding entre une variable et une propriété d'un élément du DOM pour par exemple les élèments du formulaire.
 
-On peut donc remplacer les `on:input={onPoidChange}` par `bind:value={poid}` dans le fichier `Form.svelte`
+On peut donc remplacer la combinaison de `value:poid` et `on:input={onPoidChange}` par `bind:value={poid}` dans le fichier `Form.svelte`
 
-```html
- <input type="range" min="10" max="200" step="5" bind:value={poid} />
- <input type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
+```sveltehtml
+<input name="poid" type="range" min="10" max="200" step="5" bind:value={poid} />
+<input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
  ```
+
+Les fonctions `onPoidChange` et `onTailleChange` ne sont donc plus necessaires et peuvent donc etre supprimees. Ce qui nous donne le code suivant pour le composant `Form` :
+
+```sveltehtml
+<script>
+  export let poid = 0;
+  export let taille = 0;
+</script>
+
+<form>
+  <label> Poid ({poid} kg) :
+    <input name="poid" type="range" min="10" max="200" step="5" bind:value={poid} />
+  </label>
+
+  <label> Taille ({taille.toFixed(2)} m) :
+    <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
+  </label>
+</form>
+
+```
 
 <!-- ------------------------ -->
 ## Réactive statement
 Duration: 5
 
-Pour l'instant, lorsque vous modifiez le poid ou la taille, seulement l'affichage du poid et de la taille se met à jour, vous remarquez que l'IMC n'est pas mis à jours.
-Pourtant il existe bien la ligne qui fait le calcule de l'IMC, mais ce calcul n'est fait que lors de la création du composant mais pas lors de la mise à jour des variables.
 
-Svelte propose donc une syntaxe pour rendre reactive une ligne (ou plusieurs) de code, pour cela il faut ajouter $: au début de la ligne (si on veut plusieurs lignes, on peut utiliser les {} : `$:{ }`).
-Dès qu'une variable contenu dans cette ligne est modifié, alors la ligne est réexecuté.
+Comme on l'a vu precedemment, on peut maintenant modifier les valeurs de `poid` et `taille` dans `Imc` depuis `Form`, mais cela ne vient pas mettre a jour la valeur d'`imc`, ni les styles.
+C'est parce que les valeurs de `imc`, `thin` et `bold` sont calculees uniquement a la creation du composant. Et ne prennent pas en compte les evolutions de valeurs des props.
+
+Svelte propose donc une syntaxe pour rendre reactive une ligne (ou plusieurs) de code, c'est a dire que si une ou plusieurs variables contenues dans cette ligne sont modifiées, alors la ligne est réexecutée.
+
+Pour cela il faut ajouter `$:` au début de la ligne (si on veut plusieurs lignes, on peut utiliser les {} : `$:{ }`).
 
 ```javascript
 $: imc = (poid / taille ** 2).toFixed(2)
+$: thin = imc < 18
+$: bold = imc > 35
 ```
 
-Maintenant de manière magique, l'IMC est bien recalculé lors de la modification du formulaire.
+Maintenant l'IMC est bien recalculé lors de la modification du formulaire.
+
+Positive
+: Il n'est pas necessaire de declarer la variable avec `const` ou `let` lorsque l'on utilise cette syntaxe.
+Si la variable n'est pas deja declaree avant alors Svelte se charge de le faire pour nous
 
 Cette syntaxe permet également de logger les valeurs des variables :
 
@@ -537,23 +618,8 @@ $: {
 }
 ```
 
-Positive
-: Cette syntaxe n'est pas une invention de *svelte*, mais réutilise une syntaxe peut utilisé de javascript, il est possible d'ajouter en javascript un label suivit de deux points, en particulier devant une boucle. lors d'un **break** ou **continue** dans une boucle on peut indiquer alors le label de la boucle que l'on veut arrêter, cela permet de sortir de multiple boucles intégrées :
-
-```javascript
-boucle1:
-for (i = 0; i < 3; i++) {
-   boucle2:
-   for (j = 0; j < 3; j++) {
-      if (i === 1 && j === 1) {
-         continue boucle1;
-      } else {
-         console.log("i = " + i + ", j = " + j);
-      }
-   }
-}
-```
-
+Negative
+: Cette syntaxe n'est pas une invention de *Svelte*, mais réutilise une syntaxe peu utilisée de javascript, les [labeled statements](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label).
 
 Une autre méthode permet de s'abonner aux changements des parametres d'un composant en utilisant les fonctions du cycle de vie d'un composant :
 - `beforeUpdate` : la fonction passé à cette fonction est appelé avant que les parametres sont modifiés
@@ -576,12 +642,32 @@ Une autre méthode permet de s'abonner aux changements des parametres d'un compo
 ## Evenement lors du click sur le bouton
 Duration: 10
 
-Pour le moment, dès qu'un changement est fait sur le formulaire, l'IMC est recalculé, ce qui pour de gros formulaire peut être pas performant et ne permet pas d'avoir une étape de validation.
+Pour le moment, dès qu'un changement est fait sur le formulaire, l'IMC est recalculé, ce qui pour de gros formulaire peut causer des pertes de performances et ne permet pas d'avoir une étape de validation.
 
 Ajoutons un bouton "calculer" pour ne lancer le calcule de l'IMC seulement lorsque l'on clique sur le bouton, pour cela, il faut s'abonner au click sur le bouton et ensuite envoyer un événement personnalisé pour mettre à jour l'IMC :
 
+```sveltehtml
+<script>
+  export let poid = 0;
+  export let taille = 0;
+</script>
+
+<form>
+  <label> Poid ({poid} kg) :
+    <input name="poid" type="range" min="10" max="200" step="5" bind:value={poid} />
+  </label>
+
+  <label> Taille ({taille.toFixed(2)} m) :
+    <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
+  </label>
+
+  <button type="submit">Calculer</button>
+</form>
+
+```
+
 ### Event dispatcher
-Pour envoyer un événement, on va utiliser le *dispatcher* de *svelte*. Après la création d'un evtnDispatcher avec le code suivant :
+Pour envoyer un événement, on va utiliser le *dispatcher* de *svelte*. Après la création d'un eventDispatcher avec le code suivant :
 
 ```javascript
  import { createEventDispatcher } from 'svelte';
@@ -596,13 +682,26 @@ On peut maintenant dispatcher des évènements personnalisés :
   });
 ```
 
+La fonction dispatch prends 2 arguments:
+- Le nom de l'évènement que l'on veut creer
+- La valeur que l'on passe dans cet évènement
+
 Le composant parent peut alors s'abonner à l'évènement avec la syntaxe `on:calculer={fonction_a_appeler}`.
+
+La fonction `fonction_a_appeler` du composant parent recevra alors un argument qui represente l'évènement.
+Les valeurs que l'on a passe dans cette évènement sont accessible dans la propriete `detail` de cet argument :
+
+```javascript
+function fonction_a_appeler(event) {
+  console.log('mes valeurs', event.detail)
+}
+``` 
 
 ### Evènement personnalisé
 
 Ce qui nous donne le code suivant pour notre composant :
 
-```html
+```sveltehtml
 <script>
  import { createEventDispatcher } from 'svelte';
 
@@ -610,7 +709,7 @@ Ce qui nous donne le code suivant pour notre composant :
  export let taille = 1.8;
  export let poid = 80;
 
- function submitCalculer(event) {
+ function handleSubmit() {
   dispatch('calculer', {
     poid,
     taille
@@ -618,22 +717,22 @@ Ce qui nous donne le code suivant pour notre composant :
  }
 </script>
 
-<form>
+<form on:submit={handleSubmit}>
   <label> Poid ({poid} kg) :
-    <input type="range" min="10" max="200" step="5" bind:value={poid} />
+    <input name="poid" type="range" min="10" max="200" step="5" bind:value={poid} />
   </label>
 
   <label> Taille ({taille.toFixed(2)} m) :
-    <input type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
+    <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
   </label>
 
-  <input type="submit" value="Calculer" on:click={submitCalculer}/>
+  <button type="submit">Calculer</button>
 </form>
 ```
 
 Et dans le fichier `App.svelte`, on réagit à l'évènement :
 
-```html
+```sveltehtml
 <script>
   let taille = 1.8;
   let poid = 80;
@@ -644,20 +743,66 @@ Et dans le fichier `App.svelte`, on réagit à l'évènement :
     taille = event.detail.taille;
   }
 </script>
-  <Form on:calculer={calculerEvent}/>
+  <Form {taille} {poid} on:calculer={calculerEvent}/>
   <Imc {taille} {poid} />
+```
+
+### C'est pas un peu complique quand meme ?
+
+Oui. Apres tout on veut juste prevenir notre composant parent que le formulaire vient d'etre soumis.
+Surement on peut faire un peu plus simple.
+
+*Svelte* met a notre disposition une petite astuce pour simplifier ce genre de cas. On peut transmettre directement un event qui se passe dans notre composant a son parent.
+
+Et la syntaxe est tres simple dans notre cas : `on:submit`.
+
+C'est tout. Le simple fait de ne pas associer de fonction a un evenement permet de le transmettre a son parent, ce qui nous donne le resultat suivant :
+
+```sveltehtml
+<script>
+  export let poid = 0;
+  export let taille = 0;
+</script>
+
+<form on:submit>
+  <label> Poid ({poid} kg) :
+    <input name="poid" type="range" min="10" max="200" step="5" bind:value={poid} />
+  </label>
+
+  <label> Taille ({taille.toFixed(2)} m) :
+      <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
+  </label>
+
+  <button type="submit">Calculer</button>
+</form>
+```
+
+On doit donc egalement mettre a jour `App.svelte`, d'abord l'event que l'on observe :
+
+```sveltehtml
+<Form {poid} {taille} on:submit={calculerEvent} />
+```
+
+Puis la function `calculerEvent`, qui recupere maintenant directement l'event `submit` :
+
+```javascript
+function calculerEvent(event) {
+  const formData = new FormData(event.target)
+  poid = parseFloat(formData.get('poid'))
+  taille = parseFloat(formData.get('taille'))
+}
 ```
 
 ### Event modifier
 
 Une fois ce code implémenté, vous devrier remarquer que le calcule de l'IMC se modifie mais rapidement la page est rafraichis, car le bouton envoie le formulaire.
 
-Pour cela, il est nécessaire en javascript d'appeler la fonction `preventDefault` sur l'objet `event` passé en paramètre de la fonction `submitCalculer`. Mais *svelte* apporte une syntaxe pour ajouter des modificateurs à un évènement.
+Pour cela, il est nécessaire en javascript d'appeler la fonction `preventDefault` sur l'objet `event` passé en paramètre de la fonction `submitCalculer`. Mais *Svelte* apporte une syntaxe pour ajouter des modificateurs à un évènement.
 
-En ajoutant `|preventDefault` après le `on:click`, *svelte* va automatiquement executer le code `event.preventDefault()` avant d'appeler votre fonction :
+En ajoutant `|preventDefault` après le `on:click`, *Svelte* va automatiquement executer le code `event.preventDefault()` avant d'appeler votre fonction :
 
-```html
-  <input type="submit" value="Calculer" on:click|preventDefault={submitCalculer}/>
+```sveltehtml
+  <form on:submit|preventDefault>
 ```
 
 D'[autres modificateurs](https://svelte.dev/docs#on_element_event) sont disponibles :
@@ -665,24 +810,23 @@ D'[autres modificateurs](https://svelte.dev/docs#on_element_event) sont disponib
 - `once`: Se désabonne après avoir reçu un évènement
 - `self`: L'évènement n'est actif seulement si envoyé par l'élément dom où l'on ajoute l'événement.
 
-Positive
-: On aurait aussi pu propager l'évènement click du bouton à notre composant `App` en ajoutant la ligne `on:click` sur notre bouton, et dans le composant `on:click={calculerImc}`, mais on expose de notre composant une implémentation interne, comment faire pour ajouter un autre moyen pour valider le formulaire, par exemple un racourcis clavier ?
-
 <!-- ------------------------ -->
 ## Mise en place du store
 Duration: 10
 
 
 ### Présentation
-La communication entre plusieurs composant via les attributs et les évènements peut vite devenir complexe avec de grosse application. Il est donc nécessaire d'avoir un mécanisme pour partager des données entre les différents composant.
-Un patterne est maintenant de plus en plus en train de s'imposer dans les applications front, c'est le concepte de store application. L'idée est d'avoir un endroit où garder en mémoire à tous moment de l'état globale de l'application.
+La communication entre plusieurs composant via les attributs et les évènements peut vite devenir complexe avec de grosse application.
+Il est donc nécessaire d'avoir un mécanisme pour partager des données entre les différents composant.
+Un pattern est maintenant de plus en plus en train de s'imposer dans les applications front, c'est le concept de store application.
+L'idée est d'avoir un endroit où garder en mémoire à tous moments l'état global de l'application.
 
-*Svelte* propose une implémentation de ce patterne en permettant d'écrire des stores. Il propose trois types de store :
+*Svelte* propose une implémentation de ce pattern en permettant d'écrire des stores. Il propose trois types de store :
 - **writable** : Cas le plus courant, un store qui est modifiable.
 - **readable** : L'application ne peut que lire des données du store, mais pas écrire (sert pour accèder à des données venant d'une autre source et non modifié par l'application : api du navigateur, push serveur, temps ...)
-- **derived** : Ce store se met à jour en fonction de mises à jour venant d'autres store (on le mettra en place dans le chapitre suivant).
+- **derived** : Ce store observe d'autres stores et se met a jour en fonction des modifications de ceux ci
 
-Les composants qui vont communiquer par le store seront découplé.
+Les composants qui vont communiquer par le store seront découplés.
 
 ### Un store writable
 
@@ -739,7 +883,9 @@ storeTaille.subscribe(value => taille = value)
 ```
 
 Negative
-: Attention, le subscribe retourne une fonction qui permet de se désaboner. Il faut donc gardr cette fonction dans une variable et utiliser le livecycle `onDetroy()` pour nettoyer les souscriptions et éviter les fuites mémoires. La syntaxe simplifié s'en occupe automatiquement.
+: Attention, le subscribe retourne une fonction qui permet de se désaboner. 
+Il faut donc stocker cette fonction dans une variable et utiliser le livecycle `onDetroy()` pour nettoyer les souscriptions et éviter les fuites mémoires. 
+La syntaxe simplifié s'en occupe automatiquement.
 
 ### Syntaxe simplifié
 
@@ -757,7 +903,7 @@ $count = 1; // logs '1'
 
 Cette syntaxe est également disponible dans le template :
 
-```html
+```sveltehtml
 <input type="number" bind:value={$count} />
 <p>Count : {$count}</p>
 ```
@@ -770,31 +916,35 @@ Positive
 Grâce à la syntaxe simplifié, on peut avoir un template simple en utilisant $poid et $taille comme si c'était de simple variables.
 
 Dans le fichier `Form.svelte` :
-```html
+```sveltehtml
 <script>
  import { poid, taille } from './stores'
 </script>
 
 <form>
   <label> Poid ({$poid} kg) :
-    <input type="range" min="10" max="200" step="5" bind:value={$poid} />
+    <input name="poid" type="range" min="10" max="200" step="5" bind:value={$poid} />
   </label>
 
   <label> Taille ({$taille.toFixed(2)} m) :
-    <input type="range" min="0.5" max="2.5" step="0.01" bind:value={$taille} />
+    <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={$taille} />
   </label>
 </form>
 ```
 
 Dans le fichier `Imc.svelte` :
 
-```html
+```sveltehtml
 <script>
  import { poid, taille } from './stores'
   $: imc = ($poid / $taille ** 2).toFixed(2)
+  $: thin = imc < 18
+  $: bold = imc > 35
 </script>
 
-<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {imc}</div>
+<div class:thin class:bold>
+  <div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {imc}</div>
+</div>
 ```
 
 Maintenant, il n'est plus nécessaire de faire passer les informations par le composant `App.svelte`, et on pourrait avoir d'autres composants qui utilisent aussi ce store;
@@ -821,19 +971,17 @@ export const imc = derived([poid, taille], ([$poid, $taille]) => {
 
 On peut maintenant supprimer dans le fichier `Imc.svelte` la ligne qui calcule l'IMC est utiliser à la place la syntaxe simplifié du store dérivée `$imc` :
 
-```html
+```sveltehtml
 <script>
- import { poid, taille, imc } from './stores'
+  import { poid, taille, imc } from './stores'
+
+  $: thin = $imc < 18
+  $: bold = $imc > 35
 </script>
 
-<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
-{#if $imc < 18}
-  <div class="souspoid">Vous êtes en sous poids</div>
-{:else if $imc > 35}
-  <div class="surpoid">Vous êtes en sur poids</div>
-{:else}
-  <div class="normal">Quel corps svelte !</div>
-{/if}
+<div class:thin class:bold>
+  <div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
+</div>
 ```
 
 <!-- ------------------------ -->
@@ -854,7 +1002,7 @@ Il y a 6 transitions proposés par défaut, mais il est posible de créer sa pro
 - **draw** : Intéressant pour un SVG pour avoir un effet de dessin par un crayon.
 
 Il est bien sûr possible de passer des parametres pour personnaliser l'animations avec par exemple la durée de l'animation, ou la position initiale :
-```html
+```sveltehtml
 <div in:fly="{{ y: 200, duration: 2000 }}" out:fade>
 ```
 
@@ -863,16 +1011,21 @@ Il est bien sûr possible de passer des parametres pour personnaliser l'animatio
 Ajoutons maintenant des animations sur les textes qui s'affichent en fonction de la valeur de l'IMC.
 Dans le fichier `Imc.svelte` :
 
-```html
+```sveltehtml
 <script>
- import { poid, taille, imc } from './stores'
- import { fly, fade } from 'svelte/transition';
+  import { poid, taille, imc } from './stores'
+  import { fly, fade } from 'svelte/transition';
+
+  $: thin = $imc < 18
+  $: bold = $imc > 35
 </script>
 
-<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
-{#if $imc < 18}
+<div class:thin class:bold>
+  <div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
+</div>
+{#if thin}
   <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sous poids</div>
-{:else if $imc > 35}
+{:else if bold}
   <div class="surpoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sur poids</div>
 {:else}
   <div class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Quel corps svelte !</div>
@@ -892,18 +1045,23 @@ Pour cela on va utiliser l'element special `<svelte:head>` :
 
 ```sveltehtml
 <script>
- import { poid, taille, imc } from './stores'
- import { fly, fade } from 'svelte/transition';
+  import { poid, taille, imc } from './stores'
+  import { fly, fade } from 'svelte/transition';
+
+  $: thin = $imc < 18
+  $: bold = $imc > 35
 </script>
 
 <svelte:head>
   <title>Votre IMC : {$imc}</title>
 </svelte:head>
 
-<div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
-{#if $imc < 18}
+<div class:thin class:bold>
+  <div>Votre IMC ({$poid}/{$taille}<sup>2</sup>) est de {$imc}</div>
+</div>
+{#if thin}
   <div class="souspoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sous poids</div>
-{:else if $imc > 35}
+{:else if bold}
   <div class="surpoid" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sur poids</div>
 {:else}
   <div class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Quel corps svelte !</div>

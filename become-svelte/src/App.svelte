@@ -11,7 +11,7 @@
 
 <main>
 	<h1>Hello {name}!</h1>
-	<Form on:calculer={calculerEvent}/>
+	<Form on:submit={calculerEvent}/>
 	<Imc />
 </main>
 

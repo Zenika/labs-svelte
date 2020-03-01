@@ -4,15 +4,15 @@
 
  const dispatch = createEventDispatcher();
 
- function calculerImc() {
-  dispatch('calculer', {
+ function handleSubmit() {
+  dispatch('submit', {
     poid: $poid,
     taille: $taille
 	});
  }
 </script>
 
-<form>
+<form on:submit|preventDefault={handleSubmit}>
   <label> Poid ({$poid} kg) :
     <input type="range" min="10" max="200" step="5" bind:value={$poid} />
   </label>
@@ -21,5 +21,5 @@
     <input type="range" min="0.5" max="2.5" step="0.01" bind:value={$taille} />
   </label>
 
-  <input type="submit" value="Calculer" on:click|preventDefault={calculerImc}/>
+    <button type="submit">Calculer</button>
 </form>
