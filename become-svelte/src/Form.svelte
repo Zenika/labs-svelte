@@ -1,20 +1,20 @@
 <script>
- import { poid, taille } from './stores'
+ import { poids, taille } from './stores'
  import { createEventDispatcher } from 'svelte';
 
  const dispatch = createEventDispatcher();
 
  function handleSubmit() {
   dispatch('submit', {
-    poid: $poid,
+    poids: $poids,
     taille: $taille
 	});
  }
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
-  <label> Poid ({$poid} kg) :
-    <input type="range" min="10" max="200" step="5" bind:value={$poid} />
+  <label> Poids ({$poids} kg) :
+    <input type="range" min="10" max="200" step="5" bind:value={$poids} />
   </label>
 
   <label> Taille ({$taille.toFixed(2)} m) :

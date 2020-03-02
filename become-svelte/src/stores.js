@@ -1,8 +1,8 @@
 import { derived, writable } from 'svelte/store'
 
-export const poid = writable(80)
+export const poids = writable(80)
 export const taille = writable(1.8)
 
-export const imc = derived([poid, taille], ([$poid, $taille]) => {
-  return ($poid / $taille ** 2).toFixed(2)
+export const imc = derived([poids, taille], ([$poids, $taille]) => {
+  return ($poids / $taille ** 2).toFixed(2)
 })
