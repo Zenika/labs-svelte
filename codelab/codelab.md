@@ -1098,49 +1098,6 @@ Pour cela on va utiliser l'élément spécial `<svelte:head>` :
 L'ajout de ce code permet a *Svelte* de venir modifier la balise `title` de notre page a chaque fois que le composant est inclus dans notre page.
 L'inclusion de `{$imc}` dans le titre permet également la mise a jour du titre quand la valeur du store `imc` change.
 
-<!-- ------------------------ -->
-## Code Snippets
-Duration: 20
-
-To include code snippets you can do a few things.
-- Inline highlighting can be done using the tiny tick mark on your keyboard: "`"
-- Embedded code
-
-### JavaScript
-
-```javascript
-{
-  key1: "string",
-  key2: integer,
-  key3: "string"
-}
-```
-
-### Java
-
-```java
-for (statement 1; statement 2; statement 3) {
-  // code block to be executed
-}
-```
-
-<!-- ------------------------ -->
-## Hyperlinking and Embedded Images
-Duration: 20
-
-### Hyperlinking
-[Youtube - Halsey Playlists](https://www.youtube.com/user/iamhalsey/playlists)
-
-### Images
-![alt-text-here](assets/svelte.png)
-
-<!-- ------------------------ -->
-## Other Stuff
-Duration: 30
-
-Checkout the official documentation here: [Codelab Formatting Guide](https://github.com/googlecodelabs/tools/blob/master/FORMAT-GUIDE.md)
-
-
 ## Todo :
 - Avoir des couleurs differentes pour souspoids et surpoids
 - Modifier la taille du texte en fonction du poids (thin, normal, bold)
