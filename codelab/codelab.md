@@ -65,6 +65,8 @@ npm run dev
 
 Vous aurez alors un projet de base avec les outils pour lancer l'application en développement ou construire l'application à deployer.
 
+Positive
+: Vous pouvez utiliser Typescript en executant la commande : `node scripts/setupTypeScript.js`
 
 ### Le projet pour ce codelab
 
