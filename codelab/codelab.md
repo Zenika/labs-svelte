@@ -70,11 +70,11 @@ Positive
 
 ### Le projet pour ce codelab
 
-Après ce rapide introduction à *Svelte*, nous allons créer pour ce codelab un projet pour calculer son IMC (Indice de Masse Corporelle)
+Après cette rapide introduction à *Svelte*, nous allons créer pour ce codelab un projet pour calculer son IMC (Indice de Masse Corporelle)
 
 Positive
 : L'indice de masse corporelle ou IMC (en anglais, body mass index ou BMI) est une grandeur qui permet d'estimer la corpulence d’une personne.
-Inventé au milieu du xixe siècle par Adolphe Quetelet, mathématicien belge et l'un des fondateurs de la statistique moderne, cet indice est appelé aussi l'indice de Quetelet.
+Inventé au milieu du XIXe siècle par Adolphe Quetelet, mathématicien belge qui est l'un des fondateurs de la statistique moderne, cet indice est appelé aussi l'indice de Quetelet.
 
 La formule pour calculer l'IMC est le poids divisé par la taille au carré.
 
@@ -83,8 +83,8 @@ La formule pour calculer l'IMC est le poids divisé par la taille au carré.
 Duration: 10
 
 ### Initialiser le projet
-Comme on l'a vu lors de la première étape, nous allons initialisé notre application en partant d'un template.
-Nous avons créer un template pour le codelab qui va contenir des éléments qui seront utilisé directement par votre application.
+Comme on l'a vu lors de la première étape, nous allons initialiser notre application en partant d'un template.
+Nous avons créer un template pour le codelab qui va contenir des éléments qui seront utilisés directement par votre application.
 
 ```bash
 npx degit zenika/labs-svelte/template labs-svelte
@@ -115,7 +115,7 @@ En ouvrant le navigateur à l'url http://localhost:5000/ vous verrez la page de 
 
 ### Modifier et voir le résultat
 
-Maintenant entrons dans le vif du sujet et ouvrez le fichier **App.svelte**, et modifier la variable `name` pour y mettre votre nom :
+Maintenant entrons dans le vif du sujet et ouvrez le fichier **App.svelte**, et modifiez la variable `name` pour y mettre votre nom :
 
 ```javascript
   let name = "Votre nom"
@@ -129,15 +129,15 @@ Passons maintenant à l'étape suivante, pour créer notre premier composant.
 ## Créer un composant
 Duration: 5
 
-Nous allons maintenant créer notre premier composant, pour cela créer un nouveau fichier **Imc.svelte** dans le répertoire `src`.
+Nous allons maintenant créer notre premier composant, pour cela créez un nouveau fichier **Imc.svelte** dans le répertoire `src`.
 
-Dans ce fichier, mettre du code html pour afficher un simple texte :
+Dans ce fichier, mettez du code html pour afficher un simple texte :
 
 ```sveltehtml
 <div>Votre IMC est de 20</div>
 ```
 
-Dans le fichier **App.svelte**, ajouter simplement l'import de notre composant Imc :
+Dans le fichier **App.svelte**, ajoutez simplement l'import de notre composant Imc :
 
 ```javascript
 import Imc from './Imc.svelte'
@@ -162,7 +162,7 @@ Duration: 10
 
 Dans notre fichier **Imc.svelte**, nous allons ajouter deux variables pour définir le poids et la taille, et afficher ensuite le calcul de l'IMC à la place de notre texte html statique.
 
-Pour cela, ajoutons une balise script, contenant deux déclarations de variable :
+Pour cela, ajoutez une balise script, contenant deux déclarations de variable :
 
 ```sveltehtml
 <script>
@@ -255,7 +255,7 @@ Pour cela on utilise un template propre a *Svelte* en utilisant les balises `{#i
 {/if}
 ```
 
-*Svelte* donne accès a d'autres balises similaire pour aider la création de templates, tel que `{#each}{/each}`.
+*Svelte* donne accès à d'autres balises similaire pour aider la création de templates, tel que `{#each}{/each}`.
 
 En règle générale, les balises de template *Svelte* sont encapsulées dans 2 accolades `{}`.
 Afin de pouvoir imbrique les balises, on différencies les balises ouvrantes ou fermantes avec les caractères `#` et `/` respectivement.
@@ -267,7 +267,7 @@ Dans le second cas, cela permet d'afficher une alternative au cas ou le tableau 
 ## Ajouter du styles
 Duration: 10
 
-Maintenant que l'on affiche un petit message explicatif en fonction de l'IMC, on aimerais différencier ces messages via un système de couleur :
+Maintenant que l'on affiche un petit message explicatif en fonction de l'IMC, on aimerait différencier ces messages via un système de couleur :
 - *orange*: Si l'IMC est inférieur à 18
 - *rouge*: Si l'IMC est supérieur à 35
 - *vert*: Si on est dans fourchette d'un IMC normal
@@ -295,9 +295,9 @@ Il faut maintenant ajouter les classes CSS dans le code html ajouté précédemm
 ```sveltehtml
 <div>Votre IMC ({poids}/{taille}<sup>2</sup>) est de {imc}</div>
 {#if imc < 18}
-  <div class="souspoids">Vous êtes en sous poids</div>
+  <div class="souspoids">Vous êtes en sous-poids</div>
 {:else if imc > 35}
-  <div class="surpoids">Vous êtes en sur poids</div>
+  <div class="surpoids">Vous êtes en sur-poids</div>
 {:else}
   <div class="normal">Quel corps svelte !</div>
 {/if}
