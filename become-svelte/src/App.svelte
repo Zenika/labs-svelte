@@ -10,7 +10,8 @@
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
+	<h1>IMC Calculator</h1>
+	<p>Bonjour {name} ! Calculez votre IMC (Indice de Masse Corporelle)</p>
 	<Form on:submit={calculerEvent}/>
 	<Imc />
 </main>
