@@ -29,7 +29,7 @@ Sur le site de [Svelte](https://svelte.dev/), un REPL (Read Eval Print Loop) per
 De même un [tutoriel](https://svelte.dev/tutorial/basics) permet d'apprendre les base du framework pas à pas.
 
 Un fichier *Svelte* (fichier avec une extension .svelte) ressemble à un fichier html qui va contenir les balises html de notre template,
- une balise `<script>` contenant le code javascript, ainsi qu'une balise `<style>` contenant le style CSS.
+ une balise `&lt;script>` contenant le code javascript, ainsi qu une balise `&lt;style>` contenant le style CSS.
 
 Par exemple :
 ```sveltehtml
