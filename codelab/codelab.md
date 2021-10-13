@@ -66,7 +66,7 @@ npm run dev
 Vous aurez alors un projet de base avec les outils pour lancer l'application en développement ou construire l'application à deployer.
 
 <aside>
-Vous pouvez utiliser Typescript en executant la commande : `node scripts/setupTypeScript.js`
+Vous pouvez utiliser Typescript en executant la commande : <code>node scripts/setupTypeScript.js</code>
 </aside>
 
 ### Le projet pour ce codelab
@@ -146,7 +146,7 @@ import Imc from './Imc.svelte'
 ```
 
 <aside class="positive">
-Placer ce code javascript entre les balise html <pre>&lt;script>&lt;/script><pre>
+Placer ce code javascript entre les balise html <em>&lt;script>&lt;/script></em>
 </aside>
 
 On peut maintenant utiliser notre composant Imc directement dans notre contenu html :
@@ -203,8 +203,8 @@ Duration: 10
 Pour qu'un composant *Svelte* reçoivent des entrée via des attributs html, il suffit simplement que ce composant possède des variables préfixé par le mot clé `export`.
 
 <aside class="positive">
-En javascript, le mot clé `export` permet d'indiquer que la variable ou la fonction est accessible à l'extérieur du fichier (du module).
-*Svelte* l'utilise pour définir les entrées des composants.
+En javascript, le mot clé <code>export</code> permet d'indiquer que la variable ou la fonction est accessible à l'extérieur du fichier (du module).
+<i>Svelte</i> l'utilise pour définir les entrées des composants.
 </aside>
 
 Une fois ajouté ce mot clé :
@@ -623,8 +623,8 @@ $: bold = imc > 35
 Maintenant l'IMC est bien recalculé lors de la modification du formulaire.
 
 <aside class="positive">
-Il n'est pas nécessaire de déclarer la variable avec `const` ou `let` lorsque l'on utilise cette syntaxe.
-Si la variable n'est pas déjà déclarée avant alors *Svelte* se charge de le faire pour nous !
+Il n'est pas nécessaire de déclarer la variable avec <code>const</code> ou <code>let</code> lorsque l'on utilise cette syntaxe.
+Si la variable n'est pas déjà déclarée avant alors <i>Svelte</i> se charge de le faire pour nous !
 </aside>
 
 Cette syntaxe permet également de logger les valeurs des variables :
@@ -637,7 +637,7 @@ $: {
 ```
 
 <aside class="negative">
-Cette syntaxe n'est pas une invention de *Svelte*, mais réutilise une syntaxe peu utilisée de javascript, les <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label">labeled statements</a>.
+Cette syntaxe n'est pas une invention de <i>Svelte</i>, mais réutilise une syntaxe peu utilisée de javascript, les <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label">labeled statements</a>.
 </aside>
 
 Une autre méthode permet de s'abonner aux changements des paramètres d'un composant en utilisant les fonctions du cycle de vie d'un composant :
@@ -826,10 +826,14 @@ En ajoutant `|preventDefault` après le `on:click`, *Svelte* va automatiquement 
 <form on:submit|preventDefault>
 ```
 
-D'[autres modificateurs](https://svelte.dev/docs#on_element_event) sont disponibles :
-- `stopPropagation` : Exécute le code `event.stopPropagation()` qui permet de ne pas propager l'évènement sur les noeuds html parents.
-- `once`: Se désabonne après avoir reçu un évènement
-- `self`: L'évènement n'est actif seulement si envoyé par l'élément dom où l'on ajoute l'évènement.
+<aside>
+<a href="https://svelte.dev/docs#on_element_event">D'autres modificateurs</a> sont disponibles :
+<ul>
+<li><code>stopPropagation</code> : Exécute le code <code>event.stopPropagation()</code> qui permet de ne pas propager l'évènement sur les noeuds html parents.</li>
+<li><code>once</code>: Se désabonne après avoir reçu un évènement</li>
+<li><code>self</code>: L'évènement n'est actif seulement si envoyé par l'élément dom où l'on ajoute l'évènement.</li>
+</ul>
+</aside>
 
 <!-- ------------------------ -->
 ## Mise en place du store
@@ -906,7 +910,7 @@ storeTaille.subscribe(value => taille = value)
 
 <aside class="negative">
 Attention, le subscribe retourne une fonction qui permet de se désabonner.
-Il faut donc stocker cette fonction dans une variable et utiliser le livecycle `onDetroy()` pour nettoyer les souscriptions et éviter les fuites mémoires.
+Il faut donc stocker cette fonction dans une variable et utiliser le livecycle <code>onDetroy()</code> pour nettoyer les souscriptions et éviter les fuites mémoires.
 La syntaxe simplifié s'en occupe automatiquement.
 </aside>
 
@@ -932,13 +936,13 @@ Cette syntaxe est également disponible dans le template :
 ```
 
 <aside class="positive">
-*Svelte* propose des fonctions pour créer facilement des stores,
-mais tout object `Observable` (qui possède un subscribe, unsubscribe) est considéré par *svelte* comme un store et peut utiliser la syntaxe réactive de *svelte*.
+<i>Svelte</i> propose des fonctions pour créer facilement des stores,
+mais tout object <code>Observable</code> (qui possède un subscribe, unsubscribe) est considéré par <i>Svelte</i> comme un store et peut utiliser la syntaxe réactive de <i>Svelte</i>.
 </aside>
 
 ### Utiliser la syntaxe simplifié dans notre application
 
-Grâce à la syntaxe simplifié, on peut avoir un template simple en utilisant $poids et $taille comme si c'était de simple variables.
+Grâce à la syntaxe simplifié, on peut avoir un template simple en utilisant <code>$poids</code> et <code>$taille</code> comme si c'était de simple variables.
 
 Dans le fichier **Form.svelte** :
 ```sveltehtml
