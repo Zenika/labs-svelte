@@ -65,16 +65,18 @@ npm run dev
 
 Vous aurez alors un projet de base avec les outils pour lancer l'application en développement ou construire l'application à deployer.
 
-Positive
-: Vous pouvez utiliser Typescript en executant la commande : `node scripts/setupTypeScript.js`
+<aside>
+Vous pouvez utiliser Typescript en executant la commande : `node scripts/setupTypeScript.js`
+</aside>
 
 ### Le projet pour ce codelab
 
 Après cette rapide introduction à *Svelte*, nous allons créer pour ce codelab un projet pour calculer son IMC (Indice de Masse Corporelle)
 
-Positive
-: L'indice de masse corporelle ou IMC (en anglais, body mass index ou BMI) est une grandeur qui permet d'estimer la corpulence d’une personne.
+<aside class="positive">
+L'indice de masse corporelle ou IMC (en anglais, body mass index ou BMI) est une grandeur qui permet d'estimer la corpulence d’une personne.
 Inventé au milieu du XIXe siècle par Adolphe Quetelet, mathématicien belge qui est l'un des fondateurs de la statistique moderne, cet indice est appelé aussi l'indice de Quetelet.
+</aside>
 
 La formule pour calculer l'IMC est le poids divisé par la taille au carré.
 
@@ -143,8 +145,9 @@ Dans le fichier **App.svelte**, ajoutez simplement l'import de notre composant I
 import Imc from './Imc.svelte'
 ```
 
-Positive
-: Placer ce code javascript entre les balise html `<script></script>`
+<aside class="positive">
+Placer ce code javascript entre les balise html <pre>&lt;script>&lt;/script><pre>
+</aside>
 
 On peut maintenant utiliser notre composant Imc directement dans notre contenu html :
 
@@ -177,8 +180,9 @@ Nous pouvons maintenant afficher ces variables dans le html en utilisant la synt
 <div>Votre IMC ({poids}/{taille}<sup>2</sup>) est de {(poids / taille ** 2).toFixed(2)}</div>
 ```
 
-Positive
-: La formule de l'IMC est le poids en kilo divisé par la taille en mètre au carré.
+<aside class="positive">
+La formule de l'IMC est le poids en kilo divisé par la taille en mètre au carré.
+</aside>
 
 Analysons le code ci-dessus :
 `{poids}` ou `{taille}` sera remplacé par le contenu de la variable poids ou taille
@@ -198,9 +202,10 @@ Duration: 10
 
 Pour qu'un composant *Svelte* reçoivent des entrée via des attributs html, il suffit simplement que ce composant possède des variables préfixé par le mot clé `export`.
 
-Positive
-: En javascript, le mot clé `export` permet d'indiquer que la variable ou la fonction est accessible à l'extérieur du fichier (du module).
+<aside class="positive">
+En javascript, le mot clé `export` permet d'indiquer que la variable ou la fonction est accessible à l'extérieur du fichier (du module).
 *Svelte* l'utilise pour définir les entrées des composants.
+</aside>
 
 Une fois ajouté ce mot clé :
 ```sveltehtml
@@ -230,8 +235,9 @@ Duration: 10
 
 Ajoutons maintenant un message qui précise notre état de corpulence en fonction de l'IMC.
 
-Positive
-: Le rapport taille sur le poids au carré qui est considéré comme une corpulence est compris entre 18 et 35. Au delà, on est en surpoids et inversement en sous-poids si l'on est en dessous.
+<aside class="positive">
+Le rapport taille sur le poids au carré qui est considéré comme une corpulence est compris entre 18 et 35. Au delà, on est en surpoids et inversement en sous-poids si l'on est en dessous.
+</aside>
 
 On veut donc ajouter un message en fonction de notre IMC. *Svelte* permet d'ajouter des conditions dans un template avec la syntaxe `{#if condition}{:else if condition}{:else}{/if}`
 
@@ -274,7 +280,7 @@ Maintenant que l'on affiche un petit message explicatif en fonction de l'IMC, on
 
 Pour cela, on va se créer 3 classes CSS. On peut soit mettre ces classes dans le fichier `global.css` qui se trouve dans le répertoire public.
 Les classes seront alors disponible pour toute l'application. Mais si je veux ajouter du css directement dans notre composant,
-il suffit d'ajouter la balise `<style></style>` dans votre fichier **Imc.svelte** et d'y ajouter votre code CSS :
+il suffit d'ajouter la balise `&lt;style>&lt;/style>` dans votre fichier **Imc.svelte** et d'y ajouter votre code CSS :
 
 ```css
   .normal {
@@ -461,7 +467,7 @@ Ajoutons maintenant ce formulaire dans notre composant principale **App.svelte**
 import Form from './Form.svelte'
 ```
 
-Puis au dessus du composant `<Imc />` notre composant `<Form />`
+Puis au dessus du composant `&lt;Imc />` notre composant `&lt;Form />`
 
 ```sveltehtml
 <Form />
@@ -511,7 +517,7 @@ Maintenant que l'on peut récupérer la valeur de nos champs, il est nécessaire
 ### Descendre une valeur d'un composant parent
 Pour cela, il faut passer par le composant `App` pour faire passer les valeurs.
 
-Ajoutons deux variables dans le fichier **App.svelte** à l'intérieur de la balise `<script></script>`
+Ajoutons deux variables dans le fichier **App.svelte** à l'intérieur de la balise `&lt;script>&lt;/script>`
 
 ```
  let poids = 80;
@@ -616,9 +622,10 @@ $: bold = imc > 35
 
 Maintenant l'IMC est bien recalculé lors de la modification du formulaire.
 
-Positive
-: Il n'est pas nécessaire de déclarer la variable avec `const` ou `let` lorsque l'on utilise cette syntaxe.
-Si la variable n'est pas déjà déclarée avant alors *Svelte* se charge de le faire pour nous
+<aside class="positive">
+Il n'est pas nécessaire de déclarer la variable avec `const` ou `let` lorsque l'on utilise cette syntaxe.
+Si la variable n'est pas déjà déclarée avant alors *Svelte* se charge de le faire pour nous !
+</aside>
 
 Cette syntaxe permet également de logger les valeurs des variables :
 
@@ -629,8 +636,9 @@ $: {
 }
 ```
 
-Negative
-: Cette syntaxe n'est pas une invention de *Svelte*, mais réutilise une syntaxe peu utilisée de javascript, les [labeled statements](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label).
+<aside class="negative">
+Cette syntaxe n'est pas une invention de *Svelte*, mais réutilise une syntaxe peu utilisée de javascript, les <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label">labeled statements</a>.
+</aside>
 
 Une autre méthode permet de s'abonner aux changements des paramètres d'un composant en utilisant les fonctions du cycle de vie d'un composant :
 - `beforeUpdate` : la fonction passé à cette fonction est appelé avant que les paramètres sont modifiés
@@ -896,10 +904,11 @@ storePoid.subscribe(value => poids = value)
 storeTaille.subscribe(value => taille = value)
 ```
 
-Negative
-: Attention, le subscribe retourne une fonction qui permet de se désabonner.
+<aside class="negative">
+Attention, le subscribe retourne une fonction qui permet de se désabonner.
 Il faut donc stocker cette fonction dans une variable et utiliser le livecycle `onDetroy()` pour nettoyer les souscriptions et éviter les fuites mémoires.
 La syntaxe simplifié s'en occupe automatiquement.
+</aside>
 
 ### Syntaxe simplifié
 
@@ -922,9 +931,10 @@ Cette syntaxe est également disponible dans le template :
 <p>Count : {$count}</p>
 ```
 
-Positive
-: *Svelte* propose des fonctions pour créer facilement des stores,
+<aside class="positive">
+*Svelte* propose des fonctions pour créer facilement des stores,
 mais tout object `Observable` (qui possède un subscribe, unsubscribe) est considéré par *svelte* comme un store et peut utiliser la syntaxe réactive de *svelte*.
+</aside>
 
 ### Utiliser la syntaxe simplifié dans notre application
 
@@ -1064,7 +1074,7 @@ Duration: 10
 
 On va modifier le composant `Imc`, pour qu'il mette a jour le titre de la page avec la valeur calculée de l'IMC.
 
-Pour cela on va utiliser l'élément spécial `<svelte:head>` :
+Pour cela on va utiliser l'élément spécial `&lt;svelte:head>` :
 
 ```sveltehtml
 <script>
