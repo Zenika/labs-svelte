@@ -8,15 +8,15 @@
   <title>Votre IMC : {$imc}</title>
 </svelte:head>
 
-<div class:thin={$imc < 18} class:bold={$imc > 35}>
+<p class:thin={$imc < 18} class:bold={$imc > 25}>
   Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {$imc}
-</div>
+</p>
 {#if $imc < 18}
-  <div class="souspoids" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sous poids</div>
-{:else if $imc > 35}
-  <div class="surpoids" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en sur poids</div>
+  <p class="souspoids" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes maigre</p>
+{:else if $imc > 25}
+  <p class="surpoids" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en surpoids</p>
 {:else}
-  <div class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Quel corps svelte !</div>
+  <p class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes svelte !</p>
 {/if}
 
 <style>
