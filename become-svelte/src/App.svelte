@@ -1,12 +1,12 @@
 <script>
- import Imc from './Imc.svelte'
- import Form from './Form.svelte'
+	import Imc from "./Imc.svelte";
+	import Form from "./Form.svelte";
+
+	const name = "World";
 
 	function calculerEvent(event) {
-		console.log(event.detail)
+		console.log(event)
 	}
-
- let name = "World";
 </script>
 
 <main>
@@ -25,6 +25,7 @@
 	}
 
 	h1 {
+		color: #ff3e00;
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;
