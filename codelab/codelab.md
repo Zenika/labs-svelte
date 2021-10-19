@@ -992,7 +992,7 @@ De même le code de la page *App.svelte* est simplifié :
 	import Imc from "./Imc.svelte";
 	import Form from "./Form.svelte";
 
-	const name = "Patrice";
+	const name = "world";
 </script>
 
 <main>
