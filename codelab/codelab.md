@@ -491,7 +491,7 @@ Regardons en détail ce que fait ce composant:
 
 - `let poids = 0; let taille = 0;`: Création de variables pour le poids et la taille, initialisés à `0`.
 - `Poids ({poids} kg)` `Taille ({taille.toFixed(2)} m)`: Affichage de la valeur de chaque variable dans les labels, avec la syntaxe `{}` vu précédemment.
-- ` <input name="poids" type="range" min="10" max="200" step="5" value={poids} />` `<input name="taille" type="range" min="0.5" max="2.5" step="0.01" value={taille} />`: Ajout de 2 inputs de type `range` pour régler le poids et la taille, initialisés avec les valeurs de nos variables.
+- `&lt;input name="poids" type="range" min="10" max="200" step="5" value={poids} />` `&lt;input name="taille" type="range" min="0.5" max="2.5" step="0.01" value={taille} />`: Ajout de 2 inputs de type `range` pour régler le poids et la taille, initialisés avec les valeurs de nos variables.
 
 Ajoutons maintenant ce formulaire dans notre composant principale **App.svelte**. Pour cela, commençons par l'importer :
 
@@ -947,7 +947,23 @@ function onTailleChange(event) {
 }
 ```
 
-et à l'inverse dans le fichier **Imc.svelte**
+Nous allons repasser dans le premier mode de fonctionnement en s'abonnant directement sur les évènements des champs `poids` et `taille` et supprimer le bouton calculer.
+
+Voici donc le code html du formulaire : 
+
+```
+   <form>    
+     <label> Poids :
+        <input name="poids" type="range" min="10" max="200" step="5" on:input={onPoidsChange} />
+     </label>
+   
+     <label> Taille :
+        <input name="taille" type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange} />
+     </label>
+   </form>
+```
+
+et à l'inverse dans le fichier **Imc.svelte** dans la balise `&lt;script>`
 
 ```javascript
 import { poids as storePoid, taille as storeTaille } from "./stores";
@@ -957,6 +973,10 @@ let taille;
 
 storePoid.subscribe((value) => (poids = value));
 storeTaille.subscribe((value) => (taille = value));
+
+$: imc = (poids / taille ** 2).toFixed(2);
+$: thin = imc < 18;
+$: bold = imc > 25;
 ```
 
 <aside class="negative">
@@ -964,6 +984,24 @@ Attention, le subscribe retourne une fonction qui permet de se désabonner.
 Il faut donc stocker cette fonction dans une variable et utiliser le livecycle <code>onDetroy()</code> pour nettoyer les souscriptions et éviter les fuites mémoires.
 La syntaxe simplifiée s'en occupe automatiquement.
 </aside>
+
+De même le code de la page *App.svelte* est simplifié : 
+
+```sveltehtml
+<script>
+	import Imc from "./Imc.svelte";
+	import Form from "./Form.svelte";
+
+	const name = "world";
+</script>
+
+<main>
+	<h1>Calculateur IMC</h1>
+	<p>Bonjour {name} ! Calculez votre IMC (Indice de Masse Corporelle)</p>
+	<Form />
+	<Imc />
+</main>
+```
 
 ### Syntaxe simplifiée
 
