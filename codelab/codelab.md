@@ -109,7 +109,7 @@ Vous vous retrouvez avec une application simple. Voici les différents fichiers 
 - **package.json** : Contient les dépendances, ainsi que les scripts `dev` (pour lancer le projet en développement) ou `build` (pour construire l'application finale).
 - **rollup.config.js** : Configuration pour le packageur d'application configuré pour utiliser _Svelte_.
 - **public** : Les ressources statiques du projet, contiendra également les fichiers `bundle.js` et `bundle.css` une fois votre application compilée.
-- **src**: Les fichiers sources de l'application où seront ajouteés les différents composants.
+- **src**: Les fichiers sources de l'application où seront ajoutés les différents composants.
   - **main.js** : Fichier javascript qui initialise l'application.
   - **App.svelte** : Premier composant _Svelte_ qui s'affiche sur notre application, c'est dans ce fichier que nous allons commencer notre application.
 
@@ -949,14 +949,14 @@ function onTailleChange(event) {
 
 Nous allons repasser dans le premier mode de fonctionnement en s'abonnant directement sur les évènements des champs `poids` et `taille` et supprimer le bouton calculer.
 
-Voici donc le code html du formulaire : 
+Voici donc le code html du formulaire :
 
 ```
-   <form>    
+   <form>
      <label> Poids :
         <input name="poids" type="range" min="10" max="200" step="5" on:input={onPoidsChange} />
      </label>
-   
+
      <label> Taille :
         <input name="taille" type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange} />
      </label>
@@ -985,7 +985,7 @@ Il faut donc stocker cette fonction dans une variable et utiliser le livecycle <
 La syntaxe simplifiée s'en occupe automatiquement.
 </aside>
 
-De même le code de la page *App.svelte* est simplifié : 
+De même le code de la page _App.svelte_ est simplifié :
 
 ```sveltehtml
 <script>
