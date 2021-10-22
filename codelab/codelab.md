@@ -1224,5 +1224,5 @@ Nous espérons que vous avez apprécié cette petite expérience avec Svelte !
 Vous trouverez le code final de l'app [ici](https://github.com/Zenika/labs-svelte/tree/master/become-svelte).
 
 <aside class="positive">
-  Pour devenir <em>Svelte</em>s, pratiquez régulièrement ...
+  Pour devenir <em>Svelte</em>, pratiquez régulièrement ...
 </aside>
