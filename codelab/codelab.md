@@ -85,6 +85,8 @@ Inventé au milieu du XIXe siècle par Adolphe Quetelet, mathématicien belge et
 
 La formule pour calculer l'IMC est le poids divisé par la taille au carré.
 
+[Voir l'application finale](https://labs-svelte.web.app/)
+
 <!-- ------------------------ -->
 
 ## Créez votre première application
@@ -1220,3 +1222,7 @@ Bravo ! Vous êtes arrivés à la fin de ce lab !
 Nous espérons que vous avez apprécié cette petite expérience avec Svelte !
 
 Vous trouverez le code final de l'app [ici](https://github.com/Zenika/labs-svelte/tree/master/become-svelte).
+
+<aside class="positive">
+  Pour devenir _Svelte_, pratiquez régulièrement ...
+</aside>
