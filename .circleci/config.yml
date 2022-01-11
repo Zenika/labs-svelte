@@ -17,7 +17,7 @@ jobs:
   become-svelte:
     working_directory: ~/labs
     docker:
-      - image: cimg/node:14
+      - image: cimg/node:lts
     steps:
       - checkout
       - run: cd become-svelte && npm install
