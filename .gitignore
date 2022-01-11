@@ -108,3 +108,6 @@ dist
 
 # Spécifique à l'application
 template/package-lock.json
+
+# Netlify
+.netlify
