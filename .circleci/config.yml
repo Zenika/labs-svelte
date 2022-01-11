@@ -12,6 +12,8 @@ jobs:
       - run: cd codelab && claat export codelab.md
       - run: cd become-svelte && npm install
       - run: cd become-svelte && npm run build
+      - run: cd imc-calculator && npm install
+      - run: cd imc-calculator && npm run build
       - run: npm install firebase-tools
       - run: npx firebase deploy --token $FIREBASE_TOKEN
 

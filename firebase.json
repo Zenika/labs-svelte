@@ -17,7 +17,7 @@
     },
     {
       "target": "app",
-      "public": "become-svelte/public",
+      "public": "imc-calculator/public",
       "ignore": [
         "firebase.json",
         "**/.*",
