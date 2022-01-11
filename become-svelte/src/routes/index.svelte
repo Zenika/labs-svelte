@@ -1,2 +1,14 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import Imc from "$lib/Imc.svelte";
+	import Form from "$lib/Form.svelte";
+
+	const name = "World";
+
+	function calculerEvent(event) {
+		console.log(event)
+	}
+</script>
+
+<p>Bonjour {name} ! Calculez votre IMC (Indice de Masse Corporelle)</p>
+<Form on:submit={calculerEvent}/>
+<Imc />
