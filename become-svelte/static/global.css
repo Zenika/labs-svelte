@@ -1,0 +1,40 @@
+body {
+	background-color: #f9e1b8;
+	font-family: "Fredoka One";
+}
+
+main h1 {
+	font-size: 4.5rem;
+	font-weight: 300;
+	margin: 1em 0;
+	color: #428647;
+}
+
+main p {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin: 1em 0;
+	color: #428647;
+}
+
+main button {
+	letter-spacing: 1px;
+	border-style: none;
+	text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+	font-size: 1.125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin: 0.5em 0 auto;
+	padding: 12px 84px 12px 83px;
+	background-color: #428647;
+    color: #ffffff;
+	border-radius: 4px;
+}
+
+label {
+	display: block;
+}
+
+input[type=range] {
+	width: 300px;
+}
