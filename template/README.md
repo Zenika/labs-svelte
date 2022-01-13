@@ -1,5 +1,7 @@
 # Labs Svelte
 
+Template de base pour le codelab svelte et sveltekit.
+
 ## Démarrage
 
 Installer les dépendances
@@ -8,15 +10,26 @@ Installer les dépendances
 npm install
 ```
 
-...Ensuite démarrez [Rollup](https://rollupjs.org):
+...Ensuite démarrez le projet :
+
+```bash
+npm run dev -- --open
+```
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
 npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-Ouvrez le navigateur sur l'adresse [localhost:5000](http://localhost:5000). Vous devriez voir l'application lancée. Edit a component file in `src`, save it, and reload the page to see your changes.
+L'application souvrira directement dans votre navigateur par défaut à l'adresse http://localhost:3000/
 
-## Construire et lancer l'application
+## Construire l'application
 
 Pour créer une version optimisé de l'application :
 
@@ -24,36 +37,6 @@ Pour créer une version optimisé de l'application :
 npm run build
 ```
 
-Vous pouvez maintenant lancer l'application construite  avec `npm run start`.
+## Déployer l'application
 
-## Deployer sur le web
-
-### Avec [now](https://zeit.co/now)
-
-Installez `now` si vous ne l'avez pas déjà :
-
-```bash
-npm install -g now
-```
-
-Ensuite, dans le répertoire de votre projet :
-
-```bash
-cd public
-now deploy --name my-project
-```
-
-### Avec [surge](https://surge.sh/)
-
-Installez `surge` si vous ne l'avez pas déjà :
-
-```bash
-npm install -g surge
-```
-
-Ensuite, dans le répertoire de votre projet :
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+Il est nécessaire d'installer un adapter
