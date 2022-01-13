@@ -10,7 +10,6 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
-    "netlify-cli": "^8.6.20",
     "svelte": "^3.44.0"
   },
   "type": "module"
