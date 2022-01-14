@@ -38,3 +38,27 @@ label {
 input[type=range] {
 	width: 300px;
 }
+
+/* Pages de recette */
+
+section.recettes {
+    display: flex;
+}
+section.recettes article img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+section.recette img {
+    max-width: 200px;
+    max-height: 200px;
+    float: right;
+    margin: 5px;
+}
+section.recette ul {
+    text-align: left;
+}
+section.recette dt {
+    margin-top: 1em;
+    font-weight: bold;
+}
