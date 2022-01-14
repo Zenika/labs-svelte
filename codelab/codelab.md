@@ -85,7 +85,7 @@ Inventé au milieu du XIXe siècle par Adolphe Quetelet, mathématicien belge et
 
 La formule pour calculer l'IMC est le poids divisé par la taille au carré.
 
-[Voir l'application finale](https://labs-svelte.web.app/)
+[Voir l'application finale](https://become-svelte.netlify.app/)
 
 <!-- ------------------------ -->
 
@@ -97,6 +97,7 @@ Duration: 10
 
 Comme vu lors de la première étape, nous allons initialiser notre application en partant d'un template.
 Nous avons créé un template pour le codelab qui va contenir des éléments qui seront utilisés directement par votre application.
+Ce template contient déjà la structure pour utiliser sveltekit pour la suite du codelab.
 
 ```bash
 npx degit zenika/labs-svelte/template labs-svelte
@@ -106,14 +107,16 @@ npm install
 
 ### Découvrir ce qui a été généré
 
-Vous vous retrouvez avec une application simple. Voici les différents fichiers que l'on peut retrouver :
+Vous vous retrouvez avec une application sveltekit. Voici les différents fichiers que l'on peut retrouver :
 
 - **package.json** : Contient les dépendances, ainsi que les scripts `dev` (pour lancer le projet en développement) ou `build` (pour construire l'application finale).
-- **rollup.config.js** : Configuration pour le packageur d'application configuré pour utiliser _Svelte_.
-- **public** : Les ressources statiques du projet, contiendra également les fichiers `bundle.js` et `bundle.css` une fois votre application compilée.
+- **svelte.config.js** : Configuration pour _SvelteKit_.
+- **static** : Les ressources statiques du projet.
 - **src**: Les fichiers sources de l'application où seront ajoutés les différents composants.
-  - **main.js** : Fichier javascript qui initialise l'application.
-  - **App.svelte** : Premier composant _Svelte_ qui s'affiche sur notre application, c'est dans ce fichier que nous allons commencer notre application.
+  - **lib** : Les composants commun de l'application, c'est dans ce répertoire que l'on va travailler pour tous le début du codelab
+  - **routes** : Les différentes pages de votre application, que l'on verra plus tard dans le codelab
+  - **app.html** : Page HTML de l'application où se chargera votre application.
+  - **global.d.ts** : Permet d'ajouter les définitions de type pour utiliser l'autocomplexion sur le projet.
 
 ### Lancer le projet
 
@@ -123,13 +126,13 @@ Maintenant, lançons le projet :
 npm run dev
 ```
 
-En ouvrant le navigateur à l'url http://localhost:5000/ vous verrez la page de notre application :
+En ouvrant le navigateur à l'url http://localhost:3000/ vous verrez la page de notre application :
 
 ![Capture step 1](./assets/capture-step1.png)
 
 ### Modifier et voir le résultat
 
-Maintenant entrons dans le vif du sujet, ouvrez le fichier **App.svelte** puis modifiez la variable `name` pour y mettre votre nom :
+Maintenant entrons dans le vif du sujet, ouvrez le fichier **ImcCalculator.svelte** puis modifiez la variable `name` pour y mettre votre nom :
 
 ```javascript
 const name = "Votre nom";
@@ -145,7 +148,7 @@ Passons maintenant à l'étape suivante pour créer notre premier composant.
 
 Duration: 5
 
-Nous allons maintenant créer notre premier composant, pour cela créez un nouveau fichier **Imc.svelte** dans le répertoire `src`.
+Nous allons maintenant créer notre premier composant, pour cela créez un nouveau fichier **Imc.svelte** dans le répertoire `src/lib`.
 
 Dans ce fichier, mettez du code html pour afficher un simple texte :
 
@@ -153,7 +156,7 @@ Dans ce fichier, mettez du code html pour afficher un simple texte :
 <p>Votre IMC est de 20</p>
 ```
 
-Dans le fichier **App.svelte**, ajoutez simplement l'import de notre composant Imc :
+Dans le fichier **ImcCalculator.svelte**, ajoutez simplement l'import de notre composant Imc :
 
 ```javascript
 import Imc from "./Imc.svelte";
@@ -468,7 +471,7 @@ Nous allons alors créer un formulaire pour pouvoir saisir notre poids et notre 
 
 ### Nouveau composant
 
-Commençons par créer un nouveau composant que nous nommerons `Form.svelte`.
+Commençons par créer un nouveau composant que nous nommerons `Form.svelte` dans le répertoire `src/lib`.
 
 Ce composant contiendra un formulaire simple avec deux sliders permettant de définir son poids et sa taille :
 
@@ -495,7 +498,7 @@ Regardons en détail ce que fait ce composant:
 - `Poids ({poids} kg)` `Taille ({taille.toFixed(2)} m)`: Affichage de la valeur de chaque variable dans les labels, avec la syntaxe `{}` vu précédemment.
 - `&lt;input name="poids" type="range" min="10" max="200" step="5" value={poids} />` `&lt;input name="taille" type="range" min="0.5" max="2.5" step="0.01" value={taille} />`: Ajout de 2 inputs de type `range` pour régler le poids et la taille, initialisés avec les valeurs de nos variables.
 
-Ajoutons maintenant ce formulaire dans notre composant principale **App.svelte**. Pour cela, commençons par l'importer :
+Ajoutons maintenant ce formulaire dans notre composant principale **ImcCalculator.svelte**. Pour cela, commençons par l'importer :
 
 ```javascript
 import Form from "./Form.svelte";
@@ -563,7 +566,7 @@ Maintenant que nous pouvons récupérer les valeur de nos inputs, il est nécess
 
 Pour cela, il nous faut passer par le composant `App` pour faire passer les valeurs.
 
-Ajoutons deux variables dans le fichier **App.svelte** à l'intérieur de la balise `&lt;script>&lt;/script>`
+Ajoutons deux variables dans le fichier **ImcCalculator.svelte** à l'intérieur de la balise `&lt;script>&lt;/script>`
 
 ```
  let poids = 80;
@@ -587,7 +590,7 @@ export let poids = 80;
 export let taille = 1.8;
 ```
 
-et dans le fichier **App.svelte**
+et dans le fichier **ImcCalculator.svelte**
 
 ```sveltehtml
 <Form {taille} {poids} />
@@ -803,7 +806,7 @@ Appliquons ce que nous avons vu précédemment avec l'eventDispatcher à notre c
 </form>
 ```
 
-Et dans le fichier **App.svelte**, nous pouvons réagir à l'évènement de la sorte :
+Et dans le fichier **ImcCalculator.svelte**, nous pouvons réagir à l'évènement de la sorte :
 
 ```sveltehtml
 <script>
@@ -927,7 +930,7 @@ count.update((n) => n + 1); // logs '2'
 
 ### Créer un store pour stocker le poids et la taille
 
-Pour cela, créons un fichier javascript (il ne contient que du code, et pas de template, donc pas nécessaire d'avoir un fichier _Svelte_) `stores.js` qui va contenir la création de nos deux stores pour stocker le poids et la taille :
+Pour cela, créons un fichier javascript (il ne contient que du code, et pas de template, donc pas nécessaire d'avoir un fichier _Svelte_) `stores.js` dans le répertoire `src/lib` qui va contenir la création de nos deux stores pour stocker le poids et la taille :
 
 ```javascript
 import { writable } from "svelte/store";
@@ -987,7 +990,7 @@ Il faut donc stocker cette fonction dans une variable et utiliser le livecycle <
 La syntaxe simplifiée s'en occupe automatiquement.
 </aside>
 
-De même le code de la page _App.svelte_ est simplifié :
+De même le code de la page _ImcCalculator.svelte_ est simplifié :
 
 ```sveltehtml
 <script>
@@ -1216,6 +1219,9 @@ Pour cela, utilisons l'élément spécial `&lt;svelte:head>` :
 L'ajout de ce code permet à _Svelte_ de venir modifier la balise `title` de notre page à chaque fois que le composant est inclus dans notre page.
 L'inclusion de `{$imc}` dans le titre permet également la mise à jour du titre lorsque la valeur du store `imc` change.
 
+## Sveltekit
+
+Maintenant que nous avons bien découvert les fonctionnalités offertes par **Svelte**, passont maintenant à la vitesse supérieur en découvrant **SvelteKit**
 ## Fin
 
 Bravo ! Vous êtes arrivés à la fin de ce lab !
