@@ -1,0 +1,63 @@
+[
+    {
+        "titre": "Tomates farcies au thon (recette légère)",
+        "image": "https://assets.afcdn.com/recipe/20130616/20057_w1200h911c1cx256cy192.jpeg",
+        "temps": "20 min",
+        "prix": "Bon marché",
+        "difficulte": "Très facile",
+        "type": "Entrée",
+        "personnes": 4,
+        "ingredients": ["4 tomates", "1/2 cc de moutarde", "citron", "1 cc d'herbe de provence", "1 cs d'huile d'olive", "poivre", "sel", "2 boites de thon au naturel", "120g de crème fraiche allégée", "1 échalotte hachée", "basilique frais"],
+        "etapes": [
+            "Découper un chapeau dans le haut de chaque tomate préalablement lavée.",
+            "Evider les tomates à l'aide d'une cuillère, saler légèrement l'intérieur et les retourner sur une grille afin qu'elles s'égouttent.",
+            "Mélanger la crème, la moutarde et le reste ingrédients avant d’y ajouter le thon égoutté en miettes.",
+            "Bien mélanger le tout.",
+            "Remplir chaque tomate de cette farce. Y ajouter les feuilles de basilic pour la présentation et le goût!",
+            "A servir frais, disposés sur un lit de feuilles de salade.",
+            "Bon appétit."
+        ],
+        "credit": "https://www.marmiton.org/recettes/recette_tomates-farcies-au-thon-recette-legere_81846.aspx"
+    },
+    {
+        "titre": "Dahl de lentilles corail",
+        "image": "https://assets.afcdn.com/recipe/20200928/114451_w1200h1877c1cx540cy844cxb1080cyb1689.jpeg",
+        "temps": "30 min",
+        "prix": "Bon marché",
+        "difficulte": "Facile",
+        "personnes": 4,
+        "type": "Plat",
+        "ingredients": ["30 cl de lentilles corail", "5 thomates", "4 carottes", "25cl de lait de coco", "1 gousse d'ail", "1 cs de concentré de tomates", "1 cc de curcuma", "1/2 cc de cumin", "1/2 cc de gemgembre", "1/2 cc d'huile de tournesol"],
+        "etapes":[
+            "Laver les tomates et les découper en dés. Peler les carottes, et les découper en fines rondelles.",
+            "Dans une casserole, verser les lentilles corail et couvrir d'eau. Porter à ébullition. Laisser cuire pendant 10 min environ, jusqu'à complète absorption de l'eau. Retire du feu et laisser reposer.",
+            "Dans une sauteuse, verser l'huile et chauffer. Y ajouter l'ail qui dorera pendant une petite minute. Verser ensuite les légumes et saupoudrer avec les épices. Ajouter enfin le concentré de tomate.",
+            "Verser le lait de coco et laisser mijoter environ 10 min. sans couvrir.",
+            "Enfin, ajouter les lentilles et bien remuer le tout."
+        ],
+        "credit": "https://www.marmiton.org/recettes/recette_dahl-de-lentilles-corail_166862.aspx"
+    },
+    {
+        "titre": "Dessert léger aux fruits de la passion",
+        "image": "https://assets.afcdn.com/recipe/20170204/34670_w1200h911c1cx331cy290.jpeg",
+        "temps": "35 min",
+        "prix": "Bon marché",
+        "difficulte": "Facile",
+        "personnes": 6,
+        "type": "Dessert",
+        "ingredients": ["1/2 l de lait", "2 sachet de sucre vanille", "75g de sucre", "50g de farine", "1 mangue", "8 fruits de la passion", "4 oeufs"],
+        "etapes":[
+            "Couper la mangue en petits morceaux, et vider les fruits de la passion.",
+            "Mélanger délicatement les fruits ensemble, et les disposer dans le fond d'un plat assez creux (type grand saladier). Réserver.",
+            "Préparer une crème patissière :",
+            "faire bouillir 1/2 l de lait avec les 2 sachets de sucre vanillé.",
+            "Pendant ce temps, mélanger 3 jaunes d oeufs avec le sucre. On doit obtenir un mélange lisse.",
+            "Rajouter la farine, et remuer énergiquement (pâte onctueuse).",
+            "Incorporer le lait et mélanger. Remettre le tout sur le feu (feux doux), et laisser epaissir la crème sans s'arrêter de tourner. Laisser refroidir.",
+            "Une fois que la crème pâtissière a refroidi, la mettre sur les fruits dans le saladier.",
+            "Battre 4 blancs en neige, et en recouvrir les fruits et la crème patissière.",
+            "Mettre le saladier 3 min au grill, pour faire dorer les blancs en neige. Laisser refroidir, et conserver au frigo avant de servir."
+        ],
+        "credit": "https://www.marmiton.org/recettes/recette_dessert-leger-aux-fruits-de-la-passion_43479.aspx"
+    }
+]

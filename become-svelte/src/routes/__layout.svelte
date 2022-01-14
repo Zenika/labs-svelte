@@ -1,8 +1,14 @@
 <script>
 </script>
-
+<header>
+	<nav>
+		<a href="/">Accueil</a>
+		<a href="/recettes">Recettes</a>
+		<a href="/about">A propos</a>
+	</nav>
+</header>
 <main>
-	<h1>Calculateur IMC</h1>
+	<h1>Devenir Svelte avec Svelte</h1>
 	<slot></slot>
 </main>
 

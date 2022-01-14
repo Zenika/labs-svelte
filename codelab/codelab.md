@@ -1222,6 +1222,392 @@ L'inclusion de `{$imc}` dans le titre permet également la mise à jour du titre
 ## Sveltekit
 
 Maintenant que nous avons bien découvert les fonctionnalités offertes par **Svelte**, passont maintenant à la vitesse supérieur en découvrant **SvelteKit**
+
+SvelteKit est un framework pour construire des sites ultra performants en intégrant notament les fonctionnalités :
+- router
+- api
+- génération de pages côté serveur
+- Optimisation au build
+
+SvelteKit est le remplaçant du framework Sapper.
+
+Negative:
+SvelteKit n'est pas encore en version finale, mais son développement est suffisamment avancé pour s'y intéresser, et pourquoi pas l'utiliser en production (cependant, attention aux breaking changes).
+
+SvelteKit utilise le bundler `vite` qui apporte la fonctionnalité de Hot Module Replacement (Recharge le code modifié sans même recharger la page).
+
+La force de SvelteKit, c'est de profiter de la puissance du compilateur svelte qui va générer tout le code nécessaire (et seulement celui-ci) pour faire fonctionner votre site.
+
+Si vous regardez dans votre package.json, vous n'aurez que des dépendances de dev et aucune dépendance runtime : 
+
+```json
+{
+  "name": "become-svelte",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "package": "svelte-kit package",
+    "preview": "svelte-kit preview"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/adapter-netlify": "^1.0.0-next.38",
+    "@sveltejs/kit": "next",
+    "netlify-cli": "^8.6.20",
+    "svelte": "^3.44.0"
+  },
+  "type": "module"
+}
+```
+
+## Ajouter une nouvelle page
+
+Créez une page about.svelte dans le répertoire src/routes
+Et mettons donc une texte indiquant que vous avez créer ce site :
+
+```sveltehtml
+<p>
+Ce site a été créé par xxx lors de SnowCamp
+</p>
+```
+
+La page est maintenant automatiquement disponible sur l'url http://localhost:3000/about
+
+## Ajouter un layout
+
+Il est aussi possible d'avoir un layout comment à toute les pages en créant un fichier __layout.svelte dans le répertoire src/routes
+
+```sveltehtml
+<script>
+</script>
+<header>
+<nav>
+	<a href="/">Accueil</a>
+	<a href="/about">A propos</a>
+</nav>
+</header>
+<main>
+	<h1>Devenir Svelte avec Svelte</h1>
+	<slot></slot>
+</main>
+
+<style>
+	h1 {
+		color: #ff3e00;
+		text-transform: uppercase;
+		font-size: 4em;
+		font-weight: 100;
+	}
+</style>
+```
+
+Positive:
+La syntaxe <slot></slot> permet d'indiquer à Svelte d'insérer à cet emplacement le contenu qui est ajouté dans la balise du composant, ici les différentes pages possible.
+
+## Ajouter une page de recette
+
+Il est possible d'avoir des sous pages en créant un répertoire dans le dossier src/routes
+
+Nous allons ajouter sur notre site une page listant des recettes de cuisine, permettant ensuite d'avoir le détail de la recette.
+
+Créons maintenant un répertoire `recettes` dans `src/routes`
+
+En ajoutant une page index.svelte on défini la page qui s'affichera pour l'url /recette.
+
+### Liste des recettes
+
+Créons une liste de recette dans une fichier json, créez une page `recette.json` dans le répertoire `src/route/recettes`, et ajouter une liste de recettes, voici un fichier d'exemple :
+
+```json
+[
+    {
+        "titre": "Tomates farcies au thon (recette légère)",
+        "image": "https://assets.afcdn.com/recipe/20130616/20057_w1200h911c1cx256cy192.jpeg",
+        "temps": "20 min",
+        "prix": "Bon marché",
+        "difficulte": "Très facile",
+        "type": "Entrée",
+        "personnes": 4,
+        "ingredients": ["4 tomates", "1/2 cc de moutarde", "citron", "1 cc d'herbe de provence", "1 cs d'huile d'olive", "poivre", "sel", "2 boites de thon au naturel", "120g de crème fraiche allégée", "1 échalotte hachée", "basilique frais"],
+        "etapes": [
+            "Découper un chapeau dans le haut de chaque tomate préalablement lavée.",
+            "Evider les tomates à l'aide d'une cuillère, saler légèrement l'intérieur et les retourner sur une grille afin qu'elles s'égouttent.",
+            "Mélanger la crème, la moutarde et le reste ingrédients avant d’y ajouter le thon égoutté en miettes.",
+            "Bien mélanger le tout.",
+            "Remplir chaque tomate de cette farce. Y ajouter les feuilles de basilic pour la présentation et le goût!",
+            "A servir frais, disposés sur un lit de feuilles de salade.",
+            "Bon appétit."
+        ],
+        "credit": "https://www.marmiton.org/recettes/recette_tomates-farcies-au-thon-recette-legere_81846.aspx"
+    },
+    {
+        "titre": "Dahl de lentilles corail",
+        "image": "https://assets.afcdn.com/recipe/20200928/114451_w1200h1877c1cx540cy844cxb1080cyb1689.jpeg",
+        "temps": "30 min",
+        "prix": "Bon marché",
+        "difficulte": "Facile",
+        "personnes": 4,
+        "type": "Plat",
+        "ingredients": ["30 cl de lentilles corail", "5 thomates", "4 carottes", "25cl de lait de coco", "1 gousse d'ail", "1 cs de concentré de tomates", "1 cc de curcuma", "1/2 cc de cumin", "1/2 cc de gemgembre", "1/2 cc d'huile de tournesol"],
+        "etapes":[
+            "Laver les tomates et les découper en dés. Peler les carottes, et les découper en fines rondelles.",
+            "Dans une casserole, verser les lentilles corail et couvrir d'eau. Porter à ébullition. Laisser cuire pendant 10 min environ, jusqu'à complète absorption de l'eau. Retire du feu et laisser reposer.",
+            "Dans une sauteuse, verser l'huile et chauffer. Y ajouter l'ail qui dorera pendant une petite minute. Verser ensuite les légumes et saupoudrer avec les épices. Ajouter enfin le concentré de tomate.",
+            "Verser le lait de coco et laisser mijoter environ 10 min. sans couvrir.",
+            "Enfin, ajouter les lentilles et bien remuer le tout."
+        ],
+        "credit": "https://www.marmiton.org/recettes/recette_dahl-de-lentilles-corail_166862.aspx"
+    },
+    {
+        "titre": "Dessert léger aux fruits de la passion",
+        "image": "https://assets.afcdn.com/recipe/20170204/34670_w1200h911c1cx331cy290.jpeg",
+        "temps": "35 min",
+        "prix": "Bon marché",
+        "difficulte": "Facile",
+        "personnes": 6,
+        "type": "Dessert",
+        "ingredients": ["1/2 l de lait", "2 sachet de sucre vanille", "75g de sucre", "50g de farine", "1 mangue", "8 fruits de la passion", "4 oeufs"],
+        "etapes":[
+            "Couper la mangue en petits morceaux, et vider les fruits de la passion.",
+            "Mélanger délicatement les fruits ensemble, et les disposer dans le fond d'un plat assez creux (type grand saladier). Réserver.",
+            "Préparer une crème patissière :",
+            "faire bouillir 1/2 l de lait avec les 2 sachets de sucre vanillé.",
+            "Pendant ce temps, mélanger 3 jaunes d oeufs avec le sucre. On doit obtenir un mélange lisse.",
+            "Rajouter la farine, et remuer énergiquement (pâte onctueuse).",
+            "Incorporer le lait et mélanger. Remettre le tout sur le feu (feux doux), et laisser epaissir la crème sans s'arrêter de tourner. Laisser refroidir.",
+            "Une fois que la crème pâtissière a refroidi, la mettre sur les fruits dans le saladier.",
+            "Battre 4 blancs en neige, et en recouvrir les fruits et la crème patissière.",
+            "Mettre le saladier 3 min au grill, pour faire dorer les blancs en neige. Laisser refroidir, et conserver au frigo avant de servir."
+        ],
+        "credit": "https://www.marmiton.org/recettes/recette_dessert-leger-aux-fruits-de-la-passion_43479.aspx"
+    }
+]
+```
+
+### Afficher la liste des recettes
+
+Nous pouvons importer dans notre page svelte le fichier json.
+
+```sveltehtml
+<script>
+    import recettes from "./recette.json";
+</script>
+```
+
+On peut ensuite parcourir la liste pour afficher les différentes recettes :
+```sveltehtml
+<section class="recettes">
+    {#each recettes as item}
+        <article>
+            <h2>{item.titre}</h2>
+            <h3>⏱ {item.temps} 👨‍🍳 {item.difficulte} € {item.prix} 😋 {item.personnes} Personnes</h3>
+            <img src={item.image} alt={item.titre}>
+        </article>
+    {/each}
+</section>
+```
+
+<aside>
+Nous pouvons remarquer la syntaxe <code>{#each recettes as item}{/each}</code> qui permet d'itérer sur un tableau pour afficher une liste en créant une variable item pour réccupérer l'élément en cours lors de l'itération.
+</aside>
+
+Ne pas oublier d'ajouter le liens vers la nouvelle page dans le layout :
+
+```html
+	<nav>
+		<a href="/">Accueil</a>
+		<a href="/recettes">Recettes</a>
+		<a href="/about">A propos</a>
+	</nav>
+```
+
+## Afficher une page de détail
+
+Créons maintenant une page [id].svelte qui sera appelé par les url `/recette/1` ou `recette/2`, la variable id sera alors disponible directement dans la page avec la valeur passé en parametre.
+
+Pour récupérer les parametres sveltekit fournit un **store** `page` depuis `$app/stores` qui permet de récupérer les parametres et autres informations sur la page :
+
+```sveltehtml
+<script>
+import { page } from '$app/stores';
+import recettes from "./recette.json";
+
+let recette = recettes[$page.params.id]
+</script>
+```
+
+Maintenant affichons le détail d'une recette :
+
+```svletehtml
+<section class="recette">
+    <img src={recette.image} alt={recette.titre}>
+    <h2>{recette.titre}</h2>
+    <h3>⏱ {recette.temps} 👨‍🍳 {recette.difficulte} € {recette.prix} 😋 {recette.personnes} Personnes</h3>
+    
+    <ul>
+        {#each recette.ingredients as ingredient}
+            <li>{ingredient}</li>
+        {/each}
+    </ul>
+    <dl>
+        {#each recette.etapes as etape, index}
+            <dt>Etape {index+1}</dt>
+            <dd>{etape}</dd>
+        {/each}
+    </dl>
+</section>
+```
+
+<aside>
+La syntaxe <code>{#each recettes as item, index}{/each}</code> permet de récupérer l'index du tableau.
+</aside>
+
+### Ajoutons un lien
+
+Sur la page de recette, il est maintenant nécessaire d'ajouter un lien vers la page de détail.
+
+Pour cela récupérons l'index de la recette et ajoutons simplement un ligne vers `/recettes/{index}`
+
+```sveltehtml
+    {#each recettes as item, index}
+        <article>
+            <h2><a href="/recettes/{index}">{item.titre}</a></h2>
+```
+
+Svelt va automatiquement gérer la navigation de la page vers la page de détail sans recharger la page.
+
+<aside>
+Par défaut, Svelte va intercepter les clics sur les liens `a` pour ne pas recharger la page sur les urls internes. Si l'on veut désactiver ce comportement sur un lien, il est nécessaire d'ajouter l'attribut `rel="external"` sur le lien.
+</aside>
+
+### Changement de page dynamique
+
+Ajoutons en bas de la page de détail, des liens pour automatiquement aller à la recette suivante ou précédente :
+
+```sveltehtml
+{#if $page.params.id > 0}
+<a href="/recettes/{Number($page.params.id) - 1}">Précédent</a>
+{/if}
+{#if $page.params.id < recettes.length - 1}
+<a href="/recettes/{Number($page.params.id) + 1}">Suivant</a>
+{/if}
+```
+
+Testez maintenant ce lien, remarquez que le changement de page ne fonctionne pas, la page ne réagit pas.
+
+L'erreur que nous avons fait c'est que récupérer le paramètre dans le store de la page est une notion réactive. Le composant de la page n'est pas réinitilisé lorsque l'on change simplement un paramètre de la page.
+
+Il est donc nécessaire d'utiliser une syntaxe réactive pour récupérer la recette :
+
+```javascript
+$: recette = recettes[$page.params.id]
+```
+
+
+## Ajouter du code serveur
+
+L'import d'un fichier json dans notre page inclut directement ce fichier dans le code javascript et donc chargé dès que l'on affiche notre site. Si la liste de recette grossi les performances de celui ci vont diminuer.
+
+La force de sveltekit est de permettre d'écrire le code front et back au même endroit sans distinction.
+
+Un fichier au format .svelte sera affiché dans le front, alors qu'un fichier au format .js (ou .ts si vous avec installé avec TypeScript) sera alors executé côté serveur.
+
+
+
+## SSR
+
+Le serveur side rendering permet de générer le code html sur le serveur avant d'envoyer le résultat directement au navigateur.
+L'intérêt est d'améliorer les performances de la page, car il suffit alors au navigateur d'afficher le resultat sans devoir construire toute la page.
+
+Ce fonctionnement est automatique et disponible par défaut, svelte côté serveur va générer un état de la page qui sera alors utilisé par le code javascript côté front pour s'initialiser et ainsi pouvoir ajouter l'interaction automatiquement.
+
+## Déployer votre application
+
+Il est nécessaire d'installer un adapter pour pouvoir déployer votre application sur un serveur. Cet adapter va transformer le code pour générer le code statique et le code dynamique pour les confirgurer en fonction de la plateforme cible.
+
+### Application node 
+
+Installer l'adapter :
+```shell
+npm install -d @sveltejs/adapter-node@next
+```
+
+Puis dans le fichier svelte.config.js modifier l'import de l'adapter par :
+
+```js
+import adapter from '@sveltejs/adapter-node';
+```
+
+Il est aussi possible passer des paremetres à l'adapter :
+
+```js
+import adapter from '@sveltejs/adapter-node';
+
+export default {
+	kit: {
+		adapter: adapter({ out: 'my-output-directory' })
+	}
+};
+
+```
+
+### Application static
+
+Si votre application n'a pas de code coté serveur, il est possible d'avoir un adapter qui va générer un site statique (uniquement du html et du javascript)
+
+Pour cela, il suffit d'installer l'adapter @sveltejs/adapter-static
+
+Le site peut alors être déployer sur n'importe quel serveur http
+
+### Déployer l'application sur netlify
+
+Netlify permet d'avoir un site avec des fichiers statiques mais aussi des functions javascript permettant d'éxecuter votre application back ou le prérendu html de votre front.
+
+Installer l'adapter :
+```shell
+npm install -d @sveltejs/adapter-netlify@next
+```
+
+Puis modifiez le fichier de configuration svelte.config.js :
+```js
+import adapter from '@sveltejs/adapter-netlify';
+
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+	kit: {
+		adapter: adapter({
+			split: false
+		}),
+
+		// hydrate the <div id="svelte"> element in src/app.html
+		target: '#svelte'
+	}
+};
+
+export default config;
+```
+
+Créer ensuite un fichier netlify.toml pour indiquer à netlify comment constuire votre application et la publier
+```properties
+[build]
+  command = "npm run build"
+  publish = "build"
+```
+
+#### Déployer directement depuis git
+
+Sauvegarder votre site sur un repos github, gitlab, ou bitbucket
+
+Allez maintenant directement sur https://app.netlify.com/start
+
+Connecter vous avec votre compte github, gitlab ou bitbucket, et selectionnez votre projet. Netlify va automotiquement s'abonner à votre projet git et mettera alors automatiquement à jour votre site sur netlify
+
+#### Déployer de manière manuel
+
+Si vous voulez déployer sur netlify depuis votre CI, netlify fournit une ligne de commande qui permet de deployer quand vous voulez votre projet.
+
+Documentation : https://docs.netlify.com/cli/get-started/
 ## Fin
 
 Bravo ! Vous êtes arrivés à la fin de ce lab !
