@@ -1276,30 +1276,22 @@ La page est maintenant automatiquement disponible sur l'url http://localhost:300
 
 ## Ajouter un layout
 
-Il est aussi possible d'avoir un layout comment à toute les pages en créant un fichier __layout.svelte dans le répertoire src/routes
+Il est aussi possible d'avoir un layout commun à toutes les pages en créant un fichier __layout.svelte dabs le répertoire src/routes.
 
 ```sveltehtml
 <script>
 </script>
 <header>
-<nav>
-	<a href="/">Accueil</a>
-	<a href="/about">A propos</a>
-</nav>
+	<h1>Devenir Svelte avec Svelte</h1>
+	<nav>
+		<a href="/">Accueil</a>
+		<a href="/about">A propos</a>
+	</nav>
 </header>
 <main>
 	<h1>Devenir Svelte avec Svelte</h1>
 	<slot></slot>
 </main>
-
-<style>
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-</style>
 ```
 
 Positive:

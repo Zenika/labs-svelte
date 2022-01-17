@@ -1,6 +1,22 @@
 body {
 	background-color: #f9e1b8;
+	font-family: 'Open Sans',sans-serif;
+	padding: 0;
+    margin: 0;
+	background-image: url(background.jpeg);
+    background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+
+a, a:visited {
+	color: #428647 !important;
+	text-decoration: none;
+}
+
+main {
 	font-family: "Fredoka One";
+	max-width: 1140px;
+	margin: 0 auto;
 }
 
 main h1 {
@@ -39,14 +55,58 @@ input[type=range] {
 	width: 300px;
 }
 
+/* Header */
+header {
+	min-height: 60px;
+	background-color: #ffffff;
+	margin: 0 auto;
+	display: flex;
+	align-content: center;
+	justify-content: space-between;
+	font-size: 16px;
+}
+
+header h1 {
+	font-size: 16px;
+	color: #999999 !important;
+	margin: 0;
+	line-height: 16px;
+	padding: 22px;
+}
+
+header nav {
+	display: flex;
+	gap: 10px;
+	margin: 0 auto;
+	padding: 22px;
+}
+
+header nav a, header nav a:visited {
+	color: #999999 !important;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: 700;
+	line-height: 16px;
+}
+
 /* Pages de recette */
 
 section.recettes {
     display: flex;
 }
+
+section.recettes article { 
+	border: solid 2px green;
+	border-radius: 25px;
+	padding: 25px;
+	margin: 25px;
+	text-align: center;
+}
+
 section.recettes article img {
     max-width: 200px;
     max-height: 200px;
+	margin: 0 auto;
 }
 
 section.recette img {
