@@ -1,14 +1,33 @@
+<script context="module">
+	/** @type {import('@sveltejs/kit').Load} */
+	export async function load({ params, fetch }) {
+		const url = `/recettes/${params.id}.json`;
+		const res = await fetch(url);
+
+		if (res.ok) {
+			return {
+				props: {
+					recette: await res.json()
+				}
+			};
+		}
+
+		return {
+			status: res.status,
+			error: new Error(`Could not load ${url}`)
+		};
+	}
+</script>
 <script>
 import { page } from '$app/stores';
-import recettes from "./recette.json";
 
-$: recette = recettes[$page.params.id]
+export let recette;
 </script>
 
 <section class="recette">
-    <img src={recette.image} alt={recette.titre}>
-    <h2>{recette.titre}</h2>
-    <h3>⏱ {recette.temps} 👨‍🍳 {recette.difficulte} € {recette.prix} 😋 {recette.personnes} Personnes</h3>
+    <img src={recette.image} alt="Photo de la recette {recette.name}">
+    <h2>{recette.name}</h2>
+    <h3>⏱ {recette.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][recette.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][recette.budget||0]} 😋 {recette.people} Personnes</h3>
     
     <ul>
         {#each recette.ingredients as ingredient}
@@ -16,15 +35,15 @@ $: recette = recettes[$page.params.id]
         {/each}
     </ul>
     <dl>
-        {#each recette.etapes as etape, index}
+        {#each recette.steps as step, index}
             <dt>Etape {index+1}</dt>
-            <dd>{etape}</dd>
+            <dd>{step}</dd>
         {/each}
     </dl>
 </section>
 {#if $page.params.id > 0}
 <a href="/recettes/{Number($page.params.id) - 1}">Précédent</a>
 {/if}
-{#if $page.params.id < recettes.length - 1}
+{#if $page.params.id < 3}
 <a href="/recettes/{Number($page.params.id) + 1}">Suivant</a>
 {/if}
