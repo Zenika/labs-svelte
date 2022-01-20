@@ -1231,12 +1231,62 @@ SvelteKit est un framework pour construire des sites ultra performants en intég
 
 SvelteKit est le remplaçant du framework Sapper.
 
-Negative:
-SvelteKit n'est pas encore en version finale, mais son développement est suffisamment avancé pour s'y intéresser, et pourquoi pas l'utiliser en production (cependant, attention aux breaking changes).
+<aside class="negative">
+<i>SvelteKit</i> n'est pas encore en version finale, mais son développement est suffisamment avancé pour s'y intéresser, et pourquoi pas l'utiliser en production (cependant, attention aux breaking changes).
+</aside>
 
 SvelteKit utilise le bundler `vite` qui apporte la fonctionnalité de Hot Module Replacement (Recharge le code modifié sans même recharger la page).
 
 La force de SvelteKit, c'est de profiter de la puissance du compilateur svelte qui va générer tout le code nécessaire (et seulement celui-ci) pour faire fonctionner votre site.
+
+### Créer un projet sveltekit
+
+Même si vous avez déjà un projet sveltekit grâce au template de projet. La création d'un projet svelte est simplifié par une cli pour créer un projet qui va vous demander un certains nombre de questions pour choisir les options que vous voulez intégrer.
+
+```sh
+npm init svelte@next my-app
+cd my-app
+npm install
+npm run dev
+```
+
+Voici la sortie de la console pour la création d'un projet : 
+```
+$ npm init svelte@next my-app
+Need to install the following packages:
+  create-svelte@next
+Ok to proceed? (y) 
+
+create-svelte version 2.0.0-next.98
+
+Welcome to SvelteKit!
+
+This is beta software; expect bugs and missing features.
+
+Problems? Open an issue on https://github.com/sveltejs/kit/issues if none exists already.
+
+✔ Which Svelte app template? › SvelteKit demo app
+✔ Use TypeScript? … No / Yes
+✔ Add ESLint for code linting? … No / Yes
+✔ Add Prettier for code formatting? … No / Yes
+
+Your project is ready!
+
+Install community-maintained integrations:
+  https://github.com/svelte-add/svelte-adders
+
+Next steps:
+  1: cd my-app
+  2: npm install (or pnpm install, etc)
+  3: git init && git add -A && git commit -m "Initial commit" (optional)
+  4: npm run dev -- --open
+
+To close the dev server, hit Ctrl-C
+
+Stuck? Visit us at https://svelte.dev/chat
+```
+
+### Un framework sans runtime
 
 Si vous regardez dans votre package.json, vous n'aurez que des dépendances de dev et aucune dépendance runtime : 
 
@@ -1314,15 +1364,15 @@ Créons une liste de recette dans une fichier json, créez une page `recette.jso
 ```json
 [
     {
-        "titre": "Tomates farcies au thon (recette légère)",
+        "name": "Tomates farcies au thon (recette légère)",
         "image": "https://assets.afcdn.com/recipe/20130616/20057_w1200h911c1cx256cy192.jpeg",
-        "temps": "20 min",
-        "prix": "Bon marché",
-        "difficulte": "Très facile",
-        "type": "Entrée",
-        "personnes": 4,
+        "totalTime": 20,
+        "budget": 1,
+        "difficulty": 1,
+        "tags": ["Entrée"],
+        "people": 4,
         "ingredients": ["4 tomates", "1/2 cc de moutarde", "citron", "1 cc d'herbe de provence", "1 cs d'huile d'olive", "poivre", "sel", "2 boites de thon au naturel", "120g de crème fraiche allégée", "1 échalotte hachée", "basilique frais"],
-        "etapes": [
+        "steps": [
             "Découper un chapeau dans le haut de chaque tomate préalablement lavée.",
             "Evider les tomates à l'aide d'une cuillère, saler légèrement l'intérieur et les retourner sur une grille afin qu'elles s'égouttent.",
             "Mélanger la crème, la moutarde et le reste ingrédients avant d’y ajouter le thon égoutté en miettes.",
@@ -1331,36 +1381,36 @@ Créons une liste de recette dans une fichier json, créez une page `recette.jso
             "A servir frais, disposés sur un lit de feuilles de salade.",
             "Bon appétit."
         ],
-        "credit": "https://www.marmiton.org/recettes/recette_tomates-farcies-au-thon-recette-legere_81846.aspx"
+        "url": "https://www.marmiton.org/recettes/recette_tomates-farcies-au-thon-recette-legere_81846.aspx"
     },
     {
-        "titre": "Dahl de lentilles corail",
+        "name": "Dahl de lentilles corail",
         "image": "https://assets.afcdn.com/recipe/20200928/114451_w1200h1877c1cx540cy844cxb1080cyb1689.jpeg",
-        "temps": "30 min",
-        "prix": "Bon marché",
-        "difficulte": "Facile",
-        "personnes": 4,
-        "type": "Plat",
+        "totalTime": 30,
+        "budget": 1,
+        "difficulty": 2,
+        "people": 4,
+        "tags": ["Plat"],
         "ingredients": ["30 cl de lentilles corail", "5 thomates", "4 carottes", "25cl de lait de coco", "1 gousse d'ail", "1 cs de concentré de tomates", "1 cc de curcuma", "1/2 cc de cumin", "1/2 cc de gemgembre", "1/2 cc d'huile de tournesol"],
-        "etapes":[
+        "steps":[
             "Laver les tomates et les découper en dés. Peler les carottes, et les découper en fines rondelles.",
             "Dans une casserole, verser les lentilles corail et couvrir d'eau. Porter à ébullition. Laisser cuire pendant 10 min environ, jusqu'à complète absorption de l'eau. Retire du feu et laisser reposer.",
             "Dans une sauteuse, verser l'huile et chauffer. Y ajouter l'ail qui dorera pendant une petite minute. Verser ensuite les légumes et saupoudrer avec les épices. Ajouter enfin le concentré de tomate.",
             "Verser le lait de coco et laisser mijoter environ 10 min. sans couvrir.",
             "Enfin, ajouter les lentilles et bien remuer le tout."
         ],
-        "credit": "https://www.marmiton.org/recettes/recette_dahl-de-lentilles-corail_166862.aspx"
+        "url": "https://www.marmiton.org/recettes/recette_dahl-de-lentilles-corail_166862.aspx"
     },
     {
-        "titre": "Dessert léger aux fruits de la passion",
+        "name": "Dessert léger aux fruits de la passion",
         "image": "https://assets.afcdn.com/recipe/20170204/34670_w1200h911c1cx331cy290.jpeg",
-        "temps": "35 min",
-        "prix": "Bon marché",
-        "difficulte": "Facile",
-        "personnes": 6,
-        "type": "Dessert",
+        "totalTime": 35,
+        "butget": 1,
+        "difficulty": 2,
+        "people": 6,
+        "tags": ["Dessert"],
         "ingredients": ["1/2 l de lait", "2 sachet de sucre vanille", "75g de sucre", "50g de farine", "1 mangue", "8 fruits de la passion", "4 oeufs"],
-        "etapes":[
+        "steps":[
             "Couper la mangue en petits morceaux, et vider les fruits de la passion.",
             "Mélanger délicatement les fruits ensemble, et les disposer dans le fond d'un plat assez creux (type grand saladier). Réserver.",
             "Préparer une crème patissière :",
@@ -1372,7 +1422,7 @@ Créons une liste de recette dans une fichier json, créez une page `recette.jso
             "Battre 4 blancs en neige, et en recouvrir les fruits et la crème patissière.",
             "Mettre le saladier 3 min au grill, pour faire dorer les blancs en neige. Laisser refroidir, et conserver au frigo avant de servir."
         ],
-        "credit": "https://www.marmiton.org/recettes/recette_dessert-leger-aux-fruits-de-la-passion_43479.aspx"
+        "url": "https://www.marmiton.org/recettes/recette_dessert-leger-aux-fruits-de-la-passion_43479.aspx"
     }
 ]
 ```
@@ -1390,11 +1440,11 @@ Nous pouvons importer dans notre page svelte le fichier json.
 On peut ensuite parcourir la liste pour afficher les différentes recettes :
 ```sveltehtml
 <section class="recettes">
-    {#each recettes as item}
+    {#each recettes as item, index}
         <article>
-            <h2>{item.titre}</h2>
-            <h3>⏱ {item.temps} 👨‍🍳 {item.difficulte} € {item.prix} 😋 {item.personnes} Personnes</h3>
-            <img src={item.image} alt={item.titre}>
+            <h2>{item.name}</h2>
+            <h3>⏱ {item.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][item.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][item.budget||0]} 😋 {item.people} Personnes</h3>
+            <img src={item.image} alt={item.name}>
         </article>
     {/each}
 </section>
@@ -1433,9 +1483,9 @@ Maintenant affichons le détail d'une recette :
 
 ```svletehtml
 <section class="recette">
-    <img src={recette.image} alt={recette.titre}>
-    <h2>{recette.titre}</h2>
-    <h3>⏱ {recette.temps} 👨‍🍳 {recette.difficulte} € {recette.prix} 😋 {recette.personnes} Personnes</h3>
+    <img src={recette.image}>
+    <h2>{recette.name}</h2>
+    <h3>⏱ {recette.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][recette.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][recette.budget||0]} 😋 {recette.people} Personnes</h3>
     
     <ul>
         {#each recette.ingredients as ingredient}
@@ -1443,9 +1493,9 @@ Maintenant affichons le détail d'une recette :
         {/each}
     </ul>
     <dl>
-        {#each recette.etapes as etape, index}
+        {#each recette.steps as step, index}
             <dt>Etape {index+1}</dt>
-            <dd>{etape}</dd>
+            <dd>{step}</dd>
         {/each}
     </dl>
 </section>
@@ -1495,6 +1545,23 @@ Il est donc nécessaire d'utiliser une syntaxe réactive pour récupérer la rec
 ```javascript
 $: recette = recettes[$page.params.id]
 ```
+## Accessibilité
+
+Si vous avez fait attention, lors de la création de la page affichant une recette, svelte nous as indiqué via un warning un problème d'accessibilité sur notre code (Si vous utiliser un plugin dans l'IDE, l'erreur est également souligné).
+
+```
+17:47:21 [vite-plugin-svelte] become-svelte/src/routes/recettes/[id].svelte:9:4 A11y: <img> element should have an alt attribute
+```
+
+Il nous indique que nous n'avons pas mis d'attribut `alt` à notre balise img. 
+
+Ajoutez donc dans la balise img, un attribut alt :
+
+```sveltehtml
+<img src={recette.image} alt="Photo de la recette {recette.name}">
+```
+
+Retrouvez dans la [documentation](https://svelte.dev/docs#accessibility-warnings), la liste des erreurs d'accessibilité qui sont afficher.
 
 
 ## Ajouter du code serveur
@@ -1505,8 +1572,54 @@ La force de sveltekit est de permettre d'écrire le code front et back au même 
 
 Un fichier au format .svelte sera affiché dans le front, alors qu'un fichier au format .js (ou .ts si vous avec installé avec TypeScript) sera alors executé côté serveur.
 
+Si l'on ajoute une extension juste avant le .js, alors l'url prendra en compte celle-ci. Par exemple, le fichier `recettes.json.js` sera alors accessible par l'url '/recettes.json'. Il est conseillé d'utiliser ce type d'extesion si nos pages et notre api ce trouve exactement au même endroit, sinon entre le fichier `recettes.svelte` ou `recettes.js`, sveltekit appellera en priorité le fichier .js.
 
 
+### /recette.json
+
+Développons maintenant une API pour récupérer les recettes, et ne pas importer l'intégralité de notre fichier json dans nos pages html.
+
+Créons une page `index.json.js` dans le répertoire `src/recette`
+
+```javascript
+import recettes from "./recette.json";
+
+export function get() {
+	return {
+        body: recettes.map(({ ingredients, steps, url, ...rest }) => rest)
+    };
+}
+```
+
+Le fonctionnement du code serveur est d'écrire une fonction du nom de la méthode http que nous voulons gérer (ici GET) et de l'exporter.
+
+La fonction doit retourner un objet avec les propriétés suivantes :
+- status : Status HTTP de la réponse, si celui-ci n'est pas indiqué, indique le status 200.
+- headers : Si l'on veux indiquer des headers à ajouter soit sous la forme d'une liste de string ou d'un objet clé/valeur.
+- body : Si le body est de type `object` et que l'on a pas donné de contentType dans les headers, alors l'objet est automatiquement transformé en json
+
+On a maintenant une URL [/recettes.json](http://localhost:3000/recettes.json) qui retourne notre liste de recette (auquel on a supprimé les propriétés ingredients et steps)
+
+### /recettes/1.json
+
+Ajoutons maintenant une API pour récupérer une recette selon sont id, pour cela créons une page `[id].json.js` dans le répertoire `src/recettes`.
+
+```javascript
+import recettes from "./recette.json";
+
+export function get({ params }) {
+	return {
+        body: recettes[params.id]
+    };
+}
+```
+
+La fonction exporté, est appelé avec un argument qui contient les informations suivantes : 
+- request : L'objet request de node avec toutes les informations qu'il contient (headers, queryParams, body, ...)
+- url : L'url de la page
+- params : une map avec les paramètres de la page (les [] dans le nom du fichier)
+
+On a maintenant une URL [/recettes/0.json](http://localhost:3000/recettes/0.json) qui retourne la première recette de notre liste.
 ## SSR
 
 Le serveur side rendering permet de générer le code html sur le serveur avant d'envoyer le résultat directement au navigateur.
