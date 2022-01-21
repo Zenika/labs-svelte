@@ -25,7 +25,7 @@
 <section class="recettes">
     {#each recettes as item, index}
         <article>
-            <h2><a href="/recettes/{index}">{item.name}</a></h2>
+            <h2><a sveltekit:prefetch href="/recettes/{index}">{item.name}</a></h2>
             <h3>⏱ {item.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][item.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][item.budget||0]} 😋 {item.people} Personnes</h3>
             <img src={item.image} alt={item.name}>
         </article>
