@@ -17,7 +17,7 @@
             "A servir frais, disposés sur un lit de feuilles de salade.",
             "Bon appétit."
         ],
-        "url": "https://www.marmiton.org/recettes/recette_tomates-farcies-au-thon-recette-legere_81846.aspx"
+        "credit": "https://www.marmiton.org/recettes/recette_tomates-farcies-au-thon-recette-legere_81846.aspx"
     },
     {
         "name": "Dahl de lentilles corail",
@@ -35,7 +35,7 @@
             "Verser le lait de coco et laisser mijoter environ 10 min. sans couvrir.",
             "Enfin, ajouter les lentilles et bien remuer le tout."
         ],
-        "url": "https://www.marmiton.org/recettes/recette_dahl-de-lentilles-corail_166862.aspx"
+        "credit": "https://www.marmiton.org/recettes/recette_dahl-de-lentilles-corail_166862.aspx"
     },
     {
         "name": "Dessert léger aux fruits de la passion",
@@ -58,6 +58,6 @@
             "Battre 4 blancs en neige, et en recouvrir les fruits et la crème patissière.",
             "Mettre le saladier 3 min au grill, pour faire dorer les blancs en neige. Laisser refroidir, et conserver au frigo avant de servir."
         ],
-        "url": "https://www.marmiton.org/recettes/recette_dessert-leger-aux-fruits-de-la-passion_43479.aspx"
+        "credit": "https://www.marmiton.org/recettes/recette_dessert-leger-aux-fruits-de-la-passion_43479.aspx"
     }
 ]
