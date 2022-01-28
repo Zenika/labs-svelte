@@ -14,5 +14,8 @@
     "netlify-cli": "^8.6.20",
     "svelte": "^3.44.0"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "marmiton-api": "^2.2.0"
+  }
 }
