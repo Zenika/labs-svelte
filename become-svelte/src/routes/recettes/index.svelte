@@ -52,13 +52,13 @@
 	<input type="submit" value="Rechercher" />
 </form>
 <section class="recettes">
-	{#each recettes as item, index}
+    {#each recettes as item, index}
         <article>
             <h2><a sveltekit:prefetch href="{item.url ?? `/recettes/${index}`}">{item.name}</a></h2>
             <h3>⏱ {item.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][item.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][item.budget||0]} 😋 {item.people} Personnes</h3>
             {#if item.image}
-				<img src={item.image} alt={item.name}>
-			{/if}
+               <img src={item.image} alt={item.name}>
+            {/if}
         </article>
     {/each}
 </section>

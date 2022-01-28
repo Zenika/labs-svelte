@@ -1381,7 +1381,7 @@ Créons une liste de recette dans une fichier json, créez une page `recette.jso
             "A servir frais, disposés sur un lit de feuilles de salade.",
             "Bon appétit."
         ],
-        "url": "https://www.marmiton.org/recettes/recette_tomates-farcies-au-thon-recette-legere_81846.aspx"
+        "credit": "https://www.marmiton.org/recettes/recette_tomates-farcies-au-thon-recette-legere_81846.aspx"
     },
     {
         "name": "Dahl de lentilles corail",
@@ -1399,7 +1399,7 @@ Créons une liste de recette dans une fichier json, créez une page `recette.jso
             "Verser le lait de coco et laisser mijoter environ 10 min. sans couvrir.",
             "Enfin, ajouter les lentilles et bien remuer le tout."
         ],
-        "url": "https://www.marmiton.org/recettes/recette_dahl-de-lentilles-corail_166862.aspx"
+        "credit": "https://www.marmiton.org/recettes/recette_dahl-de-lentilles-corail_166862.aspx"
     },
     {
         "name": "Dessert léger aux fruits de la passion",
@@ -1422,7 +1422,7 @@ Créons une liste de recette dans une fichier json, créez une page `recette.jso
             "Battre 4 blancs en neige, et en recouvrir les fruits et la crème patissière.",
             "Mettre le saladier 3 min au grill, pour faire dorer les blancs en neige. Laisser refroidir, et conserver au frigo avant de servir."
         ],
-        "url": "https://www.marmiton.org/recettes/recette_dessert-leger-aux-fruits-de-la-passion_43479.aspx"
+        "credit": "https://www.marmiton.org/recettes/recette_dessert-leger-aux-fruits-de-la-passion_43479.aspx"
     }
 ]
 ```
@@ -1880,6 +1880,128 @@ Connecter vous avec votre compte github, gitlab ou bitbucket, et selectionnez vo
 Si vous voulez déployer sur netlify depuis votre CI, netlify fournit une ligne de commande qui permet de deployer quand vous voulez votre projet.
 
 Documentation : https://docs.netlify.com/cli/get-started/
+
+## Ajouter une recherche de recette sur Marmiton (Bonus)
+
+Ajoutons maintenant un formulaire de recherche pour rechercher des recettes sur le site marmiton.org.
+
+Une bibliothèque apporte une API pour faire une recherche sur le site marmiton.org : https://www.npmjs.com/package/marmiton-api
+
+### Ajouter la lib
+
+Ajoutons cette dépendance sur le projet : 
+
+```shell
+npm install marmiton-api
+```
+
+### API de recherche
+
+Il faut maintenant créer une api sur notre projet qui récupère en POST la recherche qui est faite, utilise la lib que l'on vient d'ajouter et retourne le résultat.
+
+Créons un nouveau fichier `search.json.js` dans le répertoire `src/recettes`
+
+```
+import { searchRecipes, MarmitonQueryBuilder } from 'marmiton-api'
+
+/** @type {import('@sveltejs/kit').RequestHandler} */
+export async function post(request) {
+    const qb = new MarmitonQueryBuilder();
+    const query = qb
+    .withTitleContaining(request.body.query)
+    .build()
+    const recipes = await searchRecipes(query, { limit: 6 })
+
+    return {
+        body: recipes
+    };
+}
+```
+
+On a maintenant une api post pour faire une recherche sur marmiton sur l'url http://localhost:3000/recettes/search.json
+
+Vous pouvez la tester avec la requette suivante :
+
+```shell
+curl --location --request POST 'http://localhost:3000/recettes/search.json' \
+--data-raw '{
+    "query": "tomate"
+}'
+```
+
+### Interface front
+
+Dans le fichier `index.svelte`, ajouter le code pour le formulaire de recherche : 
+
+```sveltehtml
+<form on:submit|preventDefault={submitForm}>
+	<label for="query">
+	<span class="sr-only">Recherche sur marmiton.org</span>
+	</label>
+	<input
+	    id="query"
+	    aria-label="Recherche sur Marmiton.org"
+		type="search"
+		name="query"
+		placeholder="Recherche sur marmiton.org"
+		required
+		bind:value={query}
+	/>
+	<input type="submit" value="Rechercher" />
+</form>
+```
+
+Implémentons maintenant la fonction qui fait la recherche :
+
+Remplacer le script qui définie la variable recettes par ce code :
+```sveltehtml
+<script>
+  export let recettes = [];
+	let query;
+
+	async function submitForm() {
+		const submit = await fetch('/recettes/search.json', {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json, text/plain, */*',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ query }),
+		})
+		const data = await submit.json()
+
+		recettes = data
+	}
+</script>
+```
+
+On fait ici un appel vers notre API POST que l'on a écrit juste avant et on met le résultat dans la variable recettes.
+
+Comme l'API de recherche ne nous permet pas de récupérer les infos d'une recette, et qu'on a pas l'image, il est nécessaire d'adapter un peu le code qui affiche les recettes : 
+```sveltehtml
+<section class="recettes">
+    {#each recettes as item, index}
+        <article>
+            <h2><a sveltekit:prefetch href="{item.url ?? `/recettes/${index}`}">{item.name}</a></h2>
+            <h3>⏱ {item.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][item.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][item.budget||0]} 😋 {item.people} Personnes</h3>
+            {#if item.image}
+               <img src={item.image} alt={item.name}>
+            {/if}
+        </article>
+    {/each}
+</section>
+```
+On ouvre directement la page de marmiton, et on masque l'image si elle n'existe pas (la lib ne nous la retourne pas)
+
+### Bonus
+
+Améliorer cette recherche :
+- Indicateur de chargement lorsque l'on fait la recherche
+- Message si pas de résultats
+- Message si il y a une erreur
+- Afficher la recette en grand dans l'application.
+- Ajouter plus d'options de recherche (regarder l'api marmiton-api pour connaitre les différentes options possible) : filtre par ingrédients, par difficultés, prix, ...
+
 ## Fin
 
 Bravo ! Vous êtes arrivés à la fin de ce lab !
