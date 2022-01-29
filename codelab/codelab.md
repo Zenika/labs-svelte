@@ -1219,29 +1219,29 @@ Pour cela, utilisons l'élément spécial `&lt;svelte:head>` :
 L'ajout de ce code permet à _Svelte_ de venir modifier la balise `title` de notre page à chaque fois que le composant est inclus dans notre page.
 L'inclusion de `{$imc}` dans le titre permet également la mise à jour du titre lorsque la valeur du store `imc` change.
 
-## Sveltekit
+## SvelteKit
 
-Maintenant que nous avons bien découvert les fonctionnalités offertes par **Svelte**, passont maintenant à la vitesse supérieur en découvrant **SvelteKit**
+Maintenant que nous avons fait le tour des principales fonctionnalités offertes par **Svelte**, passons à la vitesse supérieur en découvrant **SvelteKit**.
 
-SvelteKit est un framework pour construire des sites ultra performants en intégrant notament les fonctionnalités :
-- router
-- api
-- génération de pages côté serveur
-- Optimisation au build
+SvelteKit est un framework, basé sur Svelte, permettant de construire des sites ultra performants en intégrant notament les fonctionnalités suivantes :
+- Un router
+- Une api avec de nouvelles fonctionnalités
+- De la génération de pages côté serveur
+- Une optimisation au build
 
 SvelteKit est le remplaçant du framework Sapper.
 
 <aside class="negative">
-<i>SvelteKit</i> n'est pas encore en version finale, mais son développement est suffisamment avancé pour s'y intéresser, et pourquoi pas l'utiliser en production (cependant, attention aux breaking changes).
+<i>SvelteKit</i> n'est pas encore en version finale, mais son développement est suffisamment avancé pour s'y intéresser, et pourquoi pas l'utiliser en production (cependant, attention aux breaking changes !).
 </aside>
 
 SvelteKit utilise le bundler `vite` qui apporte la fonctionnalité de Hot Module Replacement (Recharge le code modifié sans même recharger la page).
 
-La force de SvelteKit, c'est de profiter de la puissance du compilateur svelte qui va générer tout le code nécessaire (et seulement celui-ci) pour faire fonctionner votre site.
+La force de SvelteKit, c'est de profiter de la puissance du compilateur svelte qui va générer tout le code nécessaire (et seulement celui-ci) pour faire fonctionner votre site et d'y ajouter tout l'outillage nécessaire facilitant la construction d'applications web complexes.
 
-### Créer un projet sveltekit
+### Créer un projet SvelteKit
 
-Même si vous avez déjà un projet sveltekit grâce au template de projet. La création d'un projet svelte est simplifié par une cli pour créer un projet qui va vous demander un certains nombre de questions pour choisir les options que vous voulez intégrer.
+Même si vous avez déjà un projet SvelteKit grâce au template de projet. La création d'un projet Svelte est simplifiée par une CLI pour créer un projet qui va vous poser un certain nombre de questions pour choisir les options que vous voulez intégrer.
 
 ```sh
 npm init svelte@next my-app
