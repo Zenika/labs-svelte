@@ -1,4 +1,4 @@
-import recettes from "./recette.json";
+import recettes from "./recettes.json";
 
 export function get() {
 	return {
