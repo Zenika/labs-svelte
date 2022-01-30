@@ -1444,8 +1444,10 @@ Nous pouvons ensuite parcourir la liste pour afficher les différentes recettes 
 <section class="recettes">
     {#each recettes as item, index}
         <article>
-            <h2>{item.name}</h2>
-            <h3>⏱ {item.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][item.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][item.budget||0]} 😋 {item.people} Personnes</h3>
+            <div>
+              <h2>{item.name}</h2>
+              <p>⏱ {item.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][item.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][item.budget||0]} 😋 {item.people} Personnes</p>
+            </div>
             <img src={item.image} alt={item.name}>
         </article>
     {/each}
@@ -1516,7 +1518,8 @@ Pour cela récupérons l'index de la recette et ajoutons simplement une ligne ve
 ```sveltehtml
     {#each recettes as item, index}
         <article>
-            <h2><a href="/recettes/{index}">{item.titre}</a></h2>
+            <div>
+                <h2><a href="/recettes/{index}">{item.titre}</a></h2>
 ```
 
 *Svelte* va automatiquement gérer la navigation de la page vers la page de détail sans rechargement.
@@ -1530,12 +1533,14 @@ Par défaut, Svelte va intercepter les clics sur les liens `a` pour ne pas recha
 Ajoutons en bas de la page de détail, des liens pour naviguer automatiquement à la recette suivante ou précédente :
 
 ```sveltehtml
-{#if $page.params.id > 0}
-<a href="/recettes/{Number($page.params.id) - 1}">Précédent</a>
-{/if}
-{#if $page.params.id < recettes.length - 1}
-<a href="/recettes/{Number($page.params.id) + 1}">Suivant</a>
-{/if}
+<nav class="recette-nav">
+	{#if $page.params.id > 0}
+	<a href="/recettes/{Number($page.params.id) - 1}">Précédent</a>
+	{/if}
+	{#if $page.params.id < 2}
+	<a href="/recettes/{Number($page.params.id) + 1}">Suivant</a>
+	{/if}
+</nav>
 ```
 
 Testons maintenant ce lien. Nous remarquons que le changement de page ne fonctionne pas, la page ne réagit pas.
