@@ -1076,7 +1076,7 @@ Maintenant, il n'est plus nécessaire de faire passer les informations par le co
 
 <!-- ------------------------ -->
 
-## Store dérivée
+## Store dérivé
 
 Duration: 5
 
@@ -1221,7 +1221,7 @@ L'inclusion de `{$imc}` dans le titre permet également la mise à jour du titre
 
 ## SvelteKit
 
-Maintenant que nous avons fait le tour des principales fonctionnalités offertes par **Svelte**, passons à la vitesse supérieur en découvrant **SvelteKit**.
+Maintenant que nous avons fait le tour des principales fonctionnalités offertes par **Svelte**, passons à la vitesse supérieure en découvrant **SvelteKit**.
 
 SvelteKit est un framework, basé sur Svelte, permettant de construire des sites ultra performants en intégrant notament les fonctionnalités suivantes :
 - Un router
