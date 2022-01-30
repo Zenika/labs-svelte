@@ -1628,7 +1628,7 @@ Nous avons maintenant une URL [/recettes/0.json](http://localhost:3000/recettes/
 
 Il est maintenant nécessaire de modifier nos page svelte pour utiliser notre API.
 
-Ce code doit être executé également côté serveur lors du server side rendering, il est donc nécessaire d'utiliser la balise `<script context="module">`.
+Ce code doit être executé également côté serveur lors du server side rendering, il est donc nécessaire d'utiliser la balise `&lt;script context="module"&gt;`.
 
 Sveltekit permet d'écrire une fonction nommée `load` qui va s'executer lors du chargement de la page.
 Cette fonction peut retourner un objet props qui contient les paramètres que l'on veut faire passer à notre page qui possède alors une propriété en entrée du composant (via `export let propname;`).
@@ -1787,7 +1787,7 @@ http://localhost/recettes/0, nous remarquons qu'aucun appel à l'url http://loca
 ### Prefetch
 
 SvelteKit va essayer de précharger au maximum les pages et les ressources.
-Si nous voulons permettre de précharger une page disponible derrière un lien (au survol de celui-ci), il suffit d'ajouter `sveltekit:prefetch` sur une balise html `<a>`.
+Si nous voulons permettre de précharger une page disponible derrière un lien (au survol de celui-ci), il suffit d'ajouter `sveltekit:prefetch` sur une balise html `&lt;a&gt;`.
 
 Dans le fichier `index.svelte` du répertoire `src/routes`, modifions le lien vers les pages de recettes :
 
