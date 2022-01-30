@@ -41,9 +41,11 @@ export let recette;
         {/each}
     </dl>
 </section>
-{#if $page.params.id > 0}
-<a href="/recettes/{Number($page.params.id) - 1}">Précédent</a>
-{/if}
-{#if $page.params.id < 3}
-<a href="/recettes/{Number($page.params.id) + 1}">Suivant</a>
-{/if}
+<nav class="recette-nav">
+	{#if $page.params.id > 0}
+	<a href="/recettes/{Number($page.params.id) - 1}">Précédent</a>
+	{/if}
+	{#if $page.params.id < 2}
+	<a href="/recettes/{Number($page.params.id) + 1}">Suivant</a>
+	{/if}
+</nav>
