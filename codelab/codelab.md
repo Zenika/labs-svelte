@@ -1407,7 +1407,7 @@ Ajoutons une page `recettes.json` dans le répertoire `src/route/recettes` avec 
         "name": "Dessert léger aux fruits de la passion",
         "image": "https://assets.afcdn.com/recipe/20170204/34670_w1200h911c1cx331cy290.jpeg",
         "totalTime": 35,
-        "butget": 1,
+        "budget": 1,
         "difficulty": 2,
         "people": 6,
         "tags": ["Dessert"],
