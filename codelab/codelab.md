@@ -1435,7 +1435,7 @@ Pour afficher ces recettes, nous avons juste à importer dans notre page Svelte 
 
 ```sveltehtml
 <script>
-    import recettes from "./recette.json";
+    import recettes from "./recettes.json";
 </script>
 ```
 
@@ -1475,7 +1475,7 @@ Pour récupérer les parametres sveltekit fournit un **store** `page` depuis `$a
 ```sveltehtml
 <script>
 import { page } from '$app/stores';
-import recettes from "./recette.json";
+import recettes from "./recettes.json";
 
 let recette = recettes[$page.params.id]
 </script>
@@ -1578,14 +1578,14 @@ Un fichier au format `.svelte` sera affiché dans le front, alors qu'un fichier 
 Lorsque nous ajoutons une extension juste avant le `.js`, alors l'url prendra en compte cette dernière pour définir le type du fichier. Par exemple, le fichier `recettes.json.js` sera alors accessible par l'url '/recettes.json'. Il est conseillé d'utiliser ce type d'extesion si nos pages et notre API se trouvent exactement au même endroit. Sinon ,entre le fichier `recettes.svelte` ou `recettes.js`, SvelteKit appellera en priorité le fichier `.js`.
 
 
-### /recette.json
+### /recettes.json
 
 Développons maintenant une API pour récupérer les recettes, et ne pas importer l'intégralité de notre fichier json dans nos pages html.
 
 Pour ce faire, commencons par créer une page `index.json.js` dans le répertoire `src/recettes`
 
 ```javascript
-import recettes from "./recette.json";
+import recettes from "./recettes.json";
 
 export function get() {
 	return {
@@ -1608,7 +1608,7 @@ Nous avons maintenant une URL [/recettes.json](http://localhost:3000/recettes.js
 Ajoutons maintenant une API pour récupérer une recette selon son `id`. Pour cela créons une page `[id].json.js` dans le répertoire `src/recettes`.
 
 ```javascript
-import recettes from "./recette.json";
+import recettes from "./recettes.json";
 
 export function get({ params }) {
 	return {
