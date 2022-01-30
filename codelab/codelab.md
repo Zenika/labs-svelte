@@ -126,7 +126,7 @@ Maintenant, lançons le projet :
 npm run dev
 ```
 
-En ouvrant le navigateur à l'url http://localhost:3000/ vous verrez la page de notre application :
+En ouvrant le navigateur à l'url [http://localhost:3000/](http://localhost:3000/) vous verrez la page de notre application :
 
 ![Capture step 1](./assets/capture-step1.png)
 
@@ -1322,7 +1322,7 @@ Ce site a été créé par xxx lors de SnowCamp
 </p>
 ```
 
-La page est maintenant automatiquement disponible sur l'url http://localhost:3000/about
+La page est maintenant automatiquement disponible sur l'url [http://localhost:3000/about](http://localhost:3000/about)
 
 ## Ajouter un layout
 
@@ -1782,7 +1782,7 @@ Si vous regarder le code source d'une page, vous y verrez alors la totalité du 
 De même, nous remarquons aussi du code javascript qui indique quel est l'état de la page pour que le javascript puisse se démarrer et se positionner dans l'état où la page a été créé.
 
 Si nous regardons les appels http, et que nous ouvrons directement une page de recette :
-http://localhost/recettes/0, nous remarquons qu'aucun appel à l'url http://localhost/recettes/0.json n'est fait. Si nous cliquons sur le lien `Suivant`, l'url http://localhost/recettes/1.json est chargée.
+[http://localhost/recettes/0](http://localhost/recettes/0), nous remarquons qu'aucun appel à l'url [http://localhost/recettes/0.json](http://localhost/recettes/0.json) n'est fait. Si nous cliquons sur le lien `Suivant`, l'url [http://localhost/recettes/1.json](http://localhost/recettes/1.json) est chargée.
 
 ### Prefetch
 
@@ -1920,7 +1920,7 @@ export async function post(request) {
 }
 ```
 
-Nous avons maintenant une API pour faire une recherche sur marmiton sur l'url http://localhost:3000/recettes/search.json
+Nous avons maintenant une API pour faire une recherche sur marmiton sur l'url [http://localhost:3000/recettes/search.json](http://localhost:3000/recettes/search.json)
 
 Vous pouvez la tester avec la requette suivante :
 
