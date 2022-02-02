@@ -1394,7 +1394,7 @@ Ajoutons une page `recettes.json` dans le répertoire `src/route/recettes` avec 
         "difficulty": 2,
         "people": 4,
         "tags": ["Plat"],
-        "ingredients": ["30 cl de lentilles corail", "5 thomates", "4 carottes", "25cl de lait de coco", "1 gousse d'ail", "1 cs de concentré de tomates", "1 cc de curcuma", "1/2 cc de cumin", "1/2 cc de gemgembre", "1/2 cc d'huile de tournesol"],
+        "ingredients": ["30 cl de lentilles corail", "5 tomates", "4 carottes", "25cl de lait de coco", "1 gousse d'ail", "1 cs de concentré de tomates", "1 cc de curcuma", "1/2 cc de cumin", "1/2 cc de gemgembre", "1/2 cc d'huile de tournesol"],
         "steps":[
             "Laver les tomates et les découper en dés. Peler les carottes, et les découper en fines rondelles.",
             "Dans une casserole, verser les lentilles corail et couvrir d'eau. Porter à ébullition. Laisser cuire pendant 10 min environ, jusqu'à complète absorption de l'eau. Retire du feu et laisser reposer.",
@@ -1520,7 +1520,7 @@ Pour cela récupérons l'index de la recette et ajoutons simplement une ligne ve
     {#each recettes as item, index}
         <article>
             <div>
-                <h2><a href="/recettes/{index}">{item.titre}</a></h2>
+                <h2><a href="/recettes/{index}">{item.name}</a></h2>
 ```
 
 _Svelte_ va automatiquement gérer la navigation de la page vers la page de détail sans rechargement.
