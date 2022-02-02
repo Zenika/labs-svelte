@@ -9,7 +9,6 @@ analytics account:
 <!-- ------------------------ -->
 
 ## Overview
-
 Duration: 10
 
 ### Ce que vous allez apprendre
@@ -53,7 +52,7 @@ Par exemple :
 
 ### Créer un projet Svelte
 
-Comme _Svelte_ est un compilateur, il est nécessaire de le lancer pour pouvoir transformer les fichiers .svelte en fichier javascript et css.
+Comme _Svelte_ est un compilateur, il est nécessaire de le lancer pour pouvoir transformer les fichiers  `.svelte` en fichier javascript et css.
 
 _Svelte_ est capable de s'intégrer avec tous les packages bundler existant comme _Webpack_ ou _Rollup_.
 
@@ -97,7 +96,7 @@ Duration: 10
 
 Comme vu lors de la première étape, nous allons initialiser notre application en partant d'un template.
 Nous avons créé un template pour le codelab qui va contenir des éléments qui seront utilisés directement par votre application.
-Ce template contient déjà la structure pour utiliser sveltekit pour la suite du codelab.
+Ce template contient déjà la structure pour utiliser _SvelteKit_ pour la suite du codelab.
 
 ```bash
 npx degit zenika/labs-svelte/template labs-svelte
@@ -107,7 +106,7 @@ npm install
 
 ### Découvrir ce qui a été généré
 
-Vous vous retrouvez avec une application sveltekit. Voici les différents fichiers que l'on peut retrouver :
+Vous vous retrouvez avec une application _SvelteKit_  Voici les différents fichiers que l'on peut retrouver :
 
 - **package.json** : Contient les dépendances, ainsi que les scripts `dev` (pour lancer le projet en développement) ou `build` (pour construire l'application finale).
 - **svelte.config.js** : Configuration pour _SvelteKit_.
@@ -1221,9 +1220,9 @@ L'inclusion de `{$imc}` dans le titre permet également la mise à jour du titre
 
 ## SvelteKit
 
-Maintenant que nous avons fait le tour des principales fonctionnalités offertes par **Svelte**, passons à la vitesse supérieure en découvrant **SvelteKit**.
+Maintenant que nous avons fait le tour des principales fonctionnalités offertes par _Svelte_, passons à la vitesse supérieure en découvrant _SvelteKit_.
 
-SvelteKit est un framework, basé sur Svelte, permettant de construire des sites ultra performants en intégrant notament les fonctionnalités suivantes :
+SvelteKit est un framework, basé sur _Svelte_, permettant de construire des sites ultra performants en intégrant notament les fonctionnalités suivantes :
 - Un router
 - Une api avec de nouvelles fonctionnalités
 - De la génération de pages côté serveur
@@ -1232,16 +1231,16 @@ SvelteKit est un framework, basé sur Svelte, permettant de construire des sites
 SvelteKit est le remplaçant du framework Sapper.
 
 <aside class="negative">
-<i>SvelteKit</i> n'est pas encore en version finale, mais son développement est suffisamment avancé pour s'y intéresser, et pourquoi pas l'utiliser en production (cependant, attention aux breaking changes !).
+<i _SvelteKit_ /i> n'est pas encore en version finale, mais son développement est suffisamment avancé pour s'y intéresser, et pourquoi pas l'utiliser en production (cependant, attention aux breaking changes !).
 </aside>
 
 SvelteKit utilise le bundler `vite` qui apporte la fonctionnalité de Hot Module Replacement (Recharge le code modifié sans même recharger la page).
 
-La force de SvelteKit, c'est de profiter de la puissance du compilateur svelte qui va générer tout le code nécessaire (et seulement celui-ci) pour faire fonctionner votre site et d'y ajouter tout l'outillage nécessaire facilitant la construction d'applications web complexes.
+La force de _SvelteKit_  c'est de profiter de la puissance du compilateur svelte qui va générer tout le code nécessaire (et seulement celui-ci) pour faire fonctionner votre site et d'y ajouter tout l'outillage nécessaire facilitant la construction d'applications web complexes.
 
 ### Créer un projet SvelteKit
 
-Même si vous avez déjà un projet SvelteKit grâce au template de projet. La création d'un projet Svelte est simplifiée par une CLI pour créer un projet qui va vous poser un certain nombre de questions pour choisir les options que vous voulez intégrer.
+Même si vous avez déjà un projet _SvelteKit_ grâce au template de projet. La création d'un projet _Svelte_ est simplifiée par une CLI pour créer un projet qui va vous poser un certain nombre de questions pour choisir les options que vous voulez intégrer.
 
 ```sh
 npm init svelte@next my-app
@@ -1259,13 +1258,13 @@ Ok to proceed? (y)
 
 create-svelte version 2.0.0-next.98
 
-Welcome to SvelteKit!
+Welcome to SvelteKit 
 
 This is beta software; expect bugs and missing features.
 
 Problems? Open an issue on https://github.com/sveltejs/kit/issues if none exists already.
 
-✔ Which Svelte app template? › SvelteKit demo app
+✔ Which Svelte app template? › _SvelteKit_ demo app
 ✔ Use TypeScript? … No / Yes
 ✔ Add ESLint for code linting? … No / Yes
 ✔ Add Prettier for code formatting? … No / Yes
@@ -1326,7 +1325,7 @@ La page est maintenant automatiquement disponible sur l'url [http://localhost:30
 
 ## Ajouter un layout
 
-Il est aussi possible d'avoir un layout commun à toutes les pages en créant un fichier `__layout.svelte` dabs le répertoire `src/routes`.
+Il est aussi possible d'avoir un layout commun à toutes les pages en créant un fichier `__layout.svelte` dans le répertoire `src/routes`.
 
 ```sveltehtml
 <script>
@@ -1344,8 +1343,9 @@ Il est aussi possible d'avoir un layout commun à toutes les pages en créant un
 </main>
 ```
 
-Positive:
-La syntaxe <slot></slot> permet d'indiquer à Svelte d'insérer à cet emplacement le contenu qui est ajouté entre les balises permettant d'utiliser le composant. Ici, les différentes pages seront affichées.
+<aside>
+La syntaxe <code>&lt;slot&gt;&ls;/slot&gt;</code> permet d'indiquer à <i>Svelte</i> d'insérer à cet emplacement le contenu qui est ajouté entre les balises permettant d'utiliser le composant. Ici, les différentes pages seront affichées.
+</aside>
 
 ## Ajouter une page de recette
 
@@ -1431,7 +1431,7 @@ Ajoutons une page `recettes.json` dans le répertoire `src/route/recettes` avec 
 
 ### Afficher la liste des recettes
 
-Pour afficher ces recettes, nous avons juste à importer dans notre page Svelte le fichier json créé précédemment.
+Pour afficher ces recettes, nous avons juste à importer dans notre page _Svelte_ le fichier json créé précédemment.
 
 ```sveltehtml
 <script>
@@ -1472,7 +1472,7 @@ N'oublions pas d'ajouter le lien permettant d'accéder à cette nouvelle page da
 
 Créons maintenant une page `[id].svelte` qui sera appelée par les url `/recettes/1` ou `recettes/2` par exemple. La variable `id` sera alors disponible directement dans la page avec la valeur passée en paramètre.
 
-Pour récupérer les parametres sveltekit fournit un **store** `page` depuis `$app/stores` qui permet de récupérer les parametres et autres informations sur la page :
+Pour récupérer les parametres _SvelteKit_ fournit un **store** `page` depuis `$app/stores` qui permet de récupérer les parametres et autres informations sur la page :
 
 ```sveltehtml
 <script>
@@ -1522,10 +1522,10 @@ Pour cela récupérons l'index de la recette et ajoutons simplement une ligne ve
                 <h2><a href="/recettes/{index}">{item.titre}</a></h2>
 ```
 
-*Svelte* va automatiquement gérer la navigation de la page vers la page de détail sans rechargement.
+_Svelte_ va automatiquement gérer la navigation de la page vers la page de détail sans rechargement.
 
 <aside>
-Par défaut, Svelte va intercepter les clics sur les liens `a` pour ne pas recharger la page sur les urls internes. Si besoin, nous pouvons désactiver ce comportement en ajoutant l'attribut `rel="external"` sur le lien.
+Par défaut, _Svelte_ va intercepter les clics sur les liens `a` pour ne pas recharger la page sur les urls internes. Si besoin, nous pouvons désactiver ce comportement en ajoutant l'attribut `rel="external"` sur le lien.
 </aside>
 
 ### Changement de page dynamique
@@ -1547,14 +1547,14 @@ Testons maintenant ce lien. Nous remarquons que le changement de page ne fonctio
 
 La récupération du paramètre dans le store de la page est une notion dite "réactive". Le composant de la page n'est pas réinitilisé lorsque nous changeons simplement un paramètre de la page.
 
-Pour que notre navigation fonctionne, il est donc nécessaire d'utiliser la syntaxe de réactivité de Svelte pour récupérer la bonne recette :
+Pour que notre navigation fonctionne, il est donc nécessaire d'utiliser la syntaxe de réactivité de _Svelte_ pour récupérer la bonne recette :
 
 ```javascript
 $: recette = recettes[$page.params.id]
 ```
 ## Accessibilité
 
-Peut-être l'avez vous remarqué, lors de la création de la page affichant une recette, Svelte nous a indiqué via un warning dans le terminal, d'un problème d'accessibilité dans notre code. (Si vous utiliser un plugin dans l'IDE, l'erreur est également affichée).
+Peut-être l'avez vous remarqué, lors de la création de la page affichant une recette, _Svelte_ nous a indiqué via un warning dans le terminal, d'un problème d'accessibilité dans notre code. (Si vous utiliser un plugin dans l'IDE, l'erreur est également affichée).
 
 ```
 17:47:21 [vite-plugin-svelte] become-svelte/src/routes/recettes/[id].svelte:9:4
@@ -1576,11 +1576,11 @@ Retrouvez dans la [documentation](https://svelte.dev/docs#accessibility-warnings
 
 L'import d'un fichier json dans notre page inclut directement ce fichier dans le code javascript et est donc chargé dès que l'on affiche notre site. Si la liste de recettes grossie, les performances de notre site seront impactées.
 
-La force de SvelteKit, c'est aussi de permettre d'écrire du code front et back au même endroit, sans distinction.
+La force de _SvelteKit_  c'est aussi de permettre d'écrire du code front et back au même endroit, sans distinction.
 
 Un fichier au format `.svelte` sera affiché dans le front, alors qu'un fichier au format `.js` (ou `.ts` si nous utilisons TypeScript) sera alors executé côté serveur.
 
-Lorsque nous ajoutons une extension juste avant le `.js`, alors l'url prendra en compte cette dernière pour définir le type du fichier. Par exemple, le fichier `recettes.json.js` sera alors accessible par l'url '/recettes.json'. Il est conseillé d'utiliser ce type d'extesion si nos pages et notre API se trouvent exactement au même endroit. Sinon ,entre le fichier `recettes.svelte` ou `recettes.js`, SvelteKit appellera en priorité le fichier `.js`.
+Lorsque nous ajoutons une extension juste avant le `.js`, alors l'url prendra en compte cette dernière pour définir le type du fichier. Par exemple, le fichier `recettes.json.js` sera alors accessible par l'url '/recettes.json'. Il est conseillé d'utiliser ce type d'extesion si nos pages et notre API se trouvent exactement au même endroit. Sinon ,entre le fichier `recettes.svelte` ou `recettes.js`, _SvelteKit_ appellera en priorité le fichier `.js`.
 
 
 ### /recettes.json
@@ -1718,7 +1718,7 @@ La méthode retourne un objet avec les propriétés suivantes :
 Le serveur side rendering permet de générer le code html sur le serveur avant d'envoyer le résultat directement au navigateur.
 L'intérêt est d'améliorer les performances de la page, car il suffit alors au navigateur d'afficher le resultat sans devoir construire toute la page.
 
-Ce fonctionnement est automatique et disponible par défaut. Svelte côté serveur va générer un état de la page qui sera alors utilisé par le code javascript côté front pour s'initialiser et ainsi pouvoir ajouter l'interaction automatiquement.
+Ce fonctionnement est automatique et disponible par défaut. _Svelte_ côté serveur va générer un état de la page qui sera alors utilisé par le code javascript côté front pour s'initialiser et ainsi pouvoir ajouter l'interaction automatiquement.
 
 Si vous regarder le code source d'une page, vous y verrez alors la totalité du html qui est généré :
 
@@ -1792,12 +1792,12 @@ Si nous regardons les appels http, et que nous ouvrons directement une page de r
 ### Prefetch
 
 SvelteKit va essayer de précharger au maximum les pages et les ressources.
-Si nous voulons permettre de précharger une page disponible derrière un lien (au survol de celui-ci), il suffit d'ajouter `sveltekit:prefetch` sur une balise html `&lt;a&gt;`.
+Si nous voulons permettre de précharger une page disponible derrière un lien (au survol de celui-ci), il suffit d'ajouter  _SvelteKit_ prefetch` sur une balise html `&lt;a&gt;`.
 
 Dans le fichier `index.svelte` du répertoire `src/routes`, modifions le lien vers les pages de recettes :
 
 ```sveltehtml
-<h2><a sveltekit:prefetch href="/recettes/{index}">{item.name}</a></h2>
+<h2><a _SvelteKit_ prefetch href="/recettes/{index}">{item.name}</a></h2>
 ```
 
 Maintenant en regardant les requettes http, nous pouvons voir que l'url `/recettes/x.json` sera préchargée au survol du lien, avant même de cliquer sur celui-ci. La page s'affichera ensuite immédiatement après un clic sur le lien.
@@ -1989,7 +1989,7 @@ Comme l'API de recherche ne nous permet pas de récupérer les infos d'une recet
 <section class="recettes">
     {#each recettes as item, index}
         <article>
-            <h2><a sveltekit:prefetch href="{item.url ?? `/recettes/${index}`}">{item.name}</a></h2>
+            <h2><a _SvelteKit_ prefetch href="{item.url ?? `/recettes/${index}`}">{item.name}</a></h2>
             <h3>⏱ {item.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][item.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][item.budget||0]} 😋 {item.people} Personnes</h3>
             {#if item.image}
                <img src={item.image} alt={item.name}>
@@ -2012,7 +2012,7 @@ Améliorer cette recherche :
 ## Fin
 
 Bravo ! Vous êtes arrivés à la fin de ce lab !
-Nous espérons que vous avez apprécié cette petite expérience avec Svelte !
+Nous espérons que vous avez apprécié cette petite expérience avec _Svelte_ !
 
 Vous trouverez le code final de l'app [ici](https://github.com/Zenika/labs-svelte/tree/master/become-svelte).
 
