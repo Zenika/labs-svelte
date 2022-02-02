@@ -1121,7 +1121,7 @@ Duration: 10
 
 Maintenant que nous avons une application finalisée, ajoutons quelques animations.
 
-_Svelte_ permet d'ajouter facilement des animations, en placant simplement des attributs aux baliss HTML pour, par exemple, ajouter une transition qui pourra s'exécuter à l'apparition ou la disparition d'un élément.
+_Svelte_ permet d'ajouter facilement des animations, en placant simplement des attributs aux balises HTML pour, par exemple, ajouter une transition qui pourra s'exécuter à l'apparition ou la disparition d'un élément.
 La syntaxe est simple, nous indiquons la transition que l'on veut utiliser, préfixée par `in:` ou `out:` en fonction
 de si nous souhaitons jouer l'animation à l'apparition ou à la disparition de l'élément. Si la même transition est souhaitée à
 l'apparition et la disparition, il suffit d'utiliser le préfixe `transition:` à la place de `in:` et `out:`.
