@@ -1345,7 +1345,7 @@ Il est aussi possible d'avoir un layout commun à toutes les pages en créant un
 ```
 
 <aside>
-La syntaxe <code>&lt;slot&gt;&lt;/slot&gt;</code> permet d'indiquer à <i>Svelte</i> d'insérer à cet emplacement le contenu qui est ajouté entre les balises permettant d'utiliser le composant. Ici, les différentes pages seront affichées.
+La syntaxe <code>&lt;slot>&lt;/slot></code> permet d'indiquer à <i>Svelte</i> d'insérer à cet emplacement le contenu qui est ajouté entre les balises permettant d'utiliser le composant. Ici, les différentes pages seront affichées.
 </aside>
 
 ## Ajouter une page de recette
@@ -1887,7 +1887,7 @@ Connectez vous avec votre compte github, gitlab ou bitbucket, et selectionnez vo
 
 Si vous voulez déployer sur netlify depuis votre CI, netlify fournit une ligne de commande qui permet de deployer quand vous voulez votre projet.
 
-Documentation : https://docs.netlify.com/cli/get-started/
+Documentation : [https://docs.netlify.com/cli/get-started/](https://docs.netlify.com/cli/get-started/)
 
 ## Ajouter une recherche de recette sur Marmiton (Bonus)
 
