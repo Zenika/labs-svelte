@@ -9,6 +9,7 @@ analytics account:
 <!-- ------------------------ -->
 
 ## Overview
+
 Duration: 10
 
 ### Ce que vous allez apprendre
@@ -1231,7 +1232,7 @@ SvelteKit est un framework, basé sur _Svelte_, permettant de construire des sit
 SvelteKit est le remplaçant du framework Sapper.
 
 <aside class="negative">
-<i _SvelteKit_ /i> n'est pas encore en version finale, mais son développement est suffisamment avancé pour s'y intéresser, et pourquoi pas l'utiliser en production (cependant, attention aux breaking changes !).
+<i>SvelteKit</i> n'est pas encore en version finale, mais son développement est suffisamment avancé pour s'y intéresser, et pourquoi pas l'utiliser en production (cependant, attention aux breaking changes !).
 </aside>
 
 SvelteKit utilise le bundler `vite` qui apporte la fonctionnalité de Hot Module Replacement (Recharge le code modifié sans même recharger la page).
@@ -1792,12 +1793,12 @@ Si nous regardons les appels http, et que nous ouvrons directement une page de r
 ### Prefetch
 
 SvelteKit va essayer de précharger au maximum les pages et les ressources.
-Si nous voulons permettre de précharger une page disponible derrière un lien (au survol de celui-ci), il suffit d'ajouter  _SvelteKit_ prefetch` sur une balise html `&lt;a&gt;`.
+Si nous voulons permettre de précharger une page disponible derrière un lien (au survol de celui-ci), il suffit d'ajouter `sveltekit:prefetch` sur une balise html `&lt;a&gt;`.
 
 Dans le fichier `index.svelte` du répertoire `src/routes`, modifions le lien vers les pages de recettes :
 
 ```sveltehtml
-<h2><a _SvelteKit_ prefetch href="/recettes/{index}">{item.name}</a></h2>
+<h2><a sveltekit:prefetch href="/recettes/{index}">{item.name}</a></h2>
 ```
 
 Maintenant en regardant les requettes http, nous pouvons voir que l'url `/recettes/x.json` sera préchargée au survol du lien, avant même de cliquer sur celui-ci. La page s'affichera ensuite immédiatement après un clic sur le lien.
@@ -1880,7 +1881,7 @@ Sauvegardez votre site sur un repos github, gitlab, ou bitbucket.
 
 Allez directement sur https://app.netlify.com/start
 
-Connectez vous avec votre compte github, gitlab ou bitbucket, et selectionnez votre projet. Netlify va automatiquement s'abonner à votre projet git et mettera alors automatiquement à jour votre site sur netlifyN
+Connectez vous avec votre compte github, gitlab ou bitbucket, et selectionnez votre projet. Netlify va automatiquement s'abonner à votre projet git et mettera alors automatiquement à jour votre site sur netlify
 
 #### Déployer de manière manuel
 
