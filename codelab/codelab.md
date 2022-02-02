@@ -1343,7 +1343,6 @@ Il est aussi possible d'avoir un layout commun à toutes les pages en créant un
 	</nav>
 </header>
 <main>
-	<h1>Devenir Svelte avec Svelte</h1>
 	<slot></slot>
 </main>
 ```
