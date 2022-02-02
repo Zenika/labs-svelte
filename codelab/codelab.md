@@ -1592,7 +1592,7 @@ Lorsque nous ajoutons une extension juste avant le `.js`, alors l'url prendra en
 
 Développons maintenant une API pour récupérer les recettes, et ne pas importer l'intégralité de notre fichier json dans nos pages html.
 
-Pour ce faire, commencons par créer une page `index.json.js` dans le répertoire `src/recettes`
+Pour ce faire, commencons par créer une page `index.json.js` dans le répertoire `src/route/recettes`
 
 ```javascript
 import recettes from "./recettes.json";
@@ -1615,7 +1615,7 @@ Nous avons maintenant une URL [/recettes.json](http://localhost:3000/recettes.js
 
 ### /recettes/1.json
 
-Ajoutons maintenant une API pour récupérer une recette selon son `id`. Pour cela créons une page `[id].json.js` dans le répertoire `src/recettes`.
+Ajoutons maintenant une API pour récupérer une recette selon son `id`. Pour cela créons une page `[id].json.js` dans le répertoire `src/route/recettes`.
 
 ```javascript
 import recettes from "./recettes.json";
@@ -1911,7 +1911,7 @@ npm install marmiton-api
 
 Il faut maintenant créer une API sur notre projet qui récupère en POST la recherche qui est faite.Nous utilisons la lib nouvellement ajoutée et puis nous retournons le résultat.
 
-Créons un nouveau fichier `search.json.js` dans le répertoire `src/recettes`
+Créons un nouveau fichier `search.json.js` dans le répertoire `src/route/recettes`
 
 ```
 import { searchRecipes, MarmitonQueryBuilder } from 'marmiton-api'
