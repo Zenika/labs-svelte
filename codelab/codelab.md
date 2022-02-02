@@ -1787,7 +1787,7 @@ Si vous regarder le code source d'une page, vous y verrez alors la totalité du 
 De même, nous remarquons aussi du code javascript qui indique quel est l'état de la page pour que le javascript puisse se démarrer et se positionner dans l'état où la page a été créé.
 
 Si nous regardons les appels http, et que nous ouvrons directement une page de recette :
-[http://localhost/recettes/0](http://localhost/recettes/0), nous remarquons qu'aucun appel à l'url [http://localhost/recettes/0.json](http://localhost/recettes/0.json) n'est fait. Si nous cliquons sur le lien `Suivant`, l'url [http://localhost/recettes/1.json](http://localhost/recettes/1.json) est chargée.
+[http://localhost:3000/recettes/0](http://localhost:3000/recettes/0), nous remarquons qu'aucun appel à l'url [http://localhost:3000/recettes/0.json](http://localhost:3000/recettes/0.json) n'est fait. Si nous cliquons sur le lien `Suivant`, l'url [http://localhost:3000/recettes/1.json](http://localhost:3000/recettes/1.json) est chargée.
 
 ### Prefetch
 
