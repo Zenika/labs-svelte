@@ -1345,7 +1345,7 @@ Il est aussi possible d'avoir un layout commun à toutes les pages en créant un
 ```
 
 <aside>
-La syntaxe <code>&lt;slot>&lt;/slot></code> permet d'indiquer à <i>Svelte</i> d'insérer à cet emplacement le contenu qui est ajouté entre les balises permettant d'utiliser le composant. Ici, les différentes pages seront affichées.
+La syntaxe <code>slot</code> permet d'indiquer à <i>Svelte</i> d'insérer à cet emplacement le contenu qui est ajouté entre les balises permettant d'utiliser le composant. Ici, les différentes pages seront affichées.
 </aside>
 
 ## Ajouter une page de recette
