@@ -1241,6 +1241,10 @@ La force de _SvelteKit_  c'est de profiter de la puissance du compilateur svelte
 
 ### Créer un projet SvelteKit
 
+<aside class="negative">
+Votre code est déjà un projet sveltekit, il n'est pas nécessaire de recréer un projet pour continuer le projet.
+</aside>
+
 Même si vous avez déjà un projet _SvelteKit_ grâce au template de projet. La création d'un projet _Svelte_ est simplifiée par une CLI pour créer un projet qui va vous poser un certain nombre de questions pour choisir les options que vous voulez intégrer.
 
 ```sh
