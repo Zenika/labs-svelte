@@ -425,7 +425,7 @@ Le code complet de notre composant ressemble au final à ceci :
 <script>
   const imc = (poids / taille ** 2).toFixed(2)
   const thin = imc < 18
-  const bold = imc > 35
+  const bold = imc > 25
 </script>
 
 <p class:thin class:bold>
@@ -1152,7 +1152,7 @@ Les animations sont à importer depuis `'svelte/transition'`. Dans le fichier **
   import { fly, fade } from 'svelte/transition';
 
   $: thin = $imc < 18
-  $: bold = $imc > 35
+  $: bold = $imc > 25
 </script>
 
 <p class:thin class:bold>
@@ -1191,7 +1191,7 @@ Pour cela, utilisons l'élément spécial `&lt;svelte:head>` :
   import { fly, fade } from 'svelte/transition';
 
   $: thin = $imc < 18
-  $: bold = $imc > 35
+  $: bold = $imc > 25
 </script>
 
 <svelte:head>
