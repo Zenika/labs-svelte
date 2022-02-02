@@ -33,7 +33,7 @@ Sur le site de [Svelte](https://svelte.dev/), un REPL (Read Eval Print Loop) per
 De même un [tutoriel](https://svelte.dev/tutorial/basics) permet d'apprendre les bases du framework pas à pas.
 
 Un fichier _Svelte_ (fichier avec une extension .svelte) ressemble à un fichier html qui va contenir les balises html de notre template,
-une balise `&lt;script>` contenant le code javascript, ainsi qu une balise `&lt;style>` contenant le style CSS.
+une balise `&lt;script>` contenant le code javascript, ainsi qu'une balise `&lt;style>` contenant le style CSS.
 
 Par exemple :
 
@@ -53,7 +53,7 @@ Par exemple :
 
 ### Créer un projet Svelte
 
-Comme _Svelte_ est un compilateur, il est nécessaire de le lancer pour pouvoir transformer les fichiers  `.svelte` en fichier javascript et css.
+Comme _Svelte_ est un compilateur, il est nécessaire de le lancer pour pouvoir transformer les fichiers `.svelte` en fichier javascript et css.
 
 _Svelte_ est capable de s'intégrer avec tous les packages bundler existant comme _Webpack_ ou _Rollup_.
 
@@ -71,7 +71,7 @@ npm run dev
 Vous aurez alors un projet de base avec les outils permettant de lancer l'application en développement ou construire l'application à deployer.
 
 <aside>
-Vous pouvez utiliser Typescript en executant la commande : <code>node scripts/setupTypeScript.js</code>
+Vous pouvez utiliser Typescript en éxecutant la commande : <code>node scripts/setupTypeScript.js</code>
 </aside>
 
 ### Le projet pour ce codelab
@@ -138,7 +138,7 @@ Maintenant entrons dans le vif du sujet, ouvrez le fichier **ImcCalculator.svelt
 const name = "Votre nom";
 ```
 
-Une fois les modifications sauvegardées, l'application sera automatiquement rafraîchie avec les changements, et vous devriez avoir le texte "Bonjour Votre nom" qui s'affiche à l'écran.
+Une fois les modifications sauvegardées, l'application sera automatiquement rafraîchie avec les changements et vous devriez avoir le texte "Bonjour Votre nom" qui s'affiche à l'écran.
 
 Passons maintenant à l'étape suivante pour créer notre premier composant.
 
@@ -511,16 +511,16 @@ Puis, nous pouvons l'utiliser au dessus du composant `&lt;Imc />` :
 <Imc poids=100 taille=1.9 />
 ```
 
-### Événéments natifs
+### Évènements natifs
 
-En l'état actuel des choses, nous ne récupérons pas les valeurs saisies via les sliders. Nous allons remédier à ceci en commençant par jouer avec les événements natifs des composants html.
+En l'état actuel des choses, nous ne récupérons pas les valeurs saisies via les sliders. Nous allons remédier à ceci en commençant par jouer avec les évènements natifs des composants html.
 
 En _Svelte_, pour s'abonner aux évènements d'un composant nous pouvons utiliser le prefix `on:` sur le nom de l'évènement auquel on souhaite réagir.
 Exemple `on:click={clickHandler}`
 
-- `on:` Indique que nous souhaitons nous abonner à un événénement.
+- `on:` Indique que nous souhaitons nous abonner à un évènenement.
 - `click` Précise l'évènement auquel nous souhaitons nous abonner.
-- `={clickHandler}` Précise la fonction à appeler lorsque l'événement va survenir. Il est également possible d'appeler une fonction lambda `{event => changeEvent(event.target.value)}`.
+- `={clickHandler}` Précise la fonction à appeler lorsque l'évènement va survenir. Il est également possible d'appeler une fonction lambda `{event => changeEvent(event.target.value)}`.
 
 Autres exemples :
 
@@ -1121,7 +1121,7 @@ Duration: 10
 
 Maintenant que nous avons une application finalisée, ajoutons quelques animations.
 
-_Svelte_ permet d'ajouter facilement des animations, en placant simplement des attributs aux balises HTML pour, par exemple, ajouter une transition qui pourra s'exécuter à l'apparition ou la disparition d'un élément.
+_Svelte_ permet d'ajouter facilement des animations, en plaçant simplement des attributs aux balises HTML pour, par exemple, ajouter une transition qui pourra s'exécuter à l'apparition ou la disparition d'un élément.
 La syntaxe est simple, nous indiquons la transition que l'on veut utiliser, préfixée par `in:` ou `out:` en fonction
 de si nous souhaitons jouer l'animation à l'apparition ou à la disparition de l'élément. Si la même transition est souhaitée à
 l'apparition et la disparition, il suffit d'utiliser le préfixe `transition:` à la place de `in:` et `out:`.
