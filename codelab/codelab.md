@@ -971,12 +971,12 @@ Voici donc le code html du formulaire :
 et à l'inverse dans le fichier **Imc.svelte** dans la balise `&lt;script>`
 
 ```javascript
-import { poids as storePoid, taille as storeTaille } from "./stores";
+import { poids as storePoids, taille as storeTaille } from "./stores";
 
 let poids;
 let taille;
 
-storePoid.subscribe((value) => (poids = value));
+storePoids.subscribe((value) => (poids = value));
 storeTaille.subscribe((value) => (taille = value));
 
 $: imc = (poids / taille ** 2).toFixed(2);
