@@ -222,7 +222,7 @@ Voyons maintenant comment paramétrer ces variables pour permettre de recevoir c
 
 Duration: 10
 
-Pour définir les paramètres d'un composant _Svelte_, dont les valeurs seront transmisent via des attributs html, il faut définir une variable et la préfixer par le mot clé `export`. (Ex: `export let monParametre;`)
+Pour définir les paramètres d'un composant _Svelte_, dont les valeurs seront transmises via des attributs html, il faut définir une variable et la préfixer par le mot clé `export`. (Ex: `export let monParametre;`)
 
 <aside class="positive">
 En javascript, le mot clé <code>export</code> permet d'indiquer que la variable ou la fonction est accessible à l'extérieur du fichier (du module).
