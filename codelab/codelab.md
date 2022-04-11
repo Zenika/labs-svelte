@@ -831,7 +831,7 @@ _Svelte_ met à notre disposition une petite astuce pour nous simplifier la vie 
 
 Et la syntaxe est elle aussi très simple : `on:submit`.
 
-C'est tout, rien de plus. Avec cette syntaxe, l'event "onSubmit" sera propagé et peut donc être écouté directement sur le composant parent `<Form on:submit={sauvegarderIMC}/>`
+C'est tout, rien de plus. Avec cette syntaxe, l'event "onSubmit" sera propagé et peut donc être écouté directement sur le composant parent `&lt;Form on:submit={sauvegarderIMC}/>`
 
 Mais dans notre cas, cela n'est pas une bonne pratique, notre composant ne doit pas exposer directement l'évènement à son parent. Nous transformons l'événement natif en un nouvel évènement métier.
 
@@ -864,8 +864,8 @@ Ajoutons maintenant un tableau qui va contenir l'historique avec la date et l'IM
 ```javascript
   const historique = [];
   function sauvegarderIMC(event) {
-		historique.push(event.detail);
-	}
+    historique.push(event.detail);
+  }
 ```
 
 Reste à ajouter le code pour afficher les résultats dans le html :
