@@ -5,20 +5,13 @@
 	const name = "World";
 	let historique = [];
 
-	function calculerEvent(event) {
-		console.log(event)
-		historique = [...historique, {
-			date: event.target.date.value || new Date(),
-			poids: event.target.poids.value,
-			taille: event.target.taille.value,
-			imc: event.target.poids.value / (event.target.taille.value * event.target.taille.value)
-		}
-	];
+	function sauvegarderIMC(event) {
+		historique = [...historique, event.detail];
 	}
 </script>
 
 <p>Bonjour {name} ! Calculez votre IMC (Indice de Masse Corporelle)</p>
-<Form on:submit={calculerEvent}/>
+<Form on:sauvegarder={sauvegarderIMC}/>
 <Imc />
 <h3>Evolution de l'IMC</h3>
 <ul>
