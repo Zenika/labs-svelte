@@ -762,7 +762,7 @@ La fonction dispatch prends 2 arguments:
 - Le nom de l'évènement.
 - La valeur à transmettre dans l'évènement.
 
-Le composant parent peut alors s'abonner à l'évènement, de la même façon qu'un évènement DOM natif, avec la syntaxe `on:calculer={fonction_a_appeler}`.
+Le composant parent peut alors s'abonner à l'évènement, de la même façon qu'un évènement DOM natif, avec la syntaxe `on:sauvegarder={fonction_a_appeler}`.
 
 La fonction `fonction_a_appeler` du composant parent recevra alors un argument qui représente l'évènement.
 Les valeurs passées dans cet évènement sont accessibles dans la propriété `detail` de cet argument :
@@ -823,7 +823,7 @@ Et dans le fichier **ImcCalculator.svelte**, nous pouvons réagir à l'évèneme
 	}
 </script>
 
-<Form bind:poids bind:taille on:calculer={sauvegarderIMC}/>
+<Form bind:poids bind:taille on:sauvegarder={sauvegarderIMC}/>
 <Imc {taille} {poids} />
 ```
 
