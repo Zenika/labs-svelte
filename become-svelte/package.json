@@ -15,7 +15,8 @@
     "@sveltejs/kit": "next",
     "jest": "^27.5.1",
     "netlify-cli": "^8.6.20",
-    "svelte": "^3.44.0"
+    "svelte": "^3.44.0",
+    "svelte-jester": "^2.3.2"
   },
   "type": "module",
   "dependencies": {
