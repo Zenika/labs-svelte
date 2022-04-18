@@ -13,5 +13,10 @@ describe('Imc', () => {
         // La vérification.
         expect(displayImc).toBe(expectedImc);
     });
+
+    it('should display the right health indicator', () => {
+        const { getByText } = render(Imc);
+        expect(getByText('Vous êtes svelte !')).toBeInTheDocument();
+    });
 });
 
