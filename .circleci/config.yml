@@ -21,6 +21,7 @@ jobs:
     steps:
       - checkout
       - run: cd become-svelte && npm install
+      - run: cd become-svelte && npm run test
       - run: cd become-svelte && npm run build
       - run: cd become-svelte && npx netlify deploy
 
