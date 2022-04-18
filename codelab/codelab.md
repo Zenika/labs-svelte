@@ -1496,12 +1496,12 @@ Maintenant affichons le détail d'une recette :
     <h3>⏱ {recette.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][recette.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][recette.budget||0]} 😋 {recette.people} Personnes</h3>
     
     <ul>
-        {#each recette.ingredients as ingredient}
+        {#each recette?.ingredients as ingredient}
             <li>{ingredient}</li>
         {/each}
     </ul>
     <dl>
-        {#each recette.steps as step, index}
+        {#each recette?.steps as step, index}
             <dt>Etape {index+1}</dt>
             <dd>{step}</dd>
         {/each}
