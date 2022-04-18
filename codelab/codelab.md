@@ -714,7 +714,7 @@ afterUpdate(() => {
 
 Duration: 10
 
-Ajoutons maintenant la possibilité de sauvegarder notre IMC a différente date. Pour cela il est nécessaire d'ajouter dans notre formulaire un champ de type date et un bouton sauvegarder.
+Ajoutons maintenant la possibilité de sauvegarder notre IMC. Pour cela il est nécessaire d'ajouter un bouton `Sauvegarder` dans notre formulaire.
 
 ```sveltehtml
 <script>
@@ -731,9 +731,6 @@ Ajoutons maintenant la possibilité de sauvegarder notre IMC a différente date.
     <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
   </label>
 
-  <label> Date :
-    <input name="date" type="date" />
-  </label>
   <button type="submit">Sauvegarder</button>
 </form>
 
@@ -804,9 +801,6 @@ Appliquons ce que nous avons vu précédemment avec l'eventDispatcher à notre c
     <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
   </label>
 
-  <label> Date :
-    <input name="date" type="date" />
-  </label>
   <button type="submit">Sauvegarder</button>
 </form>
 ```
@@ -968,9 +962,6 @@ Voici donc le code html du formulaire :
         <input name="taille" type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange} />
      </label>
 
-     <label> Date :
-        <input name="date" type="date" />
-     </label>
     <button type="submit">Sauvegarder</button>
    </form>
 ```
