@@ -2033,10 +2033,11 @@ Créons un nouveau fichier `search.json.js` dans le répertoire `src/route/recet
 import { searchRecipes, MarmitonQueryBuilder } from 'marmiton-api'
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function post(request) {
+export async function post({ request }) {
+    const body = await request.json()
     const qb = new MarmitonQueryBuilder();
     const query = qb
-    .withTitleContaining(request.body.query)
+    .withTitleContaining(body.query)
     .build()
     const recipes = await searchRecipes(query, { limit: 6 })
 
