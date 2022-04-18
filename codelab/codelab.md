@@ -9,8 +9,7 @@ analytics account:
 <!-- ------------------------ -->
 
 ## Overview
-
-Duration: 10
+Duration: 0:10:00
 
 ### Ce que vous allez apprendre
 
@@ -90,8 +89,7 @@ La formule pour calculer l'IMC est le poids divisé par la taille au carré.
 <!-- ------------------------ -->
 
 ## Créez votre première application
-
-Duration: 10
+Duration: 0:10:00
 
 ### Initialiser le projet
 
@@ -145,8 +143,7 @@ Passons maintenant à l'étape suivante pour créer notre premier composant.
 <!-- ------------------------ -->
 
 ## Créer un composant
-
-Duration: 5
+Duration: 0:05:00
 
 Nous allons maintenant créer notre premier composant, pour cela créez un nouveau fichier **Imc.svelte** dans le répertoire `src/lib`.
 
@@ -179,8 +176,7 @@ Maintenant, il faudrait que ce texte soit plus dynamique et qu'il puisse être c
 <!-- ------------------------ -->
 
 ## Afficher des variables dans un template
-
-Duration: 10
+Duration: 0:10:00
 
 Dans notre fichier **Imc.svelte**, nous allons ajouter deux variables pour définir le poids et la taille, et afficher ensuite le calcul de l'IMC à la place de notre texte html statique.
 
@@ -219,8 +215,7 @@ Voyons maintenant comment paramétrer ces variables pour permettre de recevoir c
 <!-- ------------------------ -->
 
 ## Attributs d'un composant
-
-Duration: 10
+Duration: 0:10:00
 
 Pour définir les paramètres d'un composant _Svelte_, dont les valeurs seront transmisent via des attributs html, il faut définir une variable et la préfixer par le mot clé `export`. (Ex: `export let monParametre;`)
 
@@ -258,8 +253,7 @@ Ici :
 <!-- ------------------------ -->
 
 ## Conditions d'affichage
-
-Duration: 10
+Duration: 0:10:00
 
 Ajoutons maintenant un message qui précise notre état de corpulence en fonction de l'IMC.
 
@@ -300,8 +294,7 @@ Dans le second cas, cela permet d'afficher une alternative au cas où le tableau
 <!-- ------------------------ -->
 
 ## Ajouter du style
-
-Duration: 10
+Duration: 0:10:00
 
 Nous aimerions maintenant différencier les messages que nous affichons dans différentes couleurs :
 
@@ -463,8 +456,7 @@ Le code complet de notre composant ressemble au final à ceci :
 <!-- ------------------------ -->
 
 ## Créer un formulaire
-
-Duration: 10
+Duration: 0:10:00
 
 Pour l'instant, le poids et la taille sont définis comme des attributs du composant `Imc`. Nous voulons à présent rendre ces attributs éditables par l'utilisateur au travers de l'interface.
 Nous allons alors créer un formulaire pour pouvoir saisir notre poids et notre taille et ainsi pouvoir calculer notre IMC.
@@ -557,8 +549,7 @@ Ensuite, branchons ces nouvelles fonctions sur les events de nos inputs :
 <!-- ------------------------ -->
 
 ## Double binding
-
-Duration: 10
+Duration: 0:10:00
 
 Maintenant que nous pouvons récupérer les valeur de nos inputs, il est nécessaire de faire passer ces valeurs du composant `Form` vers le composant `Imc`.
 
@@ -653,8 +644,7 @@ Les fonctions `onPoidsChange` et `onTailleChange` ne sont donc plus nécessaires
 <!-- ------------------------ -->
 
 ## Réactivité
-
-Duration: 5
+Duration: 0:05:00
 
 Nous pouvons modifier les valeurs de `poids` et `taille` dans `Imc` depuis `Form`, mais cela ne vient pas mettre à jour la valeur d'`imc`, ni les styles car les valeurs de `imc`, `thin` et `bold` ne sont calculées qu'à la création du composant. Les évolutions de valeurs des propriétés ne sont pas prises en compte.
 
@@ -711,8 +701,7 @@ afterUpdate(() => {
 <!-- ------------------------ -->
 
 ## Évènement lors du click sur le bouton
-
-Duration: 10
+Duration: 0:10:00
 
 Pour le moment, dès qu'un changement est fait sur le formulaire, l'IMC est recalculé, ce qui, pour de gros formulaires, peut causer des soucis de performances et ne permet pas d'avoir une étape de validation.
 
@@ -894,8 +883,7 @@ En ajoutant `|preventDefault` après le `on:submit`, _Svelte_ va automatiquement
 <!-- ------------------------ -->
 
 ## Mise en place du store
-
-Duration: 10
+Duration: 0:10:00
 
 ### Présentation
 
@@ -1077,8 +1065,7 @@ Maintenant, il n'est plus nécessaire de faire passer les informations par le co
 <!-- ------------------------ -->
 
 ## Store dérivé
-
-Duration: 5
+Duration: 0:05:00
 
 En plus des stores simples **writable**, _Svelte_ propose les stores **derived**, ce store se met à jour par la modification d'un ou plusieurs autres stores.
 Ce qui est notre cas, ici, le calcule de l'IMC est un dérivé des valeurs du poids et de la taille.
@@ -1114,8 +1101,7 @@ Nous pouvons maintenant supprimer dans le fichier **Imc.svelte** la ligne qui ca
 <!-- ------------------------ -->
 
 ## Animation
-
-Duration: 10
+Duration: 0:10:00
 
 ### Présentation
 
@@ -1176,8 +1162,7 @@ Les animations sont à importer depuis `'svelte/transition'`. Dans le fichier **
 <!-- ------------------------ -->
 
 ## Modifier le titre de la page
-
-Duration: 10
+Duration: 0:05:00
 
 _Svelte_ met à disposition une collection d'[éléments spéciaux](https://svelte.dev/docs#svelte_self) qui nous donnent accès à des éléments déjà existant dans le DOM tel que la balise `head` ou `body`. Mais également à l'objet `window` pour l'ajout d'events.
 
@@ -1220,6 +1205,7 @@ L'ajout de ce code permet à _Svelte_ de venir modifier la balise `title` de not
 L'inclusion de `{$imc}` dans le titre permet également la mise à jour du titre lorsque la valeur du store `imc` change.
 
 ## SvelteKit
+Duration: 0:10:00
 
 Maintenant que nous avons fait le tour des principales fonctionnalités offertes par _Svelte_, passons à la vitesse supérieure en découvrant _SvelteKit_.
 
@@ -1316,6 +1302,7 @@ Si vous regardez dans votre package.json, vous n'aurez que des dépendances de d
 ```
 
 ## Ajouter une nouvelle page
+Duration: 0:05:00
 
 Créons une page `about.svelte` dans le répertoire `src/routes`.
 Ajoutons-y un texte spécifiant l'auteur du site :
@@ -1329,6 +1316,7 @@ Ce site a été créé par xxx lors de SnowCamp
 La page est maintenant automatiquement disponible sur l'url [http://localhost:3000/about](http://localhost:3000/about)
 
 ## Ajouter un layout
+Duration: 0:05:00
 
 Il est aussi possible d'avoir un layout commun à toutes les pages en créant un fichier `__layout.svelte` dans le répertoire `src/routes`.
 
@@ -1352,6 +1340,7 @@ La syntaxe <code>slot</code> permet d'indiquer à <i>Svelte</i> d'insérer à ce
 </aside>
 
 ## Ajouter une page de recette
+Duration: 0:10:00
 
 Il est possible d'avoir des sous-pages en créant un répertoire dans le dossier `src/routes`.
 
@@ -1473,6 +1462,7 @@ N'oublions pas d'ajouter le lien permettant d'accéder à cette nouvelle page da
 ```
 
 ## Afficher une page de détail
+Duration: 0:10:00
 
 Créons maintenant une page `[id].svelte` qui sera appelée par les url `/recettes/1` ou `recettes/2` par exemple. La variable `id` sera alors disponible directement dans la page avec la valeur passée en paramètre.
 
@@ -1557,6 +1547,7 @@ Pour que notre navigation fonctionne, il est donc nécessaire d'utiliser la synt
 $: recette = recettes[$page.params.id]
 ```
 ## Accessibilité
+Duration: 0:05:00
 
 Peut-être l'avez vous remarqué, lors de la création de la page affichant une recette, _Svelte_ nous a indiqué via un warning dans le terminal, d'un problème d'accessibilité dans notre code. (Si vous utiliser un plugin dans l'IDE, l'erreur est également affichée).
 
@@ -1577,6 +1568,7 @@ Retrouvez dans la [documentation](https://svelte.dev/docs#accessibility-warnings
 
 
 ## Ajouter du code serveur
+Duration: 0:10:00
 
 L'import d'un fichier json dans notre page inclut directement ce fichier dans le code javascript et est donc chargé dès que l'on affiche notre site. Si la liste de recettes grossie, les performances de notre site seront impactées.
 
@@ -1634,6 +1626,7 @@ La fonction exportée, est appelée avec un argument qui contient les informatio
 Nous avons maintenant une URL [/recettes/0.json](http://localhost:3000/recettes/0.json) qui retourne la première recette de notre liste.
 
 ## Utiliser notre API
+Duration: 0:10:00
 
 Il est maintenant nécessaire de modifier nos page svelte pour utiliser notre API.
 
@@ -1718,6 +1711,7 @@ La méthode retourne un objet avec les propriétés suivantes :
 - stuff : informations qui est passé aux sous-pages (que l'on récupère ensuite dans les paramètres de la fonction load)
 
 ## SSR
+Duration: 0:05:00
 
 Le serveur side rendering permet de générer le code html sur le serveur avant d'envoyer le résultat directement au navigateur.
 L'intérêt est d'améliorer les performances de la page, car il suffit alors au navigateur d'afficher le resultat sans devoir construire toute la page.
@@ -1805,7 +1799,129 @@ Dans le fichier `index.svelte` du répertoire `src/routes`, modifions le lien ve
 ```
 
 Maintenant en regardant les requettes http, nous pouvons voir que l'url `/recettes/x.json` sera préchargée au survol du lien, avant même de cliquer sur celui-ci. La page s'affichera ensuite immédiatement après un clic sur le lien.
+
+## Testing
+Duration: 0:10:00
+
+À présent, penchons nous un peu sur la partie testing. Nous allons voir comment nous pouvons tester nos composants _Svelte_.
+
+### Configuration
+
+Pour écrire des tests dans notre application, nous allons utiliser [jest](https://jestjs.io/fr/) et la  [Svelte Testing Library](https://testing-library.com/docs/svelte-testing-library/intro) .
+
+#### jest, svelte-jester & babel
+
+Commençons par installer [jest](https://jestjs.io/fr/), ainsi que [svelte-jester](https://github.com/svelteness/svelte-jester) qui va nous permettre de tester nos composants Svelte et [babel](https://babeljs.io/) pour pouvoir utiliser les modules es6.
+
+```sh:
+npm install --save-dev jest svelte-jester babel-jest @babel/preset-env
+```
+
+Ensuite, nous pouvons ajouter les scripts suivants dans le `package.json` pour pouvoir lancer les tests :
+
+```json
+  "test": "jest src",
+  "test:watch": "npm run test -- --watch"
+```
+
+Toujours dans le fichier `package.json`, configurons jest en ajoutant les lignes suivantes :
+
+```json
+ "jest": {
+   "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.svelte$": "svelte-jester"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "svelte"
+    ]
+  }
+```
+
+Configurons à présent babel en ajoutant à la racine du projet un nouveau fichier `.babelrc` :
+
+```json
+{
+    "presets": [["@babel/preset-env", {"targets": {"node": "current"}}]]
+}
+```
+
+#### @testing-library/svelte
+
+Nous allons maintenant installer [@testing-library/svelte](https://testing-library.com/docs/svelte-testing-library/intro).
+
+```shell
+npm install --save-dev @testing-library/svelte @testing-library/jest-dom
+```
+
+La configuration des outils nécessaires aux tests est terminée.
+Passons à la création des tests.
+
+### Création des tests
+
+Pour découvrir comment tester des composants _Svelte_, nous allons créer des tests sur le composant `Imc`.
+
+#### Premier test
+
+Commençons par créer notre fichier de test à côté du fichier `Imc.svelte` : `Imc.test.js`.
+
+Pour le premier test, nous allons chercher à valider le fait que l'imc est bien calculé avec les valeurs par défaut de l'application.
+
+Dans le fichier `Imc.svelte`, nous allons ajouter un identifiant de test `data-testid="imc"`sur la balise `<p>` affichant l'imc. Cela va nous permettre de sélectionner cette balise dans le DOM pour récupérer son contenu.
+
+  
+```html
+<p class:thin class:bold data-testid="imc">
+  Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {$imc}
+</p>
+```
+
+Ensuite, nous pouvons écrire notre test dans le fichier `Imc.test.js` :
+
+```js
+import '@testing-library/jest-dom'
+import { render } from '@testing-library/svelte'
+import Imc from './Imc'
+
+describe('Imc', () => {
+    it('should display default imc', () => {
+      // Chargement du composant.
+        const { getByTestId } = render(Imc)
+        // Sélectionne le <p> affichant l'Imc et récupère le contenu textuel.
+        const displayImc = getByTestId('imc').textContent;
+        // Le texte attendu, avec l'imc calculé grâce aux valeurs par défaut.
+        const expectedImc = 'Votre IMC (80/1.82) est de 24.69';
+        // La vérification.
+        expect(displayImc).toBe(expectedImc);
+    });
+});
+```
+
+Maintenant, nous pouvons lancer le test et vérifier que ce dernier passe correctement.
+
+```sh
+npm run test
+```
+
+#### Second test
+
+Un second test que nous pouvons ajouter ici est la vérification de l'affichage de l'indicateur `Vous êtes svelte !` avec l'imc par défaut.
+
+```js
+    it('should display the right health indicator', () => {
+        const { getByText } = render(Imc);
+        expect(getByText('Vous êtes svelte !')).toBeInTheDocument();
+    });
+```
+
+L'idée n'étant d'être exhaustif sur les tests du composant `Imc`, nous allons nous arrêter là pour la partie testing.
+Si vous souhaitez aller un peu plus loin, vous pourrez ajouter d'autres tests pour tester les autres états du composant. Référez vous à la documention de [@testing-library/svelte](https://testing-library.com/docs/svelte-testing-library/intro) et de [jest](https://jestjs.io/fr/) pour vous aider.
+
+
 ## Déployer l'application
+Duration: 0:10:00
 
 Pour déployer l'application créée sur un serveur, il est nécessaire d'installer un "adapter". Cet adapter va transformer le code pour générer le code statique et le code dynamique et les confirgurer en fonction de la plateforme cible.
 
@@ -1893,6 +2009,7 @@ Si vous voulez déployer sur netlify depuis votre CI, netlify fournit une ligne 
 Documentation : [https://docs.netlify.com/cli/get-started/](https://docs.netlify.com/cli/get-started/)
 
 ## Ajouter une recherche de recette sur Marmiton (Bonus)
+Duration: 0:15:00
 
 Ajoutons maintenant un formulaire de recherche pour rechercher des recettes sur le site marmiton.org.
 
@@ -2014,6 +2131,7 @@ Améliorer cette recherche :
 - Ajouter plus d'options de recherche (regarder l'api marmiton-api pour connaitre les différentes options possible) : filtre par ingrédients, par difficultés, prix, ...
 
 ## Fin
+Duration: 0:00:30
 
 Bravo ! Vous êtes arrivés à la fin de ce lab !
 Nous espérons que vous avez apprécié cette petite expérience avec _Svelte_ !

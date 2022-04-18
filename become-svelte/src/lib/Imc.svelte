@@ -9,7 +9,7 @@
 <title>Votre IMC : {$imc}</title>
 </svelte:head>
 
-<p class:thin class:bold>
+<p class:thin class:bold data-testid="imc">
   Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {$imc}
 </p>
 {#if thin}
