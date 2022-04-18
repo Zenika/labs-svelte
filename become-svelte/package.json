@@ -21,5 +21,11 @@
   "type": "module",
   "dependencies": {
     "marmiton-api": "^2.2.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.svelte$": "svelte-jester"
+    },
+    "moduleFileExtensions": ["js", "svelte"]
   }
 }
