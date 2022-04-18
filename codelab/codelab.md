@@ -883,7 +883,7 @@ Reste à ajouter le code pour afficher les résultats dans le html :
 La balise #each, permet de boucler sur un tableau, pour ensuite afficher chaque élément du tableau.
 </aside>
 
-En testant notre code, vous remarquerez que l'historique ne s'affiche pas en cliquant sur le bouton. C'est parce que _Svelte_ utilise l'affectation d'une variable pour savoir quand une donné est modifiée. Or lorsque l'on fait un push sur notre tableau, la variable n'est pas modifiée et donc _Svelte_ n'est pas au courant qu'il y a une modification.
+En testant notre code, vous remarquerez que l'historique ne s'affiche pas en cliquant sur le bouton. C'est parce que _Svelte_ utilise l'affectation d'une variable pour savoir quand une donnée est modifiée. Or lorsque l'on fait un push sur notre tableau, la variable n'est pas modifiée et donc _Svelte_ ne détecte pas la modification.
 Utilisez alors la syntaxe de décomposition pour reconstruire un nouveau tableau :
 
 ```javascription
