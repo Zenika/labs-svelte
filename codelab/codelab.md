@@ -1799,6 +1799,127 @@ Dans le fichier `index.svelte` du répertoire `src/routes`, modifions le lien ve
 ```
 
 Maintenant en regardant les requettes http, nous pouvons voir que l'url `/recettes/x.json` sera préchargée au survol du lien, avant même de cliquer sur celui-ci. La page s'affichera ensuite immédiatement après un clic sur le lien.
+
+## Testing
+Duration: 0:10:00
+
+À présent, penchons nous un peu sur la partie testing. Nous allons voir comment nous pouvons tester nos composants _Svelte_.
+
+### Configuration
+
+Pour écrire des tests dans notre application, nous allons utiliser [jest](https://jestjs.io/fr/) et la  [Svelte Testing Library](https://testing-library.com/docs/svelte-testing-library/intro) .
+
+#### jest, svelte-jester & babel
+
+Commençons par installer [jest](https://jestjs.io/fr/), ainsi que [svelte-jester](https://github.com/svelteness/svelte-jester) qui va nous permettre de tester nos composants Svelte et [babel](https://babeljs.io/) pour pouvoir utiliser les modules es6.
+
+```sh:
+npm install --save-dev jest svelte-jester babel-jest @babel/preset-env
+```
+
+Ensuite, nous pouvons ajouter les scripts suivants dans le `package.json` pour pouvoir lancer les tests :
+
+```json
+  "test": "jest src",
+  "test:watch": "npm run test -- --watch"
+```
+
+Toujours dans le fichier `package.json`, configurons jest en ajoutant les lignes suivantes :
+
+```json
+ "jest": {
+   "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.svelte$": "svelte-jester"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "svelte"
+    ]
+  }
+```
+
+Configurons à présent babel en ajoutant à la racine du projet un nouveau fichier `.babelrc` :
+
+```json
+{
+    "presets": [["@babel/preset-env", {"targets": {"node": "current"}}]]
+}
+```
+
+#### @testing-library/svelte
+
+Nous allons maintenant installer [@testing-library/svelte](https://testing-library.com/docs/svelte-testing-library/intro).
+
+```shell
+npm install --save-dev @testing-library/svelte @testing-library/jest-dom
+```
+
+La configuration des outils nécessaires aux tests est terminée.
+Passons à la création des tests.
+
+### Création des tests
+
+Pour découvrir comment tester des composants _Svelte_, nous allons créer des tests sur le composant `Imc`.
+
+#### Premier test
+
+Commençons par créer notre fichier de test à côté du fichier `Imc.svelte` : `Imc.test.js`.
+
+Pour le premier test, nous allons chercher à valider le fait que l'imc est bien calculé avec les valeurs par défaut de l'application.
+
+Dans le fichier `Imc.svelte`, nous allons ajouter un identifiant de test `data-testid="imc"`sur la balise `<p>` affichant l'imc. Cela va nous permettre de sélectionner cette balise dans le DOM pour récupérer son contenu.
+
+  
+```html
+<p class:thin class:bold data-testid="imc">
+  Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {$imc}
+</p>
+```
+
+Ensuite, nous pouvons écrire notre test dans le fichier `Imc.test.js` :
+
+```js
+import '@testing-library/jest-dom'
+import { render } from '@testing-library/svelte'
+import Imc from './Imc'
+
+describe('Imc', () => {
+    it('should display default imc', () => {
+      // Chargement du composant.
+        const { getByTestId } = render(Imc)
+        // Sélectionne le <p> affichant l'Imc et récupère le contenu textuel.
+        const displayImc = getByTestId('imc').textContent;
+        // Le texte attendu, avec l'imc calculé grâce aux valeurs par défaut.
+        const expectedImc = 'Votre IMC (80/1.82) est de 24.69';
+        // La vérification.
+        expect(displayImc).toBe(expectedImc);
+    });
+});
+```
+
+Maintenant, nous pouvons lancer le test et vérifier que ce dernier passe correctement.
+
+```sh
+npm run test
+```
+
+#### Second test
+
+Un second test que nous pouvons ajouter ici est la vérification de l'affichage de l'indicateur `Vous êtes svelte !` avec l'imc par défaut.
+
+```js
+    it('should display the right health indicator', () => {
+        const { getByText } = render(Imc);
+        expect(getByText('Vous êtes svelte !')).toBeInTheDocument();
+    });
+```
+
+L'idée n'étant d'être exhaustif sur les tests du composant `Imc`, nous allons nous arrêter là pour la partie testing.
+Si vous souhaitez aller un peu plus loin, vous pourrez ajouter d'autres tests pour tester les autres états du composant. Référez vous à la documention de [@testing-library/svelte](https://testing-library.com/docs/svelte-testing-library/intro) et de [jest](https://jestjs.io/fr/) pour vous aider.
+
+
 ## Déployer l'application
 Duration: 0:10:00
 
