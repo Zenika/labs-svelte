@@ -5,12 +5,7 @@
   const dispatch = createEventDispatcher();
 
   function handleSubmit(event) {
-    dispatch('sauvegarder', {
-			date: event.target.date.value || new Date(),
-			poids: event.target.poids.value,
-			taille: event.target.taille.value,
-			imc: event.target.poids.value / (event.target.taille.value * event.target.taille.value)
-		});
+    dispatch('sauvegarder', event.target.poids.value / (event.target.taille.value * event.target.taille.value));
   }
 </script>
 
@@ -21,10 +16,6 @@
 
   <label> Taille ({$taille.toFixed(2)} m) :
       <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={$taille} />
-  </label>
-
-  <label> Date :
-    <input name="date" type="date" />
   </label>
   <button type="submit">Sauvegarder</button>
 </form>

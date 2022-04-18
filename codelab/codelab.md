@@ -783,12 +783,7 @@ Appliquons ce que nous avons vu précédemment avec l'eventDispatcher à notre c
   export let poids = 80;
 
   function handleSubmit(event) {
-    dispatch('sauvegarder', {
-			date: event.target.date.value || new Date(),
-			poids: event.target.poids.value,
-			taille: event.target.taille.value,
-			imc: event.target.poids.value / (event.target.taille.value * event.target.taille.value)
-		});
+    dispatch('sauvegarder', event.target.poids.value / (event.target.taille.value * event.target.taille.value));
   }
 </script>
 
@@ -867,8 +862,8 @@ Reste à ajouter le code pour afficher les résultats dans le html :
 ```sveltehtml
 <h3>Evolution de l'IMC</h3>
 <ul>
-	{#each historique as item}
-		<li>{item.date.toString()}: {item.imc.toFixed(2)}</li>
+	{#each historique as item, index}
+		<li>{index + 1}: {item.toFixed(2)}</li>
 	{/each}
 </ul>
 ```
