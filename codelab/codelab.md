@@ -217,7 +217,7 @@ Voyons maintenant comment paramétrer ces variables pour permettre de recevoir c
 ## Attributs d'un composant
 Duration: 0:10:00
 
-Pour définir les paramètres d'un composant _Svelte_, dont les valeurs seront transmisent via des attributs html, il faut définir une variable et la préfixer par le mot clé `export`. (Ex: `export let monParametre;`)
+Pour définir les paramètres d'un composant _Svelte_, dont les valeurs seront transmises via des attributs html, il faut définir une variable et la préfixer par le mot clé `export`. (Ex: `export let monParametre;`)
 
 <aside class="positive">
 En javascript, le mot clé <code>export</code> permet d'indiquer que la variable ou la fonction est accessible à l'extérieur du fichier (du module).
@@ -703,10 +703,7 @@ afterUpdate(() => {
 ## Évènement lors du click sur le bouton
 Duration: 0:10:00
 
-Pour le moment, dès qu'un changement est fait sur le formulaire, l'IMC est recalculé, ce qui, pour de gros formulaires, peut causer des soucis de performances et ne permet pas d'avoir une étape de validation.
-
-Ajoutons alors un bouton "calculer" pour ne lancer le calcul de l'IMC que lors d'un click sur le bouton.
-Pour cela, il faut s'abonner au click sur le bouton et ensuite envoyer un évènement personnalisé pour mettre à jour l'IMC :
+Ajoutons maintenant la possibilité de sauvegarder notre IMC. Pour cela il est nécessaire d'ajouter un bouton `Sauvegarder` dans notre formulaire.
 
 ```sveltehtml
 <script>
@@ -723,7 +720,7 @@ Pour cela, il faut s'abonner au click sur le bouton et ensuite envoyer un évèn
     <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
   </label>
 
-  <button type="submit">Calculer</button>
+  <button type="submit">Sauvegarder</button>
 </form>
 
 ```
@@ -740,9 +737,9 @@ const dispatch = createEventDispatcher();
 Nous pouvons maintenant dispatcher des évènements personnalisés :
 
 ```javascript
-dispatch("calculer", {
-  poids,
-  taille,
+dispatch("sauvegarder", {
+  date,
+  imc,
 });
 ```
 
@@ -751,7 +748,7 @@ La fonction dispatch prends 2 arguments:
 - Le nom de l'évènement.
 - La valeur à transmettre dans l'évènement.
 
-Le composant parent peut alors s'abonner à l'évènement, de la même façon qu'un évènement DOM natif, avec la syntaxe `on:calculer={fonction_a_appeler}`.
+Le composant parent peut alors s'abonner à l'évènement, de la même façon qu'un évènement DOM natif, avec la syntaxe `on:sauvegarder={fonction_a_appeler}`.
 
 La fonction `fonction_a_appeler` du composant parent recevra alors un argument qui représente l'évènement.
 Les valeurs passées dans cet évènement sont accessibles dans la propriété `detail` de cet argument :
@@ -764,22 +761,19 @@ function fonction_a_appeler(event) {
 
 ### Évènement personnalisé
 
-Appliquons ce que nous avons vu précédemment avec l'eventDispatcher à notre composant. Nous écoutons l'évènement `submit` du formulaire et envoyons et évènement personnaliser `calculer`. Nous obtenons le code suivant :
+Appliquons ce que nous avons vu précédemment avec l'eventDispatcher à notre composant. Nous écoutons l'évènement `submit` du formulaire et envoyons un évènement personnalisé `sauvegarder`. Nous obtenons le code suivant :
 
 ```sveltehtml
 <script>
- import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
 
- const dispatch = createEventDispatcher();
- export let taille = 1.8;
- export let poids = 80;
+  const dispatch = createEventDispatcher();
+  export let taille = 1.8;
+  export let poids = 80;
 
- function handleSubmit() {
-  dispatch('calculer', {
-    poids,
-    taille
-  });
- }
+  function handleSubmit(event) {
+    dispatch('sauvegarder', event.target.poids.value / (event.target.taille.value * event.target.taille.value));
+  }
 </script>
 
 <form on:submit={handleSubmit}>
@@ -791,7 +785,7 @@ Appliquons ce que nous avons vu précédemment avec l'eventDispatcher à notre c
     <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
   </label>
 
-  <button type="submit">Calculer</button>
+  <button type="submit">Sauvegarder</button>
 </form>
 ```
 
@@ -802,67 +796,28 @@ Et dans le fichier **ImcCalculator.svelte**, nous pouvons réagir à l'évèneme
   let taille = 1.8;
   let poids = 80;
 
-  function calculerEvent(event) {
-    console.log(event)
-    poids = event.detail.poids;
-    taille = event.detail.taille;
-  }
+  function sauvegarderIMC(event) {
+		console.log(event.detail)
+	}
 </script>
 
-<Form {taille} {poids} on:calculer={calculerEvent}/>
+<Form bind:poids bind:taille on:sauvegarder={sauvegarderIMC}/>
 <Imc {taille} {poids} />
 ```
-
-### C'est pas un peu compliqué quand même ?
-
-En effet, ça l'est ! Car après tout, nous voulons juste prévenir notre composant parent que le formulaire vient d'être soumis. Nous pouvons faire plus simple.
 
 _Svelte_ met à notre disposition une petite astuce pour nous simplifier la vie dans ce genre de situation. Nous pouvons transmettre directement un event envoyé par un élément au sein de notre composant à son parent.
 
 Et la syntaxe est elle aussi très simple : `on:submit`.
 
-C'est tout, rien de plus. Avec cette syntaxe, l'event "onSubmit" sera propagé et peut donc être écouté directement sur le composant parent :
+C'est tout, rien de plus. Avec cette syntaxe, l'event "onSubmit" sera propagé et peut donc être écouté directement sur le composant parent `&lt;Form on:submit={sauvegarderIMC}/>`
 
-```sveltehtml
-<script>
-  export let poids = 0;
-  export let taille = 0;
-</script>
-
-<form on:submit>
-  <label> Poids ({poids} kg) :
-    <input name="poids" type="range" min="10" max="200" step="5" bind:value={poids} />
-  </label>
-
-  <label> Taille ({taille.toFixed(2)} m) :
-      <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
-  </label>
-
-  <button type="submit">Calculer</button>
-</form>
-```
-
-Nous devons également mettre à jour `App`, pour écouter l'événement de soumission du formulaire :
-
-```sveltehtml
-<Form {poids} {taille} on:submit={calculerEvent} />
-```
-
-Puis la fonction `calculerEvent`, qui récupère maintenant directement l'event `submit` :
-
-```javascript
-function calculerEvent(event) {
-  const formData = new FormData(event.target);
-  poids = parseFloat(formData.get("poids"));
-  taille = parseFloat(formData.get("taille"));
-}
-```
+Mais dans notre cas, cela n'est pas une bonne pratique, notre composant ne doit pas exposer directement l'évènement à son parent. Nous transformons l'événement natif en un nouvel évènement métier.
 
 ### Event modifier
 
-Une fois ce code implémenté, vous devriez remarquer que le calcul de l'IMC se modifie mais que la page est rafraîchie, car le bouton envoie le formulaire.
+Une fois ce code implémenté, vous devriez remarquer que la page est rafraîchie à chaque fois que l'on clique sur le bouton, car le bouton envoie le formulaire.
 
-Pour corriger cela, il est nécessaire en javascript d'appeler la fonction `preventDefault` sur l'objet `event` passé en paramètre de la fonction `calculerEvent`.
+Pour corriger cela, il est nécessaire en javascript d'appeler la fonction `preventDefault` sur l'objet `event` passé en paramètre de la fonction `handleSubmit`.
 Mais _Svelte_ nous simplifie la vie en apportant une syntaxe pour ajouter des modifications à un évènement.
 
 En ajoutant `|preventDefault` après le `on:submit`, _Svelte_ va automatiquement exécuter le code `event.preventDefault()` avant d'appeler votre fonction :
@@ -879,6 +834,42 @@ En ajoutant `|preventDefault` après le `on:submit`, _Svelte_ va automatiquement
 <li><code>self</code>: L'évènement n'est actif que si envoyé par l'élément DOM où l'on ajoute l'évènement.</li>
 </ul>
 </aside>
+
+### Afficher l'historique
+
+Ajoutons maintenant un tableau qui va contenir l'historique avec la date et l'IMC.
+
+```javascript
+  const historique = [];
+  function sauvegarderIMC(event) {
+    historique.push(event.detail);
+  }
+```
+
+Reste à ajouter le code pour afficher les résultats dans le html :
+
+```sveltehtml
+<h3>Evolution de l'IMC</h3>
+<ul>
+	{#each historique as item, index}
+		<li>{index + 1}: {item.toFixed(2)}</li>
+	{/each}
+</ul>
+```
+
+<aside>
+La balise #each, permet de boucler sur un tableau, pour ensuite afficher chaque élément du tableau.
+</aside>
+
+En testant notre code, vous remarquerez que l'historique ne s'affiche pas en cliquant sur le bouton. C'est parce que _Svelte_ utilise l'affectation d'une variable pour savoir quand une donnée est modifiée. Or lorsque l'on fait un push sur notre tableau, la variable n'est pas modifiée et donc _Svelte_ ne détecte pas la modification.
+Utilisez alors la syntaxe de décomposition pour reconstruire un nouveau tableau :
+
+```javascription
+	function sauvegarderIMC(event) {
+		historique = [...historique, event.detail];
+	}
+```
+
 
 <!-- ------------------------ -->
 
@@ -953,10 +944,16 @@ Voici donc le code html du formulaire :
      <label> Taille :
         <input name="taille" type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange} />
      </label>
+
+    <button type="submit">Sauvegarder</button>
    </form>
 ```
 
-et à l'inverse dans le fichier **Imc.svelte** dans la balise `&lt;script>`
+<aside class="negative">
+Remarquez que nous avons supprimé provisoirement l'affichage des valeurs dans le champ label, nous verrons plus tard comment afficher le contenu du store avec une syntaxe simplifiée.
+</aside>
+
+Dans le fichier **Imc.svelte** dans la balise `&lt;script>`, ajoutons le code pour récupérer les valeurs du store :
 
 ```javascript
 import { poids as storePoids, taille as storeTaille } from "./stores";
@@ -986,13 +983,20 @@ De même le code de la page _ImcCalculator.svelte_ est simplifié :
 	import Form from "./Form.svelte";
 
 	const name = "world";
+  let historique = [];
+
+	function sauvegarderIMC(event) {
+		historique = [...historique, event.detail];
+	}
 </script>
 
 <main>
 	<h1>Calculateur IMC</h1>
 	<p>Bonjour {name} ! Calculez votre IMC (Indice de Masse Corporelle)</p>
-	<Form />
-	<Imc />
+  <Form on:sauvegarder={sauvegarderIMC}/>
+  <Imc />
+  <h3>Evolution de l'IMC</h3>
+  <!-- [...] -->
 </main>
 ```
 
