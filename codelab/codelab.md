@@ -975,7 +975,7 @@ $: bold = imc > 25;
 
 <aside class="negative">
 Attention, le subscribe retourne une fonction qui permet de se désabonner.
-Il faut donc stocker cette fonction dans une variable et utiliser le livecycle <code>onDetroy()</code> pour nettoyer les souscriptions et éviter les fuites mémoires.
+Il faut donc stocker cette fonction dans une variable et utiliser le livecycle <code>onDestroy()</code> pour nettoyer les souscriptions et éviter les fuites mémoires.
 La syntaxe simplifiée s'en occupe automatiquement.
 </aside>
 
