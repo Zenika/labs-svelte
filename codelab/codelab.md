@@ -22,6 +22,10 @@ Duration: 0:10:00
 - Cycle de vie des composants
 - Stores et contexte
 - Animations
+- Sveltekit
+- SSR
+- Test
+- Déploiement
 
 ### Présentation de Svelte
 
@@ -384,7 +388,7 @@ puis on ajoute les classes dans la balise style de notre composant :
 ```
 
 C'est plutôt pratique, mais avec cette façon de faire nous utilisons les même conditions à 2 endroits différents, ce qui n'est pas idéal en terme de maintenabilité.
-Pour remédier à ce "problème", _Svelte_ dispose met à disposition un sucre syntaxique extrémement pratique.
+Pour remédier à ce "problème", _Svelte_ met à disposition un sucre syntaxique extrémement pratique.
 Si la classe et la variable qui conditionne son affichage portent le même nom, alors nous pouvons simplement écrire `class:condition`.
 
 Dans notre cas, commençons donc par ajouter nos conditions dans 2 nouvelles variables :
