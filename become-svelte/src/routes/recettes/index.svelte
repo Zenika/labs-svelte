@@ -52,7 +52,7 @@
 	<input type="submit" value="Rechercher" />
 </form>
 <section class="recettes">
-    {#each recettes as item, index}
+    {#each recettes as item, index (item.name)}
         <article>
 			<div>
 				<h2><a sveltekit:prefetch href="{item.url ?? `/recettes/${index}`}">{item.name}</a></h2>

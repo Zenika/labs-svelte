@@ -1443,7 +1443,7 @@ Pour afficher ces recettes, nous avons juste à importer dans notre page _Svelte
 Nous pouvons ensuite parcourir la liste pour afficher les différentes recettes :
 ```sveltehtml
 <section class="recettes">
-    {#each recettes as item, index}
+    {#each recettes as item, index (item.name)}
         <article>
             <div>
               <h2>{item.name}</h2>
@@ -1456,7 +1456,7 @@ Nous pouvons ensuite parcourir la liste pour afficher les différentes recettes 
 ```
 
 <aside>
-La syntaxe <code>{#each recettes as item}{/each}</code> permet d'itérer sur un tableau pour afficher une liste en créant une variable item pour réccupérer l'élément en cours lors de l'itération.
+La syntaxe <code>{#each recettes as item (item.name)}{/each}</code> permet d'itérer sur un tableau pour afficher une liste en créant une variable item pour réccupérer l'élément en cours lors de l'itération. Le <code>(item.name)</code> permet d'indiquer la clé de notre élément et ainsi permettre d'optimiser le rendu si l'élément DOM existe déjà.
 </aside>
 
 N'oublions pas d'ajouter le lien permettant d'accéder à cette nouvelle page dans le fichier de layout :
@@ -1518,7 +1518,7 @@ Sur la page de recette, il est maintenant nécessaire d'ajouter un lien vers la 
 Pour cela récupérons l'index de la recette et ajoutons simplement une ligne vers `/recettes/{index}` comme ceci :
 
 ```sveltehtml
-    {#each recettes as item, index}
+    {#each recettes as item, index (item.name)}
         <article>
             <div>
                 <h2><a href="/recettes/{index}">{item.name}</a></h2>
@@ -2117,7 +2117,7 @@ Nous faisons ici un appel vers notre API POST que nous avons écrit juste avant 
 Comme l'API de recherche ne nous permet pas de récupérer les infos d'une recette, et que nous n'avons pas l'image, il est nécessaire d'adapter un peu le code qui affiche les recettes : 
 ```sveltehtml
 <section class="recettes">
-    {#each recettes as item, index}
+    {#each recettes as item, index (item.name)}
         <article>
             <h2><a sveltekit:prefetch href="{item.url ?? `/recettes/${index}`}">{item.name}</a></h2>
             <h3>⏱ {item.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][item.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][item.budget||0]} 😋 {item.people} Personnes</h3>
