@@ -559,7 +559,7 @@ Maintenant que nous pouvons récupérer les valeur de nos inputs, il est nécess
 
 ### Descendre une valeur d'un composant parent
 
-Pour cela, il nous faut passer par le composant `App` pour faire passer les valeurs.
+Pour cela, il nous faut passer par le composant ImcCalculator pour faire passer les valeurs.
 
 Ajoutons deux variables dans le fichier **ImcCalculator.svelte** à l'intérieur de la balise `&lt;script>&lt;/script>`
 
@@ -591,8 +591,8 @@ et dans le fichier **ImcCalculator.svelte**
 <Form {taille} {poids} />
 ```
 
-Les valeurs de `taille` et `poids` du composant `App` sont désormais transmises dans les composants `Form` et `Imc`.
-Nous pouvons également modifier ces valeurs au sein du composant `Form` via les inputs mais ces mises à jour ne modifient pas les valeurs dans le composant `Imc` car les modifications ne sont jamais remontées jusque dans `App`.
+Les valeurs de `taille` et `poids` du composant `ImcCalculator` sont désormais transmises dans les composants `Form` et `Imc`.
+Nous pouvons également modifier ces valeurs au sein du composant `Form` via les inputs mais ces mises à jour ne modifient pas les valeurs dans le composant `Imc` car les modifications ne sont jamais remontées jusque dans `ImcCalculator`.
 
 ### Le Double Binding à la rescousse !
 
@@ -604,7 +604,7 @@ Pour ce faire, nous utilisons le mot clé `bind`.
 
 Ajouter `bind:` devant une propriété permet de s'assurer que toutes les mises à jour de cette propriété dans l'enfant seront aussi transmises à la variable associée dans le parent.
 
-Nous pouvons donc faire ceci sur le composant `Form` dans le composant `App` :
+Nous pouvons donc faire ceci sur le composant `Form` dans le composant `ImcCalculator` :
 
 ```sveltehtml
 <Form bind:poids bind:taille />
@@ -1068,7 +1068,7 @@ Dans le fichier **Imc.svelte** :
 </p>
 ```
 
-Maintenant, il n'est plus nécessaire de faire passer les informations par le composant `App`. Nous pourrions également avoir d'autres composants qui utilisent ce store.
+Maintenant, il n'est plus nécessaire de faire passer les informations par le composant `ImcCalculator`. Nous pourrions également avoir d'autres composants qui utilisent ce store.
 
 <!-- ------------------------ -->
 
