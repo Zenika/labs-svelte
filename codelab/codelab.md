@@ -1087,7 +1087,7 @@ export const storeImc = derived([storePoids, storeTaille], ([$poids, $taille]) =
 });
 ```
 
-Nous pouvons maintenant supprimer dans le fichier **Imc.svelte** la ligne qui calcule l'IMC est utiliser à la place la syntaxe simplifiée du store dérivée `$storeImc` :
+Nous pouvons maintenant supprimer dans le fichier **Imc.svelte** la ligne qui calcule l'IMC et utiliser à la place la syntaxe simplifiée du store dérivé `$storeImc` :
 
 ```sveltehtml
 <script>
