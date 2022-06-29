@@ -1,16 +1,16 @@
 <script>
-  import { poids, taille, imc } from "./stores";
+  import { storePoids, storeTaille, storeImc } from "./stores";
   import { fly, fade } from 'svelte/transition';
-  $: thin = $imc < 18
-  $: bold = $imc > 25
+  $: thin = $storeImc < 18
+  $: bold = $storeImc > 25
 </script>
 
 <svelte:head>
-<title>Votre IMC : {$imc}</title>
+<title>Votre IMC : {$storeImc}</title>
 </svelte:head>
 
 <p class:thin class:bold data-testid="imc">
-  Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {$imc}
+  Votre IMC ({$storePoids}/{$storeTaille}<sup>2</sup>) est de {$storeImc}
 </p>
 {#if thin}
 <p class="souspoids" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes maigre</p>

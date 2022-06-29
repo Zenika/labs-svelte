@@ -918,49 +918,45 @@ Pour cela, créons un fichier javascript (il ne contient que du code, et pas de 
 ```javascript
 import { writable } from "svelte/store";
 
-export const poids = writable(80);
-export const taille = writable(1.8);
+export const storePoids = writable(80);
+export const storeTaille = writable(1.8);
 ```
 
 Maintenant, nous pouvons modifier notre fichier **Form.svelte** pour utiliser notre store :
 
 ```javascript
-import { poids, taille } from "./stores";
+import { storePoids, storeTaille } from "./stores";
 
-function onPoidsChange(event) {
-  poids.set(event.target.value);
-}
-function onTailleChange(event) {
-  taille.set(parseFloat(event.target.value));
+let poids = 0;
+let taille = 0;
+
+function handlerSubmit(event) {
+  storePoids.set(poids);
+  storeTaille.set(parseFloat(taille);
+  dispatch("sauvegarder", (poids / taille ** 2).toFixed(2));
 }
 ```
-
-Nous allons repasser dans le premier mode de fonctionnement en s'abonnant directement sur les évènements des champs `poids` et `taille` et supprimer le bouton calculer.
 
 Voici donc le code html du formulaire :
 
 ```
-   <form>
-     <label> Poids :
-        <input name="poids" type="range" min="10" max="200" step="5" on:input={onPoidsChange} />
+   <form on:submit={handleSubmit}>
+     <label> Poids ({poids} kg) :
+        <input name="poids" type="range" min="10" max="200" step="5" bind:value={poids} />
      </label>
 
-     <label> Taille :
-        <input name="taille" type="range" min="0.5" max="2.5" step="0.01" on:input={onTailleChange} />
+     <label> Taille ({taille} m) :
+        <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={taille} />
      </label>
 
     <button type="submit">Sauvegarder</button>
    </form>
 ```
 
-<aside class="negative">
-Remarquez que nous avons supprimé provisoirement l'affichage des valeurs dans le champ label, nous verrons plus tard comment afficher le contenu du store avec une syntaxe simplifiée.
-</aside>
-
 Dans le fichier **Imc.svelte** dans la balise `&lt;script>`, ajoutons le code pour récupérer les valeurs du store :
 
 ```javascript
-import { poids as storePoids, taille as storeTaille } from "./stores";
+import { storePoids, storeTaille } from "./stores";
 
 let poids;
 let taille;
@@ -1033,22 +1029,22 @@ mais tout object <code>Observable</code> (qui possède un subscribe, unsubscribe
 
 ### Utiliser la syntaxe simplifiée dans notre application
 
-Grâce à la syntaxe simplifiée, nous pouvons avoir un template très simple en utilisant <code>$poids</code> et <code>$taille</code> comme si elles étaient de simple variables.
+Grâce à la syntaxe simplifiée, nous pouvons avoir un template très simple en utilisant <code>$storePoids</code> et <code>$storeTaille</code> comme si elles étaient de simple variables.
 
 Dans le fichier **Form.svelte** :
 
 ```sveltehtml
 <script>
- import { poids, taille } from './stores'
+ import { storePoids, storeTaille } from './stores'
 </script>
 
 <form>
-  <label> Poids ({$poids} kg) :
-    <input name="poids" type="range" min="10" max="200" step="5" bind:value={$poids} />
+  <label> Poids ({$storePoids} kg) :
+    <input name="poids" type="range" min="10" max="200" step="5" bind:value={$storePoids} />
   </label>
 
-  <label> Taille ({$taille.toFixed(2)} m) :
-    <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={$taille} />
+  <label> Taille ({$storeTaille.toFixed(2)} m) :
+    <input name="taille" type="range" min="0.5" max="2.5" step="0.01" bind:value={$storeTaille} />
   </label>
 </form>
 ```
@@ -1057,14 +1053,14 @@ Dans le fichier **Imc.svelte** :
 
 ```sveltehtml
 <script>
- import { poids, taille } from './stores'
-  $: imc = ($poids / $taille ** 2).toFixed(2)
+ import { storePoids, storeTaille } from './stores'
+  $: imc = ($storePoids / $storeTaille ** 2).toFixed(2)
   $: thin = imc < 18
   $: bold = imc > 25
 </script>
 
 <p class:thin class:bold>
-  Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {imc}
+  Votre IMC ({$storePoids}/{$storeTaille}<sup>2</sup>) est de {imc}
 </p>
 ```
 
@@ -1083,26 +1079,26 @@ Ajoutons dans le fichier `stores.js`, ce nouveau store dérivé :
 ```javascript
 import { derived, writable } from "svelte/store";
 
-export const poids = writable(80);
-export const taille = writable(1.8);
+export const storePoids = writable(80);
+export const storeTaille = writable(1.8);
 
-export const imc = derived([poids, taille], ([$poids, $taille]) => {
+export const storeImc = derived([storePoids, storeTaille], ([$poids, $taille]) => {
   return ($poids / $taille ** 2).toFixed(2);
 });
 ```
 
-Nous pouvons maintenant supprimer dans le fichier **Imc.svelte** la ligne qui calcule l'IMC est utiliser à la place la syntaxe simplifiée du store dérivée `$imc` :
+Nous pouvons maintenant supprimer dans le fichier **Imc.svelte** la ligne qui calcule l'IMC et utiliser à la place la syntaxe simplifiée du store dérivé `$storeImc` :
 
 ```sveltehtml
 <script>
-  import { poids, taille, imc } from './stores'
+  import { storePoids, storeTaille, storeImc } from './stores'
 
-  $: thin = $imc < 18
-  $: bold = $imc > 25
+  $: thin = $storeImc < 18
+  $: bold = $storeImc > 25
 </script>
 
 <p class:thin class:bold>
-  Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {$imc}
+  Votre IMC ({$storePoids}/{$storeTaille}<sup>2</sup>) est de {$storeImc}
 </p>
 ```
 
@@ -1142,15 +1138,15 @@ Les animations sont à importer depuis `'svelte/transition'`. Dans le fichier **
 
 ```sveltehtml
 <script>
-  import { poids, taille, imc } from './stores'
+  import { storePoids, storeTaille, storeImc } from './stores'
   import { fly, fade } from 'svelte/transition';
 
-  $: thin = $imc < 18
-  $: bold = $imc > 25
+  $: thin = $storeImc < 18
+  $: bold = $storeImc > 25
 </script>
 
 <p class:thin class:bold>
-  Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {$imc}
+  Votre IMC ({$storePoids}/{$storeTaille}<sup>2</sup>) est de {$storeImc}
 </p>
 {#if thin}
   <p class="souspoids" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
@@ -1180,19 +1176,19 @@ Pour cela, utilisons l'élément spécial `&lt;svelte:head>` :
 
 ```sveltehtml
 <script>
-  import { poids, taille, imc } from './stores'
+  import { storePoids, storeTaille, storeImc } from './stores'
   import { fly, fade } from 'svelte/transition';
 
-  $: thin = $imc < 18
-  $: bold = $imc > 25
+  $: thin = $storeImc < 18
+  $: bold = $storeImc > 25
 </script>
 
 <svelte:head>
-  <title>Votre IMC : {$imc}</title>
+  <title>Votre IMC : {$storeImc}</title>
 </svelte:head>
 
 <p class:thin class:bold>
-  Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {$imc}
+  Votre IMC ({$storePoids}/{$storeTaille}<sup>2</sup>) est de {$storeImc}
 </p>
 {#if thin}
   <p class="souspoids" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
@@ -1210,7 +1206,7 @@ Pour cela, utilisons l'élément spécial `&lt;svelte:head>` :
 ```
 
 L'ajout de ce code permet à _Svelte_ de venir modifier la balise `title` de notre page à chaque fois que le composant est inclus dans notre page.
-L'inclusion de `{$imc}` dans le titre permet également la mise à jour du titre lorsque la valeur du store `imc` change.
+L'inclusion de `{$storeImc}` dans le titre permet également la mise à jour du titre lorsque la valeur du store `imc` change.
 
 ## SvelteKit
 Duration: 0:10:00
@@ -1882,7 +1878,7 @@ Dans le fichier `Imc.svelte`, nous allons ajouter un identifiant de test `data-t
   
 ```html
 <p class:thin class:bold data-testid="imc">
-  Votre IMC ({$poids}/{$taille}<sup>2</sup>) est de {$imc}
+  Votre IMC ({$storePoids}/{$storeTaille}<sup>2</sup>) est de {$storeImc}
 </p>
 ```
 

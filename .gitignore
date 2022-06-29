@@ -111,3 +111,5 @@ template/package-lock.json
 
 # Netlify
 .netlify
+
+labs-svelte/
