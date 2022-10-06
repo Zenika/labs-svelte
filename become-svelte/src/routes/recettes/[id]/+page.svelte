@@ -1,27 +1,8 @@
-<script context="module">
-	/** @type {import('@sveltejs/kit').Load} */
-	export async function load({ params, fetch }) {
-		const url = `/recettes/${params.id}.json`;
-		const res = await fetch(url);
-
-		if (res.ok) {
-			return {
-				props: {
-					recette: await res.json()
-				}
-			};
-		}
-
-		return {
-			status: res.status,
-			error: new Error(`Could not load ${url}`)
-		};
-	}
-</script>
 <script>
 import { page } from '$app/stores';
 
-export let recette;
+export let data;
+$: recette = data.recette;
 </script>
 
 <section class="recette">
