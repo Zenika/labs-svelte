@@ -27,7 +27,7 @@ npm run dev
 npm run dev -- --open
 ```
 
-L'application souvrira directement dans votre navigateur par défaut à l'adresse http://localhost:3000/
+L'application souvrira directement dans votre navigateur par défaut à l'adresse http://localhost:5173/
 
 ## Construire l'application
 

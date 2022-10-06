@@ -4,10 +4,10 @@
 	let query;
 
 	async function submitForm() {
-		const submit = await fetch('/recettes/search.json', {
+		const submit = await fetch('/recettes/search', {
 		method: 'POST',
 		headers: {
-			'Accept': 'application/json, text/plain, */*',
+			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({ query }),
