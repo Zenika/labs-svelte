@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 
 /** @type {import('@sveltejs/kit').PageLoad} */
 export async function load({ fetch }) {
-	const url = `/recettes.json`;
+	const url = `/recettes`;
 	const res = await fetch(url);
 
 	if (res.ok) {

@@ -1,4 +1,4 @@
-import { json as json$1 } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 import { searchRecipes, MarmitonQueryBuilder } from 'marmiton-api'
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
@@ -10,5 +10,5 @@ export async function POST({ request }) {
     .build()
     const recipes = await searchRecipes(query, { limit: 6 })
 
-    return new Response(JSON.stringify(recipes));
+    return json(recipes);
 }

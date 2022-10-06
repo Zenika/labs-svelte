@@ -15,9 +15,9 @@
 {#if thin}
 <p class="souspoids" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes maigre</p>
 {:else if bold}
-<p class="surpoids"  in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en surpoids</p>
+<p class="surpoids" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes en surpoids</p>
 {:else}
-<p class="normal"  in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes svelte !</p>
+<p class="normal" in:fly="{{ y: 200, duration: 2000 }}" out:fade>Vous êtes svelte !</p>
 {/if}
 <style>
 .normal {
