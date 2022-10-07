@@ -113,6 +113,7 @@ Vous vous retrouvez avec une application _SvelteKit_  Voici les différents fich
 
 - **package.json** : Contient les dépendances, ainsi que les scripts `dev` (pour lancer le projet en développement) ou `build` (pour construire l'application finale).
 - **svelte.config.js** : Configuration pour _SvelteKit_.
+- **vite.config.js** : Configuration pour Vite.
 - **static** : Les ressources statiques du projet.
 - **src**: Les fichiers sources de l'application où seront ajoutés les différents composants.
   - **lib** : Les composants commun de l'application, c'est dans ce répertoire que l'on va travailler pour tous le début du codelab
@@ -128,7 +129,7 @@ Maintenant, lançons le projet :
 npm run dev
 ```
 
-En ouvrant le navigateur à l'url [http://localhost:3000/](http://localhost:3000/) vous verrez la page de notre application :
+En ouvrant le navigateur à l'url [http://localhost:5173/](http://localhost:5173/) vous verrez la page de notre application :
 
 ![Capture step 1](./assets/capture-step1.png)
 
@@ -388,7 +389,7 @@ puis on ajoute les classes dans la balise style de notre composant :
 ```
 
 C'est plutôt pratique, mais avec cette façon de faire nous utilisons les même conditions à 2 endroits différents, ce qui n'est pas idéal en terme de maintenabilité.
-Pour remédier à ce "problème", _Svelte_ met à disposition un sucre syntaxique extrémement pratique.
+Pour remédier à ce "problème", _Svelte_ met à disposition un sucre syntaxique extrêmement pratique.
 Si la classe et la variable qui conditionne son affichage portent le même nom, alors nous pouvons simplement écrire `class:condition`.
 
 Dans notre cas, commençons donc par ajouter nos conditions dans 2 nouvelles variables :
@@ -1213,7 +1214,7 @@ Duration: 0:10:00
 
 Maintenant que nous avons fait le tour des principales fonctionnalités offertes par _Svelte_, passons à la vitesse supérieure en découvrant _SvelteKit_.
 
-SvelteKit est un framework, basé sur _Svelte_, permettant de construire des sites ultra performants en intégrant notament les fonctionnalités suivantes :
+SvelteKit est un framework, basé sur _Svelte_, permettant de construire des sites ultra performants en intégrant notamment les fonctionnalités suivantes :
 - Un router
 - Une api avec de nouvelles fonctionnalités
 - De la génération de pages côté serveur
@@ -1289,17 +1290,15 @@ Si vous regardez dans votre package.json, vous n'aurez que des dépendances de d
   "name": "become-svelte",
   "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
-    "package": "svelte-kit package",
-    "preview": "svelte-kit preview"
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
-    "@sveltejs/adapter-netlify": "^1.0.0-next.38",
     "@sveltejs/kit": "next",
-    "netlify-cli": "^8.6.20",
-    "svelte": "^3.44.0"
+    "svelte": "^3.50.0",
+    "vite": "^3.1.0"
   },
   "type": "module"
 }
@@ -1308,8 +1307,10 @@ Si vous regardez dans votre package.json, vous n'aurez que des dépendances de d
 ## Ajouter une nouvelle page
 Duration: 0:05:00
 
-Créons une page `about.svelte` dans le répertoire `src/routes`.
-Ajoutons-y un texte spécifiant l'auteur du site :
+
+Créons un répertoire `about` dans le répertoire `src/routes`.
+La structure des répertoires dans `src/routes` va représenter la structure de notre site web.
+Créons ensuite une fichier `+page.svelte` dans le répertoire `src/routes/about` qui va contenir le contenue de la page :
 
 ```sveltehtml
 <p>
@@ -1317,12 +1318,12 @@ Ce site a été créé par xxx lors de Breizhcamp 2022
 </p>
 ```
 
-La page est maintenant automatiquement disponible sur l'url [http://localhost:3000/about](http://localhost:3000/about)
+La page est maintenant automatiquement disponible sur l'url [http://localhost:5173/about](http://localhost:5173/about)
 
 ## Ajouter un layout
 Duration: 0:05:00
 
-Il est aussi possible d'avoir un layout commun à toutes les pages en créant un fichier `__layout.svelte` dans le répertoire `src/routes`.
+Il est aussi possible d'avoir un layout commun à toutes les pages en créant un fichier `+layout.svelte` dans le répertoire `src/routes`.
 
 ```sveltehtml
 <script>
@@ -1346,13 +1347,13 @@ La syntaxe <code>slot</code> permet d'indiquer à <i>Svelte</i> d'insérer à ce
 ## Ajouter une page de recette
 Duration: 0:10:00
 
-Il est possible d'avoir des sous-pages en créant un répertoire dans le dossier `src/routes`.
+Il est possible d'avoir des sous-pages en créant une hiérarchie de répertoire dans le dossier `src/routes`.
 
 Nous allons ajouter sur notre site une page listant des recettes de cuisine, permettant ensuite d'avoir le détail de la recette.
 
 Créons un répertoire `recettes` dans `src/routes`.
 
-Ensuite, en ajoutant une page `index.svelte` dans ce répertoire, nous définissons la page qui s'affichera pour l'url `/recettes`.
+Ensuite, en ajoutant une page `+page.svelte` dans ce répertoire, nous définissons la page qui s'affichera pour l'url `/recettes`.
 
 ### Liste des recettes
 
@@ -1468,9 +1469,11 @@ N'oublions pas d'ajouter le lien permettant d'accéder à cette nouvelle page da
 ## Afficher une page de détail
 Duration: 0:10:00
 
-Créons maintenant une page `[id].svelte` qui sera appelée par les url `/recettes/1` ou `recettes/2` par exemple. La variable `id` sera alors disponible directement dans la page avec la valeur passée en paramètre.
+Créons maintenant une répertoire `[id]` qui sera appelée par les url `/recettes/1` ou `recettes/2` par exemple. La variable `id` sera alors disponible directement dans la page avec la valeur passée en paramètre.
 
-Pour récupérer les parametres _SvelteKit_ fournit un **store** `page` depuis `$app/stores` qui permet de récupérer les parametres et autres informations sur la page :
+Pour récupérer les paramètres _SvelteKit_ fournit un **store** `page` depuis `$app/stores` qui permet de récupérer les paramètres et autres informations sur la page.
+
+Ajoutons donc dans le fichier `+page.svelte` dans le répertoire `src/routes/recettes/[id]`, le code suivant :
 
 ```sveltehtml
 <script>
@@ -1543,7 +1546,7 @@ Ajoutons en bas de la page de détail, des liens pour naviguer automatiquement �
 
 Testons maintenant ce lien. Nous remarquons que le changement de page ne fonctionne pas, la page ne réagit pas.
 
-La récupération du paramètre dans le store de la page est une notion dite "réactive". Le composant de la page n'est pas réinitilisé lorsque nous changeons simplement un paramètre de la page.
+La récupération du paramètre dans le store de la page est une notion dite "réactive". Le composant de la page n'est pas réinitialisé lorsque nous changeons simplement un paramètre de la page.
 
 Pour que notre navigation fonctionne, il est donc nécessaire d'utiliser la syntaxe de réactivité de _Svelte_ pour récupérer la bonne recette :
 
@@ -1578,47 +1581,48 @@ L'import d'un fichier json dans notre page inclut directement ce fichier dans le
 
 La force de _SvelteKit_  c'est aussi de permettre d'écrire du code front et back au même endroit, sans distinction.
 
-Un fichier au format `.svelte` sera affiché dans le front, alors qu'un fichier au format `.js` (ou `.ts` si nous utilisons TypeScript) sera alors executé côté serveur.
+Un fichier nommé `+page.svelte` sera affiché dans le front, alors qu'un fichier au format `+server.js` (ou `.ts` si nous utilisons TypeScript) sera alors exécuté côté serveur.
 
-Lorsque nous ajoutons une extension juste avant le `.js`, alors l'url prendra en compte cette dernière pour définir le type du fichier. Par exemple, le fichier `recettes.json.js` sera alors accessible par l'url '/recettes.json'. Il est conseillé d'utiliser ce type d'extesion si nos pages et notre API se trouvent exactement au même endroit. Sinon ,entre le fichier `recettes.svelte` ou `recettes.js`, _SvelteKit_ appellera en priorité le fichier `.js`.
+Lorsque nous ajoutons une extension dans le nom d'un répertoire, alors l'url prendra en compte cette dernière pour définir le type du fichier. Par exemple, le répertoire `recettes.json` sera alors accessible par l'url '/recettes.json'. Il est conseillé d'utiliser ce type d'extension si nos pages et notre API se trouvent exactement au même endroit. Sinon ,entre le fichier `recettes/+page.svelte` ou `recettes/+server.js`, _SvelteKit_ appellera l'un ou l'autre en fonction de la méthode HTTP ou du header `accept`.
 
 
-### /recettes.json
+### /recettes
 
 Développons maintenant une API pour récupérer les recettes, et ne pas importer l'intégralité de notre fichier json dans nos pages html.
 
-Pour ce faire, commencons par créer une page `index.json.js` dans le répertoire `src/route/recettes`
+Pour ce faire, commençons par créer une page `+server.js` dans le répertoire `src/route/recettes/`
 
 ```javascript
+import { json } from '@sveltejs/kit';
 import recettes from "./recettes.json";
 
-export function get() {
-	return {
-        body: recettes.map(({ ingredients, steps, credit, ...rest }) => rest)
-    };
+export function GET() {
+	return json(recettes.map(({ ingredients, steps, url, ...rest }) => rest));
 }
 ```
 
 Pour écrire le code serveur, nous ajoutons et exportons une fonction du nom de la méthode http que nous voulons gérer (ici GET).
 
-La fonction doit retourner un objet avec les propriétés suivantes :
-- status : Status HTTP de la réponse, si celui-ci n'est pas indiqué, indique le status 200.
-- headers : Si nous voulons indiquer des headers. À ajouter soit sous la forme d'une liste de string ou d'un objet clé/valeur.
-- body : Si le body est de type `object` et que nous n'avons pas donné de contentType dans les headers, alors l'objet est automatiquement transformé en json.
+La fonction doit retourner un objet Response, qui dans le cas d'une API, peut utiliser la méthode utilitaire `json` pour retourner un objet json.
 
-Nous avons maintenant une URL [/recettes.json](http://localhost:3000/recettes.json) qui retourne notre liste de recettes (auxquelles nous avons supprimé les propriétés ingredients et steps).
+Nous avons maintenant une URL [/recettes](http://localhost:5173/recettes.json) qui retourne notre liste de recettes (auxquelles nous avons supprimé les propriétés ingredients et steps).
 
-### /recettes/1.json
+Pour la tester, il est nécessaire de mettre un header `accept` à `application/json` dans notre requête.
 
-Ajoutons maintenant une API pour récupérer une recette selon son `id`. Pour cela créons une page `[id].json.js` dans le répertoire `src/route/recettes`.
+### /recettes/1
+
+Ajoutons maintenant une API pour récupérer une recette selon son `id`. Pour cela créons un répertoire `[id]` dans le répertoire `src/route/recettes`.
+Puis dans le fichier `+server.js` :
 
 ```javascript
-import recettes from "./recettes.json";
+import { json, error } from '@sveltejs/kit';
+import recettes from "../recettes.json";
 
-export function get({ params }) {
-	return {
-        body: recettes[params.id]
-    };
+export function GET({ params }) {
+	if (params.id < 0 || params.id >= recettes.length) {
+		throw error(404, 'Not found');
+	}
+	return json(recettes[params.id]);
 }
 ```
 
@@ -1627,76 +1631,68 @@ La fonction exportée, est appelée avec un argument qui contient les informatio
 - url : L'url de la page.
 - params : Une map avec les paramètres de la page (les paramètres entre [] dans le nom du fichier).
 
-Nous avons maintenant une URL [/recettes/0.json](http://localhost:3000/recettes/0.json) qui retourne la première recette de notre liste.
+Nous avons maintenant une URL [/recettes/0](http://localhost:5173/recettes/0) qui retourne la première recette de notre liste.
+
+La méthode `error(statusCode, texte)` permet de retourner une erreur avec un code et un texte.
 
 ## Utiliser notre API
 Duration: 0:10:00
 
 Il est maintenant nécessaire de modifier nos page svelte pour utiliser notre API.
 
-Ce code doit être executé également côté serveur lors du server side rendering, il est donc nécessaire d'utiliser la balise `&lt;script context="module"&gt;`.
+Ce code doit être exécuté également côté serveur lors du server side rendering, il est donc nécessaire de créer du code dans une fichier nommé `+page.js`
 
-Sveltekit permet d'écrire une fonction nommée `load` qui va s'executer lors du chargement de la page.
-Cette fonction peut retourner un objet props qui contient les paramètres que l'on veut faire passer à notre page qui possède alors une propriété en entrée du composant (via `export let propname;`).
+Sveltekit permet d'écrire une fonction nommée `load` qui va s'exécuter lors du chargement de la page.
+Cette fonction peut retourner un objet javascript qui contient les paramètres que l'on peut récupérer dans notre page via la propriété data (via `export let data;`).
 
 ### Page des recettes
 
-Remplaçons dans la page `index.svelte`, la balise script par le code suivant :
+Créons une page `+page.js` dans le répertoire `src/routes/recettes` le code suivant :
+
 ```
-<script context="module">
-	/** @type {import('@sveltejs/kit').Load} */
-	export async function load({ fetch }) {
-		const url = `/recettes.json`;
-		const res = await fetch(url);
+import { error } from '@sveltejs/kit';
 
-		if (res.ok) {
-			return {
-				props: {
-					recettes: await res.json()
-				}
-			};
-		}
+/** @type {import('@sveltejs/kit').PageLoad} */
+export async function load({ fetch }) {
+	const url = `/recettes`;
+	const res = await fetch(url);
 
+	if (res.ok) {
 		return {
-			status: res.status,
-			error: new Error(`Could not load ${url}`)
+			recettes: await res.json()
 		};
 	}
-</script>
-<script>
-    export let recettes = [];
-</script>
+
+	throw error(500, `Could not load ${url}`);
+}
+```
+
+Puis modifions le code dans la balise script dans le fichier `src/routes/recettes/+page.svelte` :
+
+```javascript
+	export let data;
+	const recettes = data.recettes;
 ```
 
 ### Page détail d'une recette
 
-Remplaçons la balise `script` par le code suivant :
-```sveltehtml
-<script context="module">
-	/** @type {import('@sveltejs/kit').Load} */
-	export async function load({ params, fetch }) {
-		const url = `/recettes/${params.id}.json`;
-		const res = await fetch(url);
+Créons une page `+page.js` dans le répertoire `src/routes/recettes/[id]` le code suivant :
+```javascript
+import { error } from '@sveltejs/kit';
 
-		if (res.ok) {
-			return {
-				props: {
-					recette: await res.json()
-				}
-			};
-		}
+/** @type {import('@sveltejs/kit').PageLoad} */
+export async function load({ params, fetch }) {
+	const url = `/recettes/${params.id}`;
+	const res = await fetch(url);
 
+	if (res.ok) {
 		return {
-			status: res.status,
-			error: new Error(`Could not load ${url}`)
+			recette: await res.json()
 		};
 	}
-</script>
-<script>
-import { page } from '$app/stores';
 
-export let recette;
-</script>
+	throw error(500, `Could not load ${url}`);
+}
 ```
 
 La fonction `load`, permet de récupérer plusieurs éléments :
@@ -1706,19 +1702,37 @@ La fonction `load`, permet de récupérer plusieurs éléments :
 - session : Donnée de session qui est accessible côté serveur et côté client.
 - stuff : Donnée que l'on réucupère depuis le layout.
 
-La méthode retourne un objet avec les propriétés suivantes :
-- status : Status HTTP de la page.
-- error : Si la fonction load a une erreur (status doit alors est de type 4xx ou 5xx)
-- redirect : Pour rediriger vers une autre page (status doit être de type 3xx)
-- maxage : indique la durée de mise en cache de la page
-- props : les informations que l'on passe au composant de la page lors de son affichage
-- stuff : informations qui est passé aux sous-pages (que l'on récupère ensuite dans les paramètres de la fonction load)
+La méthode retourne un objet qui sera récupéré dans la page via la propriété data (via `export let data;`).
 
+Si la méthode veut retourner une erreur, il faut envoyer via un `throw` la méthode `error(statusCode, texte)`. :
+
+```
+import { error } from '@sveltejs/kit';
+
+if (!admin)
+  throw error(403, 'not admin');
+```
+
+Si nous voulons faire une redirection, il faut envoyer via un `throw` la méthode `redirect(url)`. :
+
+```
+import { redirect } from '@sveltejs/kit';
+
+if (!user)
+  throw redirect('/login');
+```
+
+Puis modifions le code dans la balise script dans le fichier `src/routes/recettes/[id]/+page.svelte` :
+
+```javascript
+	export let data;
+	$: recette = data.recette;
+```
 ## SSR
 Duration: 0:05:00
 
 Le serveur side rendering permet de générer le code html sur le serveur avant d'envoyer le résultat directement au navigateur.
-L'intérêt est d'améliorer les performances de la page, car il suffit alors au navigateur d'afficher le resultat sans devoir construire toute la page.
+L'intérêt est d'améliorer les performances de la page, car il suffit alors au navigateur d'afficher le résultat sans devoir construire toute la page.
 
 Ce fonctionnement est automatique et disponible par défaut. _Svelte_ côté serveur va générer un état de la page qui sera alors utilisé par le code javascript côté front pour s'initialiser et ainsi pouvoir ajouter l'interaction automatiquement.
 
@@ -1789,20 +1803,20 @@ Si vous regarder le code source d'une page, vous y verrez alors la totalité du 
 De même, nous remarquons aussi du code javascript qui indique quel est l'état de la page pour que le javascript puisse se démarrer et se positionner dans l'état où la page a été créé.
 
 Si nous regardons les appels http, et que nous ouvrons directement une page de recette :
-[http://localhost:3000/recettes/0](http://localhost:3000/recettes/0), nous remarquons qu'aucun appel à l'url [http://localhost:3000/recettes/0.json](http://localhost:3000/recettes/0.json) n'est fait. Si nous cliquons sur le lien `Suivant`, l'url [http://localhost:3000/recettes/1.json](http://localhost:3000/recettes/1.json) est chargée.
+[http://localhost:5173/recettes/0](http://localhost:5173/recettes/0), nous remarquons qu'aucun appel à l'url [http://localhost:5173/recettes/0](http://localhost:5173/recettes/0) n'est fait. Si nous cliquons sur le lien `Suivant`, l'url [http://localhost:5173/recettes/1](http://localhost:5173/recettes/1) est chargée.
 
 ### Prefetch
 
 SvelteKit va essayer de précharger au maximum les pages et les ressources.
-Si nous voulons permettre de précharger une page disponible derrière un lien (au survol de celui-ci), il suffit d'ajouter `sveltekit:prefetch` sur une balise html `&lt;a&gt;`.
+Si nous voulons permettre de précharger une page disponible derrière un lien (au survol de celui-ci), il suffit d'ajouter `data-sveltekit-prefetch` sur une balise html `&lt;a&gt;`.
 
-Dans le fichier `index.svelte` du répertoire `src/routes`, modifions le lien vers les pages de recettes :
+Dans le fichier `+page.svelte` du répertoire `src/routes/recettes`, modifions le lien vers les pages de recettes :
 
 ```sveltehtml
-<h2><a sveltekit:prefetch href="/recettes/{index}">{item.name}</a></h2>
+<h2><a data-sveltekit-prefetch href="/recettes/{index}">{item.name}</a></h2>
 ```
 
-Maintenant en regardant les requettes http, nous pouvons voir que l'url `/recettes/x.json` sera préchargée au survol du lien, avant même de cliquer sur celui-ci. La page s'affichera ensuite immédiatement après un clic sur le lien.
+Maintenant en regardant les requêtes http, nous pouvons voir que l'url `/recettes/x` sera préchargée au survol du lien, avant même de cliquer sur celui-ci. La page s'affichera ensuite immédiatement après un clic sur le lien.
 
 ## Testing
 Duration: 0:10:00
@@ -1818,7 +1832,7 @@ Pour écrire des tests dans notre application, nous allons utiliser [jest](https
 Commençons par installer [jest](https://jestjs.io/fr/), ainsi que [svelte-jester](https://github.com/svelteness/svelte-jester) qui va nous permettre de tester nos composants Svelte et [babel](https://babeljs.io/) pour pouvoir utiliser les modules es6.
 
 ```sh:
-npm install --save-dev jest svelte-jester babel-jest @babel/preset-env
+npm install --save-dev jest svelte-jester babel-jest @babel/preset-env jest-environment-jsdom
 ```
 
 Ensuite, nous pouvons ajouter les scripts suivants dans le `package.json` pour pouvoir lancer les tests :
@@ -1921,13 +1935,13 @@ Un second test que nous pouvons ajouter ici est la vérification de l'affichage 
 ```
 
 L'idée n'étant d'être exhaustif sur les tests du composant `Imc`, nous allons nous arrêter là pour la partie testing.
-Si vous souhaitez aller un peu plus loin, vous pourrez ajouter d'autres tests pour tester les autres états du composant. Référez vous à la documention de [@testing-library/svelte](https://testing-library.com/docs/svelte-testing-library/intro) et de [jest](https://jestjs.io/fr/) pour vous aider.
+Si vous souhaitez aller un peu plus loin, vous pourrez ajouter d'autres tests pour tester les autres états du composant. Référez vous à la documentation de [@testing-library/svelte](https://testing-library.com/docs/svelte-testing-library/intro) et de [jest](https://jestjs.io/fr/) pour vous aider.
 
 
 ## Déployer l'application
 Duration: 0:10:00
 
-Pour déployer l'application créée sur un serveur, il est nécessaire d'installer un "adapter". Cet adapter va transformer le code pour générer le code statique et le code dynamique et les confirgurer en fonction de la plateforme cible.
+Pour déployer l'application créée sur un serveur, il est nécessaire d'installer un "adapter". Cet adapter va transformer le code pour générer le code statique et le code dynamique et les configurer en fonction de la plateforme cible.
 
 ### Application node 
 
@@ -1991,7 +2005,7 @@ const config = {
 export default config;
 ```
 
-Créer ensuite un fichier netlify.toml pour indiquer à netlify comment constuire votre application et la publier
+Créer ensuite un fichier netlify.toml pour indiquer à netlify comment construire votre application et la publier
 ```properties
 [build]
   command = "npm run build"
@@ -2031,13 +2045,14 @@ npm install marmiton-api
 
 Il faut maintenant créer une API sur notre projet qui récupère en POST la recherche qui est faite.Nous utilisons la lib nouvellement ajoutée et puis nous retournons le résultat.
 
-Créons un nouveau fichier `search.json.js` dans le répertoire `src/route/recettes`
+Créons un nouveau répertoire `search` dans le répertoire `src/route/recettes` et un fichier `+server.js` :
 
 ```
+import { json } from '@sveltejs/kit';
 import { searchRecipes, MarmitonQueryBuilder } from 'marmiton-api'
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function post({ request }) {
+export async function POST({ request }) {
     const body = await request.json()
     const qb = new MarmitonQueryBuilder();
     const query = qb
@@ -2045,18 +2060,16 @@ export async function post({ request }) {
     .build()
     const recipes = await searchRecipes(query, { limit: 6 })
 
-    return {
-        body: recipes
-    };
+    return json(recipes);
 }
 ```
 
-Nous avons maintenant une API pour faire une recherche sur marmiton sur l'url [http://localhost:3000/recettes/search.json](http://localhost:3000/recettes/search.json)
+Nous avons maintenant une API pour faire une recherche sur marmiton sur l'url [http://localhost:5173/recettes/search](http://localhost:5173/recettes/search)
 
-Vous pouvez la tester avec la requette suivante :
+Vous pouvez la tester avec la requête suivante :
 
 ```shell
-curl --location --request POST 'http://localhost:3000/recettes/search.json' \
+curl --location --request POST 'http://localhost:5173/recettes/search.json' \
 --data-raw '{
     "query": "tomate"
 }'
@@ -2064,7 +2077,7 @@ curl --location --request POST 'http://localhost:3000/recettes/search.json' \
 
 ### Interface front
 
-Dans le fichier `index.svelte`, ajoutons le code pour le formulaire de recherche : 
+Dans le fichier `recettes/+page.svelte`, ajoutons le code pour le formulaire de recherche : 
 
 ```sveltehtml
 <form on:submit|preventDefault={submitForm}>
@@ -2089,14 +2102,15 @@ Implémentons maintenant la fonction qui fait la recherche :
 Remplaçons le script qui défini la variable `recettes` par ce code :
 ```sveltehtml
 <script>
-  export let recettes = [];
+	export let data;
+	$: recettes = data.recettes;
 	let query;
 
 	async function submitForm() {
-		const submit = await fetch('/recettes/search.json', {
+		const submit = await fetch('/recettes/search', {
 		method: 'POST',
 		headers: {
-			'Accept': 'application/json, text/plain, */*',
+			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({ query }),
@@ -2115,7 +2129,7 @@ Comme l'API de recherche ne nous permet pas de récupérer les infos d'une recet
 <section class="recettes">
     {#each recettes as item, index (item.name)}
         <article>
-            <h2><a sveltekit:prefetch href="{item.url ?? `/recettes/${index}`}">{item.name}</a></h2>
+            <h2><a data-sveltekit-prefetch href="{item.url ?? `/recettes/${index}`}">{item.name}</a></h2>
             <h3>⏱ {item.totalTime} min 👨‍🍳 {['', 'Très Facile', 'Facile', 'Moyenne', 'Difficile'][item.difficulty || 0]} € {['', 'Bon marché', 'Moyen', 'Assez cher'][item.budget||0]} 😋 {item.people} Personnes</h3>
             {#if item.image}
                <img src={item.image} alt={item.name}>
