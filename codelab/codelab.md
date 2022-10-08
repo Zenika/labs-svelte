@@ -933,7 +933,7 @@ import { storePoids, storeTaille } from "./stores";
 let poids = 0;
 let taille = 0;
 
-function handlerSubmit(event) {
+function handleSubmit(event) {
   storePoids.set(poids);
   storeTaille.set(parseFloat(taille));
   dispatch("sauvegarder", (poids / taille ** 2).toFixed(2));
