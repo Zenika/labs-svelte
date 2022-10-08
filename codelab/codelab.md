@@ -933,7 +933,7 @@ let taille = 0;
 
 function handlerSubmit(event) {
   storePoids.set(poids);
-  storeTaille.set(parseFloat(taille);
+  storeTaille.set(parseFloat(taille));
   dispatch("sauvegarder", (poids / taille ** 2).toFixed(2));
 }
 ```
