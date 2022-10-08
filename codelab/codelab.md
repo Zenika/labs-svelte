@@ -870,11 +870,13 @@ En testant notre code, vous remarquerez que l'historique ne s'affiche pas en cli
 Utilisez alors la syntaxe de décomposition pour reconstruire un nouveau tableau :
 
 ```javascription
+  let historique = [];
 	function sauvegarderIMC(event) {
 		historique = [...historique, event.detail];
 	}
 ```
 
+Attention à changer le type de la variable `historique` en `let` et non plus en `const`, car maintenant on modifie la variable.
 
 <!-- ------------------------ -->
 
