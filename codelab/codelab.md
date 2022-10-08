@@ -556,7 +556,7 @@ Ensuite, branchons ces nouvelles fonctions sur les events de nos inputs :
 ## Double binding
 Duration: 0:10:00
 
-Maintenant que nous pouvons récupérer les valeur de nos inputs, il est nécessaire de faire passer ces valeurs du composant `Form` vers le composant `Imc`.
+Maintenant que nous pouvons récupérer les valeurs de nos inputs, il est nécessaire de faire passer ces valeurs du composant `Form` vers le composant `Imc`.
 
 ### Descendre une valeur d'un composant parent
 
