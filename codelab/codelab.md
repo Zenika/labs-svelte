@@ -1752,53 +1752,54 @@ Si vous regarder le code source d'une page, vous y verrez alors la totalité du 
 		/>
 		<link rel="stylesheet" href="./global.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="/_app/assets/start-61d1577b.css">
-		<link rel="modulepreload" href="/_app/start-53bce2a1.js">
-		<link rel="modulepreload" href="/_app/chunks/vendor-fa2d59c6.js">
-		<link rel="modulepreload" href="/_app/pages/__layout.svelte-d673c1f6.js">
-		<link rel="modulepreload" href="/_app/pages/recettes/index.svelte-7cee68ff.js">
-		<link rel="modulepreload" href="/_app/chunks/recette-6ce5406e.js">
-		<script type="module">
-			import { start } from "/_app/start-53bce2a1.js";
-			start({
-				target: document.querySelector("#svelte"),
-				paths: {"base":"","assets":""},
-				session: {},
-				route: true,
-				spa: false,
-				trailing_slash: "never",
-				hydrate: {
-					status: 200,
-					error: null,
-					nodes: [
-						import("/_app/pages/__layout.svelte-d673c1f6.js"),
-						import("/_app/pages/recettes/index.svelte-7cee68ff.js")
-					],
-					url: new URL("https://become-svelte.patou.dev/recettes"),
-					params: {}
-				}
-			});
-		</script>
+		
 	</head>
 	<body>
 		<div id="svelte">
-      <header><h1>Devenir Svelte avec Svelte</h1>
-      <nav><a href="/">Accueil</a>
-        <a href="/recettes">Recettes</a>
-        <a href="/about">A propos</a></nav></header>
-        <main><section class="recettes"><article><h2><a href="/recettes/0">Tomates farcies au thon (recette légère)</a></h2>
-            <h3>⏱ 20 min 👨‍🍳 Très facile € Bon marché 😋 4 Personnes</h3>
+
+
+<header><h1>Devenir Svelte avec Svelte</h1>
+	<nav><a href="/">Accueil</a>
+		<a href="/recettes">Recettes</a>
+		<a href="/about">A propos</a></nav></header>
+<main><form><label for="query"><span class="sr-only">Recherche sur marmiton.org</span></label>
+	<input id="query" aria-label="Recherche sur Marmiton.org" type="search" name="query" placeholder="Recherche sur marmiton.org" required>
+	<input type="submit" value="Rechercher"></form>
+<section class="recettes"><article><div><h2><a data-sveltekit-prefetch href="/recettes/0">Tomates farcies au thon (recette légère)</a></h2>
+				<p>⏱ 20 min 👨‍🍳 Très Facile € Bon marché 😋 4 Personnes</p></div>
             <img src="https://assets.afcdn.com/recipe/20130616/20057_w1200h911c1cx256cy192.jpeg" alt="Tomates farcies au thon (recette légère)">
-        </article><article><h2><a href="/recettes/1">Dahl de lentilles corail</a></h2>
-            <h3>⏱ 30 min 👨‍🍳 Facile € Bon marché 😋 4 Personnes</h3>
+        </article><article><div><h2><a data-sveltekit-prefetch href="/recettes/1">Dahl de lentilles corail</a></h2>
+				<p>⏱ 30 min 👨‍🍳 Facile € Bon marché 😋 4 Personnes</p></div>
             <img src="https://assets.afcdn.com/recipe/20200928/114451_w1200h1877c1cx540cy844cxb1080cyb1689.jpeg" alt="Dahl de lentilles corail">
-        </article><article><h2><a href="/recettes/2">Dessert léger aux fruits de la passion</a></h2>
-            <h3>⏱ 35 min 👨‍🍳 Facile € Bon marché 😋 6 Personnes</h3>
+        </article><article><div><h2><a data-sveltekit-prefetch href="/recettes/2">Dessert léger aux fruits de la passion</a></h2>
+				<p>⏱ 35 min 👨‍🍳 Facile € Bon marché 😋 6 Personnes</p></div>
             <img src="https://assets.afcdn.com/recipe/20170204/34670_w1200h911c1cx331cy290.jpeg" alt="Dessert léger aux fruits de la passion">
         </article></section></main>
-    </div>
+
+
+		<script type="module" data-sveltekit-hydrate="24gyzr">
+			import { start } from "./_app/immutable/start-e466b874.js";
+
+			start({
+				env: {},
+				hydrate: {
+					status: 200,
+					error: null,
+					node_ids: [0, 4],
+					params: {},
+					routeId: "recettes",
+					data: (function(a){return [a,a]}(null)),
+					form: null
+				},
+				paths: {"base":"","assets":""},
+				target: document.querySelector('[data-sveltekit-hydrate="24gyzr"]').parentNode,
+				trailing_slash: "never"
+			});
+		</script>
+	<script type="application/json" data-sveltekit-fetched data-url="/recettes">{"status":200,"statusText":"","headers":{},"body":"[{\"name\":\"Tomates farcies au thon (recette légère)\",\"image\":\"https://assets.afcdn.com/recipe/20130616/20057_w1200h911c1cx256cy192.jpeg\",\"totalTime\":20,\"budget\":1,\"difficulty\":1,\"tags\":[\"Entrée\"],\"people\":4,\"credit\":\"https://www.marmiton.org/recettes/recette_tomates-farcies-au-thon-recette-legere_81846.aspx\"},{\"name\":\"Dahl de lentilles corail\",\"image\":\"https://assets.afcdn.com/recipe/20200928/114451_w1200h1877c1cx540cy844cxb1080cyb1689.jpeg\",\"totalTime\":30,\"budget\":1,\"difficulty\":2,\"people\":4,\"tags\":[\"Plat\"],\"credit\":\"https://www.marmiton.org/recettes/recette_dahl-de-lentilles-corail_166862.aspx\"},{\"name\":\"Dessert léger aux fruits de la passion\",\"image\":\"https://assets.afcdn.com/recipe/20170204/34670_w1200h911c1cx331cy290.jpeg\",\"totalTime\":35,\"budget\":1,\"difficulty\":2,\"people\":6,\"tags\":[\"Dessert\"],\"credit\":\"https://www.marmiton.org/recettes/recette_dessert-leger-aux-fruits-de-la-passion_43479.aspx\"}]"}</script></div>
 	</body>
 </html>
+
 ```
 
 De même, nous remarquons aussi du code javascript qui indique quel est l'état de la page pour que le javascript puisse se démarrer et se positionner dans l'état où la page a été créé.
