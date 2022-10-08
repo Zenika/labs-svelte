@@ -1480,7 +1480,7 @@ Ajoutons donc dans le fichier `+page.svelte` dans le répertoire `src/routes/rec
 ```sveltehtml
 <script>
 import { page } from '$app/stores';
-import recettes from "./recettes.json";
+import recettes from "../recettes.json";
 
 let recette = recettes[$page.params.id]
 </script>
@@ -1702,7 +1702,6 @@ La fonction `load`, permet de récupérer plusieurs éléments :
 - params : Les paramètres de la page (paramètres entre [] dans le nom du fichier).
 - fetch : Fonction pour faire des appels http, identique à fetch natif, sauf qu'il gère le fait d'être appelé côté serveur ou côté client (enregistre le retour de l'appel côté server pour le serialiser dans le code de la page et réutiliser la valeur côté client).
 - session : Donnée de session qui est accessible côté serveur et côté client.
-- stuff : Donnée que l'on réucupère depuis le layout.
 
 La méthode retourne un objet qui sera récupéré dans la page via la propriété data (via `export let data;`).
 
