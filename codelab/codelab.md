@@ -1471,7 +1471,7 @@ N'oublions pas d'ajouter le lien permettant d'accéder à cette nouvelle page da
 ## Afficher une page de détail
 Duration: 0:10:00
 
-Créons maintenant une répertoire `[id]` qui sera appelée par les url `/recettes/1` ou `recettes/2` par exemple. La variable `id` sera alors disponible directement dans la page avec la valeur passée en paramètre.
+Créons maintenant un répertoire `[id]` qui sera appelée par les url `/recettes/1` ou `recettes/2` par exemple. La variable `id` sera alors disponible directement dans la page avec la valeur passée en paramètre.
 
 Pour récupérer les paramètres _SvelteKit_ fournit un **store** `page` depuis `$app/stores` qui permet de récupérer les paramètres et autres informations sur la page.
 
