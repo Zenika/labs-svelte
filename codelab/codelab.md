@@ -1,7 +1,7 @@
 summary: Devenir svelte avec Svelte
-id: build
+id: labs-svelte
 authors: Patrice de Saint Steban & Anthony Le Goas
-Feedback Link: https://zenika.com
+Feedback Link: https://github.com/Zenika/labs-svelte
 analytics account:
 
 # Devenir svelte avec Svelte
