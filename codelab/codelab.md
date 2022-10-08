@@ -1579,7 +1579,7 @@ Retrouvez dans la [documentation](https://svelte.dev/docs#accessibility-warnings
 ## Ajouter du code serveur
 Duration: 0:10:00
 
-L'import d'un fichier json dans notre page inclut directement ce fichier dans le code javascript et est donc chargé dès que l'on affiche notre site. Si la liste de recettes grossie, les performances de notre site seront impactées.
+L'import d'un fichier json dans notre page inclut directement ce fichier dans le code javascript et celui-ci est donc chargé dès que l'on affiche notre site. Si la liste de recettes grossie, les performances de notre site seront impactées.
 
 La force de _SvelteKit_  c'est aussi de permettre d'écrire du code front et back au même endroit, sans distinction.
 
@@ -1998,9 +1998,6 @@ const config = {
 		adapter: adapter({
 			split: false
 		}),
-
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte'
 	}
 };
 
@@ -2020,7 +2017,7 @@ Sauvegardez votre site sur un repos github, gitlab, ou bitbucket.
 
 Allez directement sur https://app.netlify.com/start
 
-Connectez vous avec votre compte github, gitlab ou bitbucket, et selectionnez votre projet. Netlify va automatiquement s'abonner à votre projet git et mettera alors automatiquement à jour votre site sur netlify
+Connectez vous avec votre compte github, gitlab ou bitbucket, et sélectionnez votre projet. Netlify va automatiquement s'abonner à votre projet git et mettera alors automatiquement à jour votre site sur netlify
 
 #### Déployer de manière manuel
 
@@ -2045,7 +2042,7 @@ npm install marmiton-api
 
 ### API de recherche
 
-Il faut maintenant créer une API sur notre projet qui récupère en POST la recherche qui est faite.Nous utilisons la lib nouvellement ajoutée et puis nous retournons le résultat.
+Il faut maintenant créer une API sur notre projet qui récupère en POST la recherche qui est faite. Nous utilisons la lib nouvellement ajoutée et puis nous retournons le résultat.
 
 Créons un nouveau répertoire `search` dans le répertoire `src/route/recettes` et un fichier `+server.js` :
 
