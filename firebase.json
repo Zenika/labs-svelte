@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "codelab",
-      "public": "codelab/build",
+      "public": "codelab/labs-svelte",
       "ignore": [
         "firebase.json",
         "**/.*",
