@@ -1316,7 +1316,7 @@ Créons ensuite une fichier `+page.svelte` dans le répertoire `src/routes/about
 
 ```sveltehtml
 <p>
-Ce site a été créé par xxx lors de Paris WEB 2022
+Ce site a été créé par xxx lors de Volcamp 2022
 </p>
 ```
 
