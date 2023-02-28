@@ -113,3 +113,6 @@ template/package-lock.json
 .netlify
 
 labs-svelte/
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
